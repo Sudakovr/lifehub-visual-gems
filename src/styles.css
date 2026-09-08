@@ -71,6 +71,7 @@
   --spacing-2xl: 2rem; /* между секциями экрана */
   --spacing-3xl: 3rem; /* верх/низ страницы */
   --spacing-4xl: 4rem; /* пустое состояние во всю высоту */
+  --spacing-editor: 28rem; /* рабочая высота текста заметки */
 
   /* --- Ширины модальных окон ---------------------------------- */
   --container-app: 100rem; /* предельная ширина рабочей области экрана */
@@ -88,6 +89,12 @@
   --container-table-dense: 64rem; /* плотная таблица задач с деревом */
   --container-kit: 72rem; /* полотно страницы дизайн-системы */
   --container-copy: 42rem; /* читаемая строка вводного текста */
+  --container-properties: 18rem; /* колонка свойств задачи */
+  --container-command: 18.75rem; /* список команд и результатов */
+  --container-drawer-handle: 6.25rem; /* ручка мобильной шторки */
+
+  /* --- Ограничения по высоте ---------------------------------- */
+  --container-dialog-height: 85vh; /* диалог на небольшом экране */
 
 
 
@@ -97,6 +104,9 @@
   --radius-md: 0.875rem; /* кнопка, панель, меню, поповер */
   --radius-lg: 1.125rem; /* диалог, крупная карточка */
   --radius-full: 9999px; /* аватар, переключатель, прогресс */
+
+  /* --- Эффекты ------------------------------------------------- */
+  --blur-overlay: 0.125rem; /* отделяет диалог от рабочего экрана */
 
 
   /* --- Тени: ровно три уровня --------------------------------- */
@@ -289,4 +299,32 @@
 
 @utility ok-label {
   color: var(--color-ok-contrast);
+}
+
+@utility task-workspace-open {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) var(--container-properties);
+}
+
+@utility task-workspace-closed {
+  grid-template-columns: minmax(0, 1fr) var(--spacing-3xl) var(--container-properties);
+}
+
+@utility vertical-label {
+  writing-mode: vertical-rl;
+}
+
+@utility dialog-height {
+  max-height: var(--container-dialog-height);
+}
+
+@utility overlay-blur {
+  backdrop-filter: blur(var(--blur-overlay));
+}
+
+@utility profile-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+}
+
+@utility timeline-row {
+  grid-template-columns: minmax(0, 1fr) auto;
 }

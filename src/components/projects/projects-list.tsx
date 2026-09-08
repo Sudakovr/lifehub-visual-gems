@@ -136,7 +136,7 @@ export function ProjectsListScreen() {
       <Modal
         open={create}
         title="Создать проект"
-        description="Проект появится в пространстве «Работа». Участников можно добавить позже."
+        description="Проект появится в пространстве «Работа». Добавьте участников позже."
         onClose={() => setCreate(false)}
         footer={
           <>

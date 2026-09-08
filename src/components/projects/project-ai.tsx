@@ -58,13 +58,13 @@ export function ProjectAiAnswer() {
         <div className="mt-lg flex flex-wrap items-center gap-md">
           <p className="min-w-0 flex-1 text-body text-foreground">
             ИИ предлагает: {aiAnswer.proposal.title}.{" "}
-            <span className="text-muted-foreground">Ничего не создаётся, пока вы не подтвердите.</span>
+            <span className="text-muted-foreground">Мы ничего не создадим без вашего подтверждения.</span>
           </p>
           {created ? (
             <span className="text-meta text-ok-strong">Задача создана</span>
           ) : (
             <Button variant="secondary" onClick={() => setConfirm(true)}>
-              Посмотреть и подтвердить
+              Проверить и создать
             </Button>
           )}
         </div>

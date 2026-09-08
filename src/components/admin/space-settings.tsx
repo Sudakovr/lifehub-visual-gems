@@ -40,7 +40,7 @@ export function SpaceSettings() {
         actions={
           <div className="flex flex-wrap items-center gap-md">
             <Toggle label="Смотреть глазами наблюдателя" checked={viewer} onChange={setViewer} />
-            {ro ? null : <Button>Сохранить изменения</Button>}
+            {ro ? null : <Button>Сохранить</Button>}
           </div>
         }
       />

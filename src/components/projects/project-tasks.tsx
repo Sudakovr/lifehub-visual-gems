@@ -4,6 +4,7 @@ import { KebabMenu } from "@/components/app/kebab-menu";
 import {
   Button,
   Checkbox,
+  EmptyState,
   Input,
   PriorityChip,
   Select,
@@ -196,22 +197,23 @@ export function ProjectTasks() {
       {state === "loading" ? (
         <TableSkeleton />
       ) : state === "empty" || lines.length === 0 ? (
-        <div className="flex flex-col items-center gap-md rounded-lg border border-dashed border-border py-4xl text-center">
-          <h3 className="text-title font-semibold text-foreground">По этим условиям задач нет</h3>
-          <p className="max-w-prose text-body text-muted-foreground">
-            Смягчите фильтр или очистите поиск — в проекте есть ещё {projectTasks.length} задач.
-          </p>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              setQuery("");
-              setStatus("Все");
-              setState("ready");
-            }}
-          >
-            Сбросить фильтры
-          </Button>
-        </div>
+        <EmptyState
+          className="items-center rounded-lg border border-dashed border-border px-lg text-center"
+          title="По этим условиям задач нет"
+          description={`Смягчите фильтр или очистите поиск — в проекте есть ещё ${projectTasks.length} задач.`}
+          action={
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setQuery("");
+                setStatus("Все");
+                setState("ready");
+              }}
+            >
+              Сбросить фильтры
+            </Button>
+          }
+        />
       ) : (
         <div className="flex flex-col gap-lg lg:flex-row lg:items-start">
         <div className="min-w-0 flex-1 overflow-x-auto">

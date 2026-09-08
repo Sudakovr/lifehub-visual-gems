@@ -158,7 +158,7 @@ export function RegisterScreen() {
   return (
     <AuthFrame
       title="Создать аккаунт"
-      note="Личное пространство создаётся сразу и остаётся только вашим."
+      note="Мы сразу создадим личное пространство — оно останется только вашим."
       footer={
         <span>
           Уже есть аккаунт? <Nav to="/auth/login" className="text-accent underline underline-offset-4">Войти</Nav>

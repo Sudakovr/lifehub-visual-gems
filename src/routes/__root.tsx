@@ -11,22 +11,24 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Button, buttonVariants } from "@/components/kit/primitives";
+import { cn } from "@/lib/utils";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-canvas px-lg">
       <div className="max-w-form text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+        <h1 className="text-display font-semibold text-foreground">404</h1>
+        <h2 className="mt-lg text-title font-semibold text-foreground">Страница не найдена</h2>
+        <p className="mt-sm text-body text-muted-foreground">
+          Проверьте адрес или вернитесь на главную страницу.
         </p>
-        <div className="mt-6">
+        <div className="mt-xl">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className={buttonVariants({ variant: "primary", size: "md" })}
           >
-            Go home
+            На главную
           </Link>
         </div>
       </div>
@@ -42,29 +44,28 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-canvas px-lg">
       <div className="max-w-form text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+        <h1 className="text-title font-semibold text-foreground">
+          Страница не загрузилась
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+        <p className="mt-sm text-body text-muted-foreground">
+          Обновите страницу. Если ошибка повторится, вернитесь на главную.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
+        <div className="mt-xl flex flex-wrap justify-center gap-sm">
+          <Button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
-          </button>
+            Обновить страницу
+          </Button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className={cn(buttonVariants({ variant: "secondary", size: "md" }))}
           >
-            Go home
+            На главную
           </a>
         </div>
       </div>

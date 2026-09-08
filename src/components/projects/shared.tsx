@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { StatusChip, type Tone } from "@/components/kit/primitives";
+import { StatusChip, Tag, type Tone } from "@/components/kit/primitives";
 import type { ProjectStatus, RiskLevel } from "@/mock/projects";
 import type { TaskStatus } from "@/mock/kit";
 import { cn } from "@/lib/utils";
@@ -39,18 +39,13 @@ export function RiskChip({ level }: { level: RiskLevel }) {
 
 export function TagDot({ name }: { name: string }) {
   const colors: Record<string, string> = {
-    Интеграции: "oklch(0.62 0.12 258)",
-    Платежи: "oklch(0.63 0.12 155)",
-    Q3: "oklch(0.66 0.12 70)",
-    Клиенты: "oklch(0.62 0.13 25)",
-    Внутреннее: "oklch(0.6 0.03 260)",
+    Интеграции: "var(--color-accent)",
+    Платежи: "var(--color-ok)",
+    Q3: "var(--color-warn)",
+    Клиенты: "var(--color-danger)",
+    Внутреннее: "var(--color-border-strong)",
   };
-  return (
-    <span className="inline-flex items-center gap-xs rounded-full border border-border bg-surface px-md py-0.5 text-meta text-foreground">
-      <span className="size-2 rounded-xs" style={{ backgroundColor: colors[name] }} aria-hidden />
-      {name}
-    </span>
-  );
+  return <Tag color={colors[name] ?? "var(--color-info)"}>{name}</Tag>;
 }
 
 export function ProgressBar({ value, className }: { value: number; className?: string }) {
@@ -120,6 +115,39 @@ export function TaskLink({ code, title }: { code: string; title?: string }) {
       ) : (
         <span className="num">{code}</span>
       )}
+    </Link>
+  );
+}
+
+export function TaskTitle({
+  code,
+  title,
+  onOpen,
+}: {
+  code: string;
+  title: string;
+  onOpen?: () => void;
+}) {
+  const content = (
+    <>
+      <span className="num shrink-0 text-meta text-muted-foreground">{code}</span>
+      <span className="min-w-0 text-body font-medium text-foreground transition-fast group-hover/task-title:text-accent">
+        {title}
+      </span>
+    </>
+  );
+
+  return onOpen ? (
+    <button type="button" onClick={onOpen} className="group/task-title flex min-w-0 items-baseline gap-sm text-left">
+      {content}
+    </button>
+  ) : (
+    <Link
+      to="/tasks/$id"
+      params={{ id: "2481" }}
+      className="group/task-title flex min-w-0 items-baseline gap-sm"
+    >
+      {content}
     </Link>
   );
 }

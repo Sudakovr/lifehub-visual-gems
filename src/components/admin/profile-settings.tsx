@@ -22,11 +22,11 @@ export function ProfileSettings() {
       <PageHeading
         title="Профиль и уведомления"
         note="Как вас видят коллеги и о чём продукт сообщает вам."
-        actions={<Button>Сохранить изменения</Button>}
+        actions={<Button>Сохранить</Button>}
       />
 
-      <div className="mt-2xl grid gap-3xl lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-        <section className="flex flex-col gap-xl">
+      <div className="mt-2xl grid gap-3xl lg:profile-grid">
+        <section className="flex min-w-0 flex-col gap-xl">
           <div className="flex flex-col gap-lg">
             <SectionHead title="Профиль" />
             <div className="flex items-center gap-lg">
@@ -93,9 +93,10 @@ export function ProfileSettings() {
           </div>
         </section>
 
-        <section className="flex flex-col gap-lg">
+        <section className="flex min-w-0 flex-col gap-lg">
           <SectionHead title="Уведомления" note="письмо и push настраиваются отдельно" />
-          <table className="w-full border-collapse text-body">
+          <div className="w-full min-w-0 overflow-x-auto overscroll-x-contain">
+          <table className="w-full min-w-form border-collapse text-body">
             <thead>
               <tr className="border-b border-border text-left text-meta text-muted-foreground">
                 <th scope="col" className="py-sm font-normal">
@@ -132,6 +133,7 @@ export function ProfileSettings() {
               ))}
             </tbody>
           </table>
+          </div>
 
           <div className={cn("flex flex-col gap-md border-t border-border pt-lg")}>
             <div className="flex flex-wrap items-center justify-between gap-md">

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "@tanstack/react-router";
 import { Avatar, PriorityChip, StatusChip } from "@/components/kit/primitives";
 import { KebabMenu } from "@/components/app/kebab-menu";
-import { taskStatusTone } from "@/components/projects/shared";
+import { TaskTitle, taskStatusTone } from "@/components/projects/shared";
 import type { DailyTask } from "@/mock/daily";
 import { cn } from "@/lib/utils";
 
@@ -59,23 +59,10 @@ export function TaskRow({
 
       <span className="flex min-w-0 flex-1 basis-64 flex-col gap-2xs">
         <span className="flex flex-wrap items-baseline gap-sm">
-          <span className="num text-meta text-muted-foreground">{task.code}</span>
           {onPeek ? (
-            <button
-              type="button"
-              onClick={() => onPeek(task)}
-              className="text-left text-body font-medium text-foreground transition-fast hover:text-accent"
-            >
-              {task.title}
-            </button>
+            <TaskTitle code={task.code} title={task.title} onOpen={() => onPeek(task)} />
           ) : (
-            <Link
-              to="/tasks/$id"
-              params={{ id: "2481" }}
-              className="text-body font-medium text-foreground transition-fast hover:text-accent"
-            >
-              {task.title}
-            </Link>
+            <TaskTitle code={task.code} title={task.title} />
           )}
           {task.watching ? (
             <span className="text-meta text-muted-foreground">я наблюдатель</span>

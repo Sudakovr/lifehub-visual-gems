@@ -34,7 +34,7 @@ export function ProjectTime() {
             </Button>
             <Button size="sm">
               <Play className="size-4" strokeWidth={1.75} />
-              Начать таймер
+              Запустить таймер
             </Button>
           </div>
         }
@@ -48,14 +48,14 @@ export function ProjectTime() {
       </div>
 
       <section className="grid gap-2xl lg:grid-cols-2">
-        <div className="flex flex-col gap-lg">
+        <div className="flex min-w-0 flex-col gap-lg">
           <SectionHead title="По людям" note={`${timeByPerson.length} человек`} />
           <ul className="divide-y divide-border">
             {timeByPerson.map((p) => (
               <li key={p.person} className="flex flex-col gap-xs py-sm">
-                <div className="flex items-baseline justify-between gap-md">
+                <div className="timeline-row grid items-baseline gap-md">
                   <span className="text-body text-foreground">{p.person}</span>
-                  <span className="num text-body">
+                  <span className="num flex flex-col items-end text-body sm:block">
                     {hoursMinutes(p.minutes)}
                     <span className="ml-sm text-meta text-muted-foreground">
                       оплачиваемое {hoursMinutes(p.billable)}
@@ -68,16 +68,16 @@ export function ProjectTime() {
           </ul>
         </div>
 
-        <div className="flex flex-col gap-lg">
+        <div className="flex min-w-0 flex-col gap-lg">
           <SectionHead title="По задачам" note={`${timeByTask.length} задач`} />
           <ul className="divide-y divide-border">
             {timeByTask.map((t) => (
               <li key={t.code} className="flex flex-col gap-xs py-sm">
-                <div className="flex items-baseline justify-between gap-md">
+                <div className="timeline-row grid items-baseline gap-md">
                   <span className="min-w-0 text-body">
                     <TaskLink code={t.code} title={t.title} />
                   </span>
-                  <span className="num text-body whitespace-nowrap">
+                  <span className="num flex flex-col items-end whitespace-nowrap text-body sm:block">
                     {hoursMinutes(t.minutes)}
                     <span className="ml-sm text-meta text-muted-foreground">
                       оплачиваемое {hoursMinutes(t.billable)}

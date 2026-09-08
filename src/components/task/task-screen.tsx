@@ -214,7 +214,7 @@ export function TaskScreen() {
     <div className="min-h-screen bg-canvas">
       {/* Шапка */}
       <header className="sticky top-0 z-10 border-b border-border bg-surface/95 backdrop-blur">
-        <div className="mx-auto flex max-w-[1600px] flex-wrap items-center gap-md px-lg py-md">
+        <div className="mx-auto flex max-w-app flex-wrap items-center gap-md px-lg py-md">
           <nav aria-label="Хлебные крошки" className="flex min-w-0 items-center gap-xs text-meta text-muted-foreground">
             <span>{t.space}</span>
             <ChevronRight className="size-3.5 shrink-0" strokeWidth={1.75} />
@@ -268,7 +268,7 @@ export function TaskScreen() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1600px] px-lg pt-xl pb-3xl">
+      <main className="mx-auto max-w-app px-lg pt-xl pb-3xl">
         {/* Заголовок задачи */}
         <div className="flex flex-col gap-md border-b border-border pb-lg">
           <p className="text-meta text-muted-foreground">
@@ -294,8 +294,8 @@ export function TaskScreen() {
           className={cn(
             "grid grid-cols-1 gap-x-2xl gap-y-xl pt-xl",
             feedOpen
-              ? "xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_18rem]"
-              : "xl:grid-cols-[minmax(0,1fr)_3rem_18rem]",
+              ? "xl:task-workspace-open"
+              : "xl:task-workspace-closed",
           )}
         >
           {/* Колонка 1 — содержание */}
@@ -501,12 +501,12 @@ export function TaskScreen() {
             <aside className="xl:border-x xl:border-border">
               <button
                 onClick={() => setFeedOpen(true)}
-                title="Развернуть ленту задачи"
+                 title="Развернуть ленту"
                 className="flex w-full items-center gap-md px-md py-sm text-meta text-muted-foreground transition-fast hover:text-foreground xl:h-full xl:w-12 xl:flex-col xl:justify-start xl:gap-lg xl:py-lg"
               >
                 <MessageSquare className="size-4 shrink-0" strokeWidth={1.75} />
                 <span className="num rounded-full bg-accent-soft px-sm text-caption text-accent">4</span>
-                <span className="xl:[writing-mode:vertical-rl]">Развернуть ленту</span>
+                <span className="xl:vertical-label">Развернуть ленту</span>
               </button>
             </aside>
           )}
@@ -550,7 +550,7 @@ export function TaskScreen() {
                   ) : (
                     <>
                       <Play className="size-4" strokeWidth={1.75} />
-                      Начать таймер
+                      Запустить таймер
                     </>
                   )}
                 </Button>
