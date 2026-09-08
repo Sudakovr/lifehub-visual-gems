@@ -297,24 +297,25 @@ function BigRows({ rows }: { rows: ProjectRow[] }) {
               ))}
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-xl lg:w-2xl lg:justify-end">
-            <div className="w-40">
+          <div className="flex shrink-0 flex-wrap items-center gap-x-xl gap-y-md lg:w-rowmeta lg:flex-nowrap lg:justify-between">
+            <div className="w-40 shrink-0">
               <div className="mb-xs flex items-baseline justify-between text-meta text-muted-foreground">
                 <span>Ход</span>
                 <span className="num">{p.progress}%</span>
               </div>
               <ProgressBar value={p.progress} />
             </div>
-            <div className="flex flex-col gap-2xs">
+            <div className="flex w-40 shrink-0 flex-col gap-2xs">
               <span className="text-meta text-muted-foreground">Ближайший срок</span>
               <DueText due={p.nextDue} overdue={p.overdue} note={p.nextDueNote} />
             </div>
-            <div className="flex flex-col gap-2xs">
+            <div className="flex w-32 shrink-0 flex-col gap-2xs">
               <span className="text-meta text-muted-foreground">Задач открыто / всего</span>
               <span className="num text-body">
                 {p.tasksOpen} / {p.tasksTotal}
               </span>
             </div>
+            <div className="flex w-40 shrink-0 items-center justify-end gap-md">
             <AvatarGroup names={p.members} max={4} />
             <KebabMenu
               items={[
@@ -325,6 +326,7 @@ function BigRows({ rows }: { rows: ProjectRow[] }) {
               ]}
               destructive={{ label: "Удалить проект" }}
             />
+            </div>
           </div>
         </div>
       ))}
