@@ -7,7 +7,7 @@ import { systemModules } from "@/mock/admin";
 
 /* Модули системы: вид администратора над всеми пространствами. */
 
-const stateTone: Record<string, Tone> = {
+const stateTone: Record<string, Tone | undefined> = {
   Работает: "ok",
   Ошибка: "danger",
   Выключен: "neutral",
@@ -68,13 +68,13 @@ export function SystemModules() {
                   <td className="num py-md align-top text-muted-foreground">{m.version}</td>
                   <td className="num py-md align-top text-muted-foreground">{m.spaces}</td>
                   <td className="py-md align-top">
-                    <StatusChip tone={stateTone[m.state]}>{m.state}</StatusChip>
+                    <StatusChip tone={stateTone[m.state] ?? "neutral"}>{m.state}</StatusChip>
                   </td>
                   <td className="py-md align-top">
                     <Toggle
                       label={m.enabled ? "Включён" : "Выключен"}
                       checked={m.enabled}
-                      disabled={m.locked}
+                      disabled={Boolean(m.locked)}
                       onChange={(v) => setRows((r) => r.map((x) => (x.id === m.id ? { ...x, enabled: v } : x)))}
                     />
                   </td>

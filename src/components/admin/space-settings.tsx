@@ -328,7 +328,7 @@ function Modules({
                 <Toggle
                   label={m.enabled ? "Включён" : "Выключен"}
                   checked={m.enabled}
-                  disabled={m.locked}
+                  disabled={Boolean(m.locked)}
                   onChange={(v) => onToggle(m.id, v)}
                 />
               )}
