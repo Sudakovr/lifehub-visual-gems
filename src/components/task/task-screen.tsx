@@ -249,10 +249,10 @@ export function TaskScreen() {
             {canEdit && isAssignee ? <Button variant="primary">Отправить на приёмку</Button> : null}
             {canEdit && isAuthor ? (
               <>
-                <Button variant="secondary" onClick={() => setDialog("return")}>
+                <Button variant="ok" onClick={() => setDialog("return")}>
                   Вернуть в работу
                 </Button>
-                <Button variant="primary">Принять работу</Button>
+                <Button variant="ok">Принять работу</Button>
               </>
             ) : null}
             <ActionsMenu canDelete={t.viewerRole === "owner"} onSelect={setDialog} />
@@ -524,7 +524,7 @@ export function TaskScreen() {
               </div>
               <Progress value={spentPct} label={`Из оценки ${hm(t.estimateMin)}`} />
               {canEdit ? (
-                <Button variant={timer ? "secondary" : "primary"} onClick={() => setTimer((v) => !v)}>
+                <Button variant={timer ? "secondary" : "ok"} onClick={() => setTimer((v) => !v)}>
                   {timer ? (
                     <>
                       <Square className="size-4" strokeWidth={1.75} />
