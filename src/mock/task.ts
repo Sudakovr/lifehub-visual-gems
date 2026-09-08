@@ -9,8 +9,11 @@ export type ChecklistItem = {
   text: string;
   done: boolean;
   due?: string;
+  /** срок прошёл — дата показывается красной и подписью «просрочено» */
+  overdue?: boolean;
   position: number;
 };
+
 
 export type AcceptanceItem = { id: string; text: string; done: boolean; due?: string };
 
@@ -110,10 +113,11 @@ export const taskDetail: TaskDetail = {
   checklist: [
     { id: "c-1", text: "Подключить тестовый стенд", done: true, due: "04 июн", position: 1 },
     { id: "c-2", text: "Настроить шифрование ключей", done: true, due: "06 июн", position: 2 },
-    { id: "c-3", text: "Проверить обработку вебхуков", done: false, due: "10 июн", position: 3 },
-    { id: "c-4", text: "Согласовать лимиты с платёжной группой", done: false, due: "11 июн", position: 4 },
+    { id: "c-3", text: "Проверить обработку вебхуков", done: false, due: "10 июн", overdue: true, position: 3 },
+    { id: "c-4", text: "Согласовать лимиты с платёжной группой", done: false, due: "11 июн", overdue: true, position: 4 },
     { id: "c-5", text: "Провести нагрузочное тестирование", done: false, due: "13 июн", position: 5 },
   ],
+
   subtasks: [
     { id: "s-1", code: "LH-2483", title: "API сверки остатков", status: "Готово", assignee: "Дмитрий Соловьёв", estimateMin: 240, spentMin: 120 },
     { id: "s-2", code: "LH-2484", title: "Модуль возврата средств", status: "В работе", assignee: "Анна Верёвкина", estimateMin: 300, spentMin: 180 },
@@ -200,7 +204,7 @@ export const taskDetail: TaskDetail = {
       text: "Обновил схему вебхуков: подпись HMAC SHA-256, версия payload v2. Стенд перезапущен.",
     },
   ],
-  viewerRole: "member",
+  viewerRole: "owner",
   viewerId: "u-av",
 };
 
@@ -212,4 +216,35 @@ export const taskHints: { id: string; text: string; important?: boolean }[] = [
   },
   { id: "h-2", text: "Похожие задачи закрывались за 9 часов, здесь оценка 8 часов." },
   { id: "h-3", text: "Ирина уже согласовала лимиты — пункт «Согласовать лимиты» можно закрывать." },
+];
+
+/* --- Данные диалогов задачи --------------------------------- */
+
+export const spaceProjects: { id: string; name: string; space: string }[] = [
+  { id: "p-1", name: "Запуск платёжного шлюза", space: "Работа" },
+  { id: "p-2", name: "Мобильный кабинет", space: "Работа" },
+  { id: "p-3", name: "Реестр контрагентов", space: "Работа" },
+  { id: "p-4", name: "Внутренние регламенты", space: "Работа" },
+];
+
+export const spaceMembers: Person[] = [
+  { id: "u-av", name: "Анна Верёвкина", role: "member" },
+  { id: "u-ds", name: "Дмитрий Соловьёв", role: "member" },
+  { id: "u-mp", name: "Марина Панова", role: "member" },
+  { id: "u-og", name: "Олег Гринь", role: "member" },
+  { id: "u-nk", name: "Нина Кац", role: "viewer" },
+  { id: "u-ss", name: "Сергей Штейн", role: "viewer" },
+  { id: "u-ik", name: "Ирина Ковалёва", role: "owner" },
+];
+
+export const aiSubtaskSuggestions: {
+  id: string;
+  title: string;
+  estimateMin: number;
+  reason: string;
+}[] = [
+  { id: "ai-1", title: "Повтор запроса при таймауте /reconcile", estimateMin: 120, reason: "В ленте зафиксирован 504 на батчах больше 500 записей" },
+  { id: "ai-2", title: "Нагрузочный прогон на 5 000 транзакций", estimateMin: 180, reason: "Блокирует приёмку, срок 12 июня" },
+  { id: "ai-3", title: "Сверка подписи вебхуков HMAC SHA-256", estimateMin: 90, reason: "Схема обновлена до payload v2" },
+  { id: "ai-4", title: "Инструкция по откату релиза", estimateMin: 60, reason: "Похожие задачи закрывались с этим пунктом" },
 ];

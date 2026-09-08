@@ -10,6 +10,7 @@ import {
   Moon,
   Paperclip,
   Play,
+  Sparkles,
   Square,
   Sun,
 } from "lucide-react";
@@ -25,8 +26,10 @@ import {
   Textarea,
   type Tone,
 } from "@/components/kit/primitives";
+import { TaskDialog, type TaskDialogKind } from "@/components/task/task-dialogs";
 import { taskDetail, taskHints, type FeedItem } from "@/mock/task";
 import type { TaskStatus } from "@/mock/kit";
+
 
 const statusTone: Record<TaskStatus, Tone> = {
   Новая: "neutral",
@@ -73,7 +76,13 @@ function BlockTitle({
 
 /* ---------- Меню «…»: «Удалить» последним пунктом за разделителем ---------- */
 
-function ActionsMenu({ canDelete }: { canDelete: boolean }) {
+function ActionsMenu({
+  canDelete,
+  onSelect,
+}: {
+  canDelete: boolean;
+  onSelect: (kind: TaskDialogKind) => void;
+}) {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -85,7 +94,14 @@ function ActionsMenu({ canDelete }: { canDelete: boolean }) {
     return () => document.removeEventListener("mousedown", onDoc);
   }, []);
 
-  const items = ["Скопировать ссылку", "Дублировать задачу", "Перенести в проект", "Отписаться от задачи"];
+  const items: { label: string; kind?: TaskDialogKind }[] = [
+    { label: "Сменить исполнителя", kind: "assignee" },
+    { label: "Добавить наблюдателей", kind: "watchers" },
+    { label: "Разобрать на подзадачи через ИИ", kind: "decompose" },
+    { label: "Перенести в другой проект", kind: "move" },
+    { label: "Скопировать ссылку" },
+    { label: "Отписаться от задачи" },
+  ];
 
   return (
     <div className="relative" ref={ref}>
@@ -99,14 +115,17 @@ function ActionsMenu({ canDelete }: { canDelete: boolean }) {
         <MoreHorizontal className="size-4" strokeWidth={1.75} />
       </Button>
       {open ? (
-        <div className="absolute right-0 z-20 mt-xs w-56 rounded-md border border-border bg-surface py-xs shadow-e2">
+        <div className="absolute right-0 z-20 mt-xs w-64 rounded-md border border-border bg-surface py-xs shadow-e2">
           {items.map((i) => (
             <button
-              key={i}
+              key={i.label}
               className="block w-full px-md py-sm text-left text-body text-foreground transition-fast hover:bg-surface-pressed"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+                if (i.kind) onSelect(i.kind);
+              }}
             >
-              {i}
+              {i.label}
             </button>
           ))}
           {canDelete ? (
@@ -114,7 +133,10 @@ function ActionsMenu({ canDelete }: { canDelete: boolean }) {
               <div className="my-xs h-px bg-border" />
               <button
                 className="block w-full px-md py-sm text-left text-body text-danger-foreground transition-fast hover:bg-danger-soft"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  onSelect("delete");
+                }}
               >
                 Удалить
               </button>
@@ -125,6 +147,7 @@ function ActionsMenu({ canDelete }: { canDelete: boolean }) {
     </div>
   );
 }
+
 
 /* ---------- Лента: комментарии и события одним потоком ---------- */
 
@@ -166,15 +189,19 @@ export function TaskScreen() {
   const [timer, setTimer] = React.useState(false);
   const [checks, setChecks] = React.useState(() => t.checklist.map((c) => c.done));
   const [comment, setComment] = React.useState("");
+  const [dialog, setDialog] = React.useState<TaskDialogKind | null>(null);
+  /** эталон показывает обе роли приёмки: исполнитель и постановщик */
+  const [seat, setSeat] = React.useState<"assignee" | "author">("assignee");
 
   React.useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
   const canEdit = t.viewerRole !== "viewer";
-  const isAssignee = t.viewerId === t.assignee.id;
-  const isAuthor = t.viewerId === t.author.id;
+  const isAssignee = seat === "assignee";
+  const isAuthor = seat === "author";
   const showAcceptance = t.needsAcceptance && t.author.id !== t.assignee.id;
+
 
   const doneChecks = checks.filter(Boolean).length;
   const doneAcceptance = t.acceptance.filter((a) => a.done).length;
@@ -194,7 +221,23 @@ export function TaskScreen() {
             <ChevronRight className="size-3.5 shrink-0" strokeWidth={1.75} />
             <span className="num text-foreground">{t.code}</span>
           </nav>
-          <div className="ml-auto flex items-center gap-sm">
+          <div className="ml-auto flex flex-wrap items-center gap-sm">
+            <div className="flex items-center gap-xs rounded-md border border-border p-0.5">
+              {(["assignee", "author"] as const).map((r) => (
+                <button
+                  key={r}
+                  onClick={() => setSeat(r)}
+                  className={cn(
+                    "rounded-sm px-md py-xs text-meta transition-fast",
+                    seat === r
+                      ? "bg-surface-pressed font-medium text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  {r === "assignee" ? "Я исполнитель" : "Я постановщик"}
+                </button>
+              ))}
+            </div>
             <Button
               variant="ghost"
               size="icon"
@@ -204,9 +247,17 @@ export function TaskScreen() {
               {dark ? <Sun className="size-4" strokeWidth={1.75} /> : <Moon className="size-4" strokeWidth={1.75} />}
             </Button>
             {canEdit && isAssignee ? <Button variant="primary">Отправить на приёмку</Button> : null}
-            {canEdit && isAuthor ? <Button variant="primary">Принять работу</Button> : null}
-            <ActionsMenu canDelete={t.viewerRole === "owner"} />
+            {canEdit && isAuthor ? (
+              <>
+                <Button variant="secondary" onClick={() => setDialog("return")}>
+                  Вернуть в работу
+                </Button>
+                <Button variant="primary">Принять работу</Button>
+              </>
+            ) : null}
+            <ActionsMenu canDelete={t.viewerRole === "owner"} onSelect={setDialog} />
           </div>
+
         </div>
       </header>
 
@@ -237,15 +288,30 @@ export function TaskScreen() {
               <p className="max-w-prose text-body-lg text-foreground">{t.description}</p>
             </div>
 
-            <div className="flex flex-col gap-md">
-              <BlockTitle note="3 подсказки">Помощь ИИ</BlockTitle>
-              <ul className="flex flex-col divide-y divide-border">
+            <section
+              aria-label="Рекомендации ИИ"
+              className="flex flex-col gap-md rounded-lg border border-accent/25 bg-accent-soft px-lg py-lg"
+            >
+              <div className="flex flex-wrap items-center gap-sm">
+                <Sparkles className="size-4 text-accent" strokeWidth={1.75} />
+                <h2 className="text-body font-semibold text-foreground">Рекомендации ИИ</h2>
+                <span className="num text-meta text-muted-foreground">3 подсказки</span>
+                {canEdit ? (
+                  <button
+                    className="ml-auto text-meta text-accent transition-fast hover:text-accent-hover"
+                    onClick={() => setDialog("decompose")}
+                  >
+                    Разобрать на подзадачи
+                  </button>
+                ) : null}
+              </div>
+              <ul className="flex flex-col divide-y divide-accent/15">
                 {taskHints.map((h) => (
-                  <li key={h.id} className="flex gap-md py-md">
+                  <li key={h.id} className="flex gap-md py-sm first:pt-0 last:pb-0">
                     <span
                       className={cn(
                         "mt-1.5 size-1.5 shrink-0 rounded-full",
-                        h.important ? "bg-warn" : "bg-border-strong",
+                        h.important ? "bg-warn" : "bg-accent/50",
                       )}
                     />
                     <p className="text-body text-foreground">
@@ -257,7 +323,8 @@ export function TaskScreen() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
+
 
             {showAcceptance ? (
               <div className="flex flex-col gap-md">
@@ -293,21 +360,43 @@ export function TaskScreen() {
               <BlockTitle note={`${doneChecks} из ${t.checklist.length}`}>Чек-лист</BlockTitle>
               <Progress value={Math.round((doneChecks / t.checklist.length) * 100)} />
               <ul className="flex flex-col divide-y divide-border">
-                {t.checklist.map((c, i) => (
-                  <li key={c.id} className="flex items-center justify-between gap-md py-sm">
-                    <Checkbox
-                      label={c.text}
-                      checked={checks[i] ?? false}
-                      disabled={!canEdit}
-                      onChange={(v) =>
-                        setChecks((prev) => prev.map((p, idx) => (idx === i ? v : p)))
-                      }
-                    />
-                    <span className="num shrink-0 text-meta text-muted-foreground">{c.due}</span>
-                  </li>
-                ))}
+                {t.checklist.map((c, i) => {
+                  const done = checks[i] ?? false;
+                  const late = !done && c.overdue;
+                  return (
+                    <li key={c.id} className="flex items-center justify-between gap-md py-sm">
+                      <span className="flex min-w-0 items-center gap-sm">
+                        <Checkbox
+                          label=""
+                          checked={done}
+                          disabled={!canEdit}
+                          onChange={(v) =>
+                            setChecks((prev) => prev.map((p, idx) => (idx === i ? v : p)))
+                          }
+                        />
+                        <span
+                          className={cn(
+                            "min-w-0 text-body",
+                            done ? "text-muted-foreground line-through" : "text-foreground",
+                          )}
+                        >
+                          {c.text}
+                        </span>
+                      </span>
+                      <span
+                        className={cn(
+                          "num shrink-0 text-meta",
+                          late ? "font-medium text-danger-foreground" : "text-muted-foreground",
+                        )}
+                      >
+                        {late ? `Просрочено · ${c.due}` : c.due}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
+
 
             <div className="flex flex-col gap-md">
               <BlockTitle note={`${t.subtasks.length} шт.`}>Подзадачи</BlockTitle>
@@ -359,7 +448,7 @@ export function TaskScreen() {
                 Только обсуждение
               </label>
 
-              <ul className="flex flex-col divide-y divide-border border-l border-border">
+              <ul className="flex flex-col divide-y divide-border">
                 {feed.map((item) => (
                   <FeedRow key={item.id} item={item} />
                 ))}
@@ -467,15 +556,22 @@ export function TaskScreen() {
               <div className="flex items-center justify-between gap-md">
                 <AvatarGroup names={t.watchers.map((w) => w.name)} max={4} />
                 {canEdit ? (
-                  <button className="text-meta text-accent transition-fast hover:text-accent-hover">
+                  <button
+                    className="text-meta text-accent transition-fast hover:text-accent-hover"
+                    onClick={() => setDialog("watchers")}
+                  >
                     Добавить
                   </button>
                 ) : null}
               </div>
             </div>
+
           </aside>
         </div>
       </main>
+
+      {dialog ? <TaskDialog kind={dialog} onClose={() => setDialog(null)} /> : null}
     </div>
   );
 }
+

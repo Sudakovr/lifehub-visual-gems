@@ -8,7 +8,8 @@ import { Check, ChevronDown, Loader2 } from "lucide-react";
 ------------------------------------------------------------------ */
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-sm rounded-sm font-medium transition-fast transition-colors disabled:pointer-events-none disabled:text-disabled-foreground select-none",
+  "inline-flex items-center justify-center gap-sm rounded-md font-medium transition-fast transition-colors disabled:pointer-events-none disabled:text-disabled-foreground select-none",
+
   {
     variants: {
       variant: {
@@ -233,15 +234,15 @@ export function StatusChip({ tone = "neutral", children }: { tone?: Tone; childr
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-xs rounded-xs border px-sm py-0.5 text-meta font-medium",
+        "inline-flex items-center rounded-full border px-md py-0.5 text-meta font-medium",
         toneClass[tone],
       )}
     >
-      <span className={cn("size-1.5 rounded-full", dotClass[tone])} />
       {children}
     </span>
   );
 }
+
 
 export function PriorityChip({ level }: { level: "Критический" | "Высокий" | "Обычный" | "Низкий" }) {
   const map = {
@@ -251,7 +252,7 @@ export function PriorityChip({ level }: { level: "Критический" | "В�
     Низкий: { tone: "neutral" as Tone, bars: 0 },
   }[level];
   return (
-    <span className={cn("inline-flex items-center gap-sm rounded-xs border px-sm py-0.5 text-meta font-medium", toneClass[map.tone])}>
+    <span className={cn("inline-flex items-center gap-sm rounded-full border px-md py-0.5 text-meta font-medium", toneClass[map.tone])}>
       <span className="flex items-end gap-0.5" aria-hidden>
         {[1, 2, 3].map((i) => (
           <span
@@ -271,7 +272,7 @@ export function PriorityChip({ level }: { level: "Критический" | "В�
 
 export function Tag({ color, children }: { color: string; children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-xs rounded-xs border border-border bg-surface px-sm py-0.5 text-meta text-foreground">
+    <span className="inline-flex items-center gap-xs rounded-full border border-border bg-surface px-md py-0.5 text-meta text-foreground">
       <span className="size-2 rounded-xs" style={{ backgroundColor: color }} aria-hidden />
       {children}
     </span>
