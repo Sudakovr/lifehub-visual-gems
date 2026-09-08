@@ -34,8 +34,8 @@ const Nav = Link as unknown as React.FC<{
   className?: string;
   activeProps?: { className?: string };
   activeOptions?: { exact?: boolean };
-  onClick?: () => void;
-  title?: string;
+  onClick?: (() => void) | undefined;
+  title?: string | undefined;
   children?: React.ReactNode;
 }>;
 
