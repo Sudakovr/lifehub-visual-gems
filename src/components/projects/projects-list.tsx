@@ -202,7 +202,7 @@ function ViewButton({
 function DenseTable({ rows }: { rows: ProjectRow[] }) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-4xl border-collapse text-body">
+      <table className="w-full min-w-table-wide border-collapse text-body">
         <thead>
           <tr className="border-b border-border-strong text-left text-meta text-muted-foreground">
             <th className="py-sm pr-md font-medium">Название</th>

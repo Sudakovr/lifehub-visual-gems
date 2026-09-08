@@ -85,7 +85,7 @@ export function TaskPeek({ task, onClose }: { task: ProjectTask; onClose: () => 
           <Link
             to="/tasks/$id"
             params={{ id: "2481" }}
-            className="inline-flex h-9 items-center rounded-md bg-accent px-lg text-body font-medium text-accent-foreground transition-fast hover:bg-accent-hover"
+            className="inline-flex h-9 items-center rounded-md bg-action px-lg text-body font-medium text-action-foreground shadow-e1 transition-fast hover:bg-action-hover"
           >
             Открыть задачу
           </Link>

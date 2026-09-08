@@ -215,7 +215,7 @@ export function ProjectTasks() {
       ) : (
         <div className="flex flex-col gap-lg lg:flex-row lg:items-start">
         <div className="min-w-0 flex-1 overflow-x-auto">
-          <table className="w-full min-w-5xl border-collapse text-body">
+          <table className="w-full min-w-table-dense border-collapse text-body">
             <thead>
               <tr className="border-b border-border-strong text-left text-meta text-muted-foreground">
                 {canEdit ? <th className="w-8 py-sm" /> : null}
