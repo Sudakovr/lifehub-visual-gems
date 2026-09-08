@@ -1,24 +1,40 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "LifeHub — визуальные эталоны продукта" },
+      {
+        name: "description",
+        content: "Дизайн-система LifeHub: токены, типографика и примитивы интерфейса на странице /kit.",
+      },
+      { property: "og:title", content: "LifeHub — визуальные эталоны продукта" },
+      {
+        property: "og:description",
+        content: "Дизайн-система LifeHub: токены, типографика и примитивы интерфейса.",
+      },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="min-h-screen bg-canvas">
+      <div className="mx-auto max-w-2xl px-lg py-4xl">
+        <p className="text-meta text-muted-foreground">LifeHub</p>
+        <h1 className="mt-xs text-display font-semibold">Визуальные эталоны</h1>
+        <p className="mt-sm text-body-lg text-muted-foreground">
+          Собрана основа дизайн-системы: семантические токены двух тем, типографика и набор
+          примитивов.
+        </p>
+        <Link
+          to="/kit"
+          className="mt-xl inline-flex h-9 items-center rounded-sm bg-accent px-lg text-body font-medium text-accent-foreground transition-fast hover:bg-accent-hover"
+        >
+          Открыть набор примитивов
+        </Link>
+      </div>
+    </main>
   );
 }
