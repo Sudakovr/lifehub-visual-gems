@@ -22,10 +22,10 @@ export function ProfileSettings() {
       <PageHeading
         title="Профиль и уведомления"
         note="Как вас видят коллеги и о чём продукт сообщает вам."
-        actions={<Button>Сохранить изменения</Button>}
+        actions={<Button>Сохранить</Button>}
       />
 
-      <div className="mt-2xl grid gap-3xl lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+      <div className="mt-2xl grid gap-3xl lg:profile-grid">
         <section className="flex flex-col gap-xl">
           <div className="flex flex-col gap-lg">
             <SectionHead title="Профиль" />

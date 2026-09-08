@@ -59,7 +59,11 @@ export function TaskRow({
 
       <span className="flex min-w-0 flex-1 basis-64 flex-col gap-2xs">
         <span className="flex flex-wrap items-baseline gap-sm">
-          <TaskTitle code={task.code} title={task.title} onOpen={onPeek ? () => onPeek(task) : undefined} />
+          {onPeek ? (
+            <TaskTitle code={task.code} title={task.title} onOpen={() => onPeek(task)} />
+          ) : (
+            <TaskTitle code={task.code} title={task.title} />
+          )}
           {task.watching ? (
             <span className="text-meta text-muted-foreground">я наблюдатель</span>
           ) : null}

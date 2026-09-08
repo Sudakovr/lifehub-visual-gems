@@ -89,6 +89,8 @@
   --container-kit: 72rem; /* полотно страницы дизайн-системы */
   --container-copy: 42rem; /* читаемая строка вводного текста */
   --container-properties: 18rem; /* колонка свойств задачи */
+  --container-command: 18.75rem; /* список команд и результатов */
+  --container-drawer-handle: 6.25rem; /* ручка мобильной шторки */
 
   /* --- Ограничения по высоте ---------------------------------- */
   --container-dialog-height: 85vh; /* диалог на небольшом экране */
@@ -316,4 +318,12 @@
 
 @utility overlay-blur {
   backdrop-filter: blur(var(--blur-overlay));
+}
+
+@utility profile-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+}
+
+@utility timeline-row {
+  grid-template-columns: minmax(0, 1fr) auto;
 }

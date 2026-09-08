@@ -34,7 +34,7 @@ export function ProjectTime() {
             </Button>
             <Button size="sm">
               <Play className="size-4" strokeWidth={1.75} />
-              Начать таймер
+              Запустить таймер
             </Button>
           </div>
         }

@@ -462,7 +462,7 @@ export function KitSections() {
           </div>
           <ul className="flex flex-col divide-y divide-border">
             {kitTimeline.map((e) => (
-              <li key={e.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-md py-sm">
+              <li key={e.id} className="timeline-row grid items-center gap-md py-sm">
                 <div className="flex min-w-0 items-center gap-sm">
                   <MessageSquare className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.75} />
                   <span className="truncate text-body">{e.title}</span>

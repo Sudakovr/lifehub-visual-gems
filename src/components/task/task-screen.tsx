@@ -550,7 +550,7 @@ export function TaskScreen() {
                   ) : (
                     <>
                       <Play className="size-4" strokeWidth={1.75} />
-                      Начать таймер
+                      Запустить таймер
                     </>
                   )}
                 </Button>

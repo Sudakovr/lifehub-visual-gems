@@ -87,7 +87,7 @@ export function ProjectBoard() {
                   <ChevronRight className="size-4" strokeWidth={1.75} />
                 </button>
                 <span className="num text-meta text-muted-foreground">{cards.length}</span>
-                <span className="text-meta whitespace-nowrap text-muted-foreground [writing-mode:vertical-rl]">
+                <span className="vertical-label whitespace-nowrap text-meta text-muted-foreground">
                   {status}
                 </span>
               </div>
