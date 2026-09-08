@@ -17,6 +17,7 @@ import { Route as ProjectsIdIndexRouteImport } from './routes/projects/$id/index
 import { Route as ProjectsIdBoardRouteImport } from './routes/projects/$id/board'
 import { Route as ProjectsIdFilesRouteImport } from './routes/projects/$id/files'
 import { Route as ProjectsIdNotesRouteImport } from './routes/projects/$id/notes'
+import { Route as ProjectsIdSettingsRouteImport } from './routes/projects/$id/settings'
 import { Route as ProjectsIdTasksRouteImport } from './routes/projects/$id/tasks'
 import { Route as ProjectsIdTimeRouteImport } from './routes/projects/$id/time'
 import { Route as TasksIdIndexRouteImport } from './routes/tasks/$id/index'
@@ -61,6 +62,11 @@ const ProjectsIdNotesRoute = ProjectsIdNotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => ProjectsIdRouteRoute,
 } as any)
+const ProjectsIdSettingsRoute = ProjectsIdSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ProjectsIdRouteRoute,
+} as any)
 const ProjectsIdTasksRoute = ProjectsIdTasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
   '/projects/$id/notes': typeof ProjectsIdNotesRoute
+  '/projects/$id/settings': typeof ProjectsIdSettingsRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id/time': typeof ProjectsIdTimeRoute
   '/projects/$id/': typeof ProjectsIdIndexRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
   '/projects/$id/notes': typeof ProjectsIdNotesRoute
+  '/projects/$id/settings': typeof ProjectsIdSettingsRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id/time': typeof ProjectsIdTimeRoute
   '/projects/$id': typeof ProjectsIdIndexRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
   '/projects/$id/notes': typeof ProjectsIdNotesRoute
+  '/projects/$id/settings': typeof ProjectsIdSettingsRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id/time': typeof ProjectsIdTimeRoute
   '/projects/$id/': typeof ProjectsIdIndexRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/projects/$id/board'
     | '/projects/$id/files'
     | '/projects/$id/notes'
+    | '/projects/$id/settings'
     | '/projects/$id/tasks'
     | '/projects/$id/time'
     | '/projects/$id/'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/projects/$id/board'
     | '/projects/$id/files'
     | '/projects/$id/notes'
+    | '/projects/$id/settings'
     | '/projects/$id/tasks'
     | '/projects/$id/time'
     | '/projects/$id'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/projects/$id/board'
     | '/projects/$id/files'
     | '/projects/$id/notes'
+    | '/projects/$id/settings'
     | '/projects/$id/tasks'
     | '/projects/$id/time'
     | '/projects/$id/'
@@ -223,6 +235,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsIdNotesRouteImport
       parentRoute: typeof ProjectsIdRouteRoute
     }
+    '/projects/$id/settings': {
+      id: '/projects/$id/settings'
+      path: '/settings'
+      fullPath: '/projects/$id/settings'
+      preLoaderRoute: typeof ProjectsIdSettingsRouteImport
+      parentRoute: typeof ProjectsIdRouteRoute
+    }
     '/projects/$id/tasks': {
       id: '/projects/$id/tasks'
       path: '/tasks'
@@ -251,6 +270,7 @@ interface ProjectsIdRouteRouteChildren {
   ProjectsIdBoardRoute: typeof ProjectsIdBoardRoute
   ProjectsIdFilesRoute: typeof ProjectsIdFilesRoute
   ProjectsIdNotesRoute: typeof ProjectsIdNotesRoute
+  ProjectsIdSettingsRoute: typeof ProjectsIdSettingsRoute
   ProjectsIdTasksRoute: typeof ProjectsIdTasksRoute
   ProjectsIdTimeRoute: typeof ProjectsIdTimeRoute
   ProjectsIdIndexRoute: typeof ProjectsIdIndexRoute
@@ -260,6 +280,7 @@ const ProjectsIdRouteRouteChildren: ProjectsIdRouteRouteChildren = {
   ProjectsIdBoardRoute: ProjectsIdBoardRoute,
   ProjectsIdFilesRoute: ProjectsIdFilesRoute,
   ProjectsIdNotesRoute: ProjectsIdNotesRoute,
+  ProjectsIdSettingsRoute: ProjectsIdSettingsRoute,
   ProjectsIdTasksRoute: ProjectsIdTasksRoute,
   ProjectsIdTimeRoute: ProjectsIdTimeRoute,
   ProjectsIdIndexRoute: ProjectsIdIndexRoute,
