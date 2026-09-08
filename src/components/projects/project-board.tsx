@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight, MessageSquare } from "lucide-react";
 import { Avatar, Button, StatusChip } from "@/components/kit/primitives";
+import { TaskPeek } from "@/components/projects/task-peek";
 import { SectionHead, taskStatusTone } from "@/components/projects/shared";
 import { projectTasks, type ProjectTask } from "@/mock/projects";
 import type { TaskStatus } from "@/mock/kit";
@@ -13,6 +14,11 @@ export function ProjectBoard() {
   const [dragId, setDragId] = React.useState<string | null>(null);
   const [target, setTarget] = React.useState<TaskStatus | null>(null);
   const [collapsed, setCollapsed] = React.useState<TaskStatus[]>([]);
+  const [peekId, setPeekId] = React.useState<string | null>(null);
+  const moved = React.useRef(false);
+  const start = React.useRef({ x: 0, y: 0 });
+
+  const peek = items.find((t) => t.id === peekId) ?? null;
 
   function move(id: string, status: TaskStatus) {
     setItems((list) => list.map((t) => (t.id === id ? { ...t, status } : t)));
@@ -20,12 +26,17 @@ export function ProjectBoard() {
 
   function onPointerDown(e: React.PointerEvent, id: string) {
     if (e.button && e.button !== 0) return;
+    moved.current = false;
+    start.current = { x: e.clientX, y: e.clientY };
     setDragId(id);
     (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
   }
 
   function onPointerMove(e: React.PointerEvent) {
     if (!dragId) return;
+    if (Math.abs(e.clientX - start.current.x) > 4 || Math.abs(e.clientY - start.current.y) > 4) {
+      moved.current = true;
+    }
     e.preventDefault();
     const el = document.elementFromPoint(e.clientX, e.clientY);
     const col = el?.closest<HTMLElement>("[data-column]");
@@ -33,7 +44,7 @@ export function ProjectBoard() {
   }
 
   function onPointerUp() {
-    if (dragId && target) move(dragId, target);
+    if (dragId && moved.current && target) move(dragId, target);
     setDragId(null);
     setTarget(null);
   }
@@ -45,12 +56,13 @@ export function ProjectBoard() {
         note={`${items.length} задач`}
         action={
           <span className="text-meta text-muted-foreground">
-            Карточку можно перетащить мышью или пальцем в другую колонку
+            Карточку можно перетащить в другую колонку, клик открывает панель просмотра
           </span>
         }
       />
 
-      <div className="-mx-lg flex touch-pan-y gap-lg overflow-x-auto px-lg pb-lg">
+      <div className="flex flex-col gap-lg lg:flex-row lg:items-start">
+      <div className="flex min-w-0 flex-1 touch-pan-y gap-lg overflow-x-auto pb-lg">
         {columnsOrder.map((status) => {
           const cards = items.filter((t) => t.status === status);
           const isCollapsed = collapsed.includes(status);
@@ -110,7 +122,11 @@ export function ProjectBoard() {
                     key={task.id}
                     task={task}
                     dragging={dragId === task.id}
+                    active={peekId === task.id}
                     onPointerDown={(e) => onPointerDown(e, task.id)}
+                    onOpen={() => {
+                      if (!moved.current) setPeekId(task.id);
+                    }}
                   />
                 ))}
                 {isTarget ? (
@@ -126,6 +142,9 @@ export function ProjectBoard() {
           );
         })}
       </div>
+
+      {peek ? <TaskPeek task={peek} onClose={() => setPeekId(null)} /> : null}
+      </div>
     </div>
   );
 }
@@ -133,22 +152,34 @@ export function ProjectBoard() {
 function BoardCard({
   task,
   dragging,
+  active,
   onPointerDown,
+  onOpen,
 }: {
   task: ProjectTask;
   dragging: boolean;
+  active: boolean;
   onPointerDown: (e: React.PointerEvent) => void;
+  onOpen: () => void;
 }) {
   const subtasks = projectTasks.filter((t) => t.parentId === task.id).length;
   return (
     <article
       onPointerDown={onPointerDown}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
       role="button"
       tabIndex={0}
-      aria-label={`Задача ${task.code}. Перетащите, чтобы сменить статус`}
+      aria-label={`Задача ${task.code}. Клик открывает панель просмотра, перетаскивание меняет статус`}
       className={cn(
         "cursor-grab touch-none rounded-md border border-border bg-surface px-md py-sm select-none",
         dragging ? "cursor-grabbing border-accent shadow-e3" : "shadow-e1",
+        active ? "border-accent" : null,
       )}
     >
       <div className="flex items-start justify-between gap-sm">

@@ -10,6 +10,7 @@ import {
   Skeleton,
   StatusChip,
 } from "@/components/kit/primitives";
+import { TaskPeek } from "@/components/projects/task-peek";
 import { SectionHead, TaskLink, taskStatusTone } from "@/components/projects/shared";
 import { hoursMinutes, projectTasks, type ProjectTask } from "@/mock/projects";
 import { cn } from "@/lib/utils";
@@ -39,6 +40,9 @@ export function ProjectTasks() {
   const [columnsOpen, setColumnsOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<string[]>([]);
   const [collapsed, setCollapsed] = React.useState<string[]>([]);
+  const [peekId, setPeekId] = React.useState<string | null>(null);
+
+  const peek = projectTasks.find((t) => t.id === peekId) ?? null;
 
   const canEdit = state !== "readonly";
 
@@ -209,7 +213,8 @@ export function ProjectTasks() {
           </Button>
         </div>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="flex flex-col gap-lg lg:flex-row lg:items-start">
+        <div className="min-w-0 flex-1 overflow-x-auto">
           <table className="w-full min-w-5xl border-collapse text-body">
             <thead>
               <tr className="border-b border-border-strong text-left text-meta text-muted-foreground">
@@ -239,9 +244,14 @@ export function ProjectTasks() {
                 {g.lines.map(({ task, depth, hasChildren }) => (
                   <tr
                     key={task.id}
+                    onClick={(e) => {
+                      if ((e.target as HTMLElement).closest("a,button,input,label")) return;
+                      setPeekId(task.id);
+                    }}
                     className={cn(
-                      "border-b border-border transition-fast hover:bg-surface-pressed",
+                      "cursor-pointer border-b border-border transition-fast hover:bg-surface-pressed",
                       selected.includes(task.id) && "bg-accent-soft",
+                      peekId === task.id && "bg-surface-pressed",
                     )}
                   >
                     {canEdit ? (
@@ -327,6 +337,8 @@ export function ProjectTasks() {
               </tbody>
             ))}
           </table>
+        </div>
+        {peek ? <TaskPeek task={peek} onClose={() => setPeekId(null)} /> : null}
         </div>
       )}
     </div>

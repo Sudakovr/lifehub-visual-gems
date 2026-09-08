@@ -2,6 +2,7 @@ import * as React from "react";
 import { Sparkles } from "lucide-react";
 import { Avatar, Button } from "@/components/kit/primitives";
 import { Metric } from "@/components/app/app-shell";
+import { TaskDialog } from "@/components/task/task-dialogs";
 import { DueText, ProgressBar, SectionHead, TaskLink, taskStatusTone } from "@/components/projects/shared";
 import {
   getProject,
@@ -28,6 +29,7 @@ const dotByTone: Record<string, string> = {
 export function ProjectOverview({ id }: { id: string }) {
   const project = getProject(id);
   const totalTasks = statusBreakdown.reduce((s, i) => s + i.count, 0);
+  const [dialog, setDialog] = React.useState<"decompose" | null>(null);
 
   return (
     <div className="flex flex-col gap-2xl">
@@ -39,9 +41,14 @@ export function ProjectOverview({ id }: { id: string }) {
             <h2 className="text-body font-semibold text-foreground">Сводка проекта от ИИ</h2>
             <span className="text-meta text-muted-foreground">обновлена 12 июня, 09:20</span>
           </div>
-          <Button variant="ghost" size="sm">
-            Обновить сводку
-          </Button>
+          <div className="flex items-center gap-sm">
+            <Button variant="ghost" size="sm">
+              Обновить сводку
+            </Button>
+            <Button variant="secondary" size="sm" onClick={() => setDialog("decompose")}>
+              Разобрать на подзадачи
+            </Button>
+          </div>
         </div>
         <ol className="mt-md flex flex-col gap-sm">
           {projectSummary.map((s, i) => (
@@ -174,6 +181,8 @@ export function ProjectOverview({ id }: { id: string }) {
           </ul>
         </div>
       </section>
+
+      {dialog ? <TaskDialog kind="decompose" onClose={() => setDialog(null)} /> : null}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -217,7 +218,13 @@ export function TaskScreen() {
           <nav aria-label="Хлебные крошки" className="flex min-w-0 items-center gap-xs text-meta text-muted-foreground">
             <span>{t.space}</span>
             <ChevronRight className="size-3.5 shrink-0" strokeWidth={1.75} />
-            <span className="truncate">{t.project}</span>
+            <Link
+              to="/projects/$id"
+              params={{ id: "p-1" }}
+              className="truncate font-medium text-foreground transition-fast hover:text-accent"
+            >
+              {t.project}
+            </Link>
             <ChevronRight className="size-3.5 shrink-0" strokeWidth={1.75} />
             <span className="num text-foreground">{t.code}</span>
           </nav>
@@ -264,6 +271,16 @@ export function TaskScreen() {
       <main className="mx-auto max-w-[1600px] px-lg pt-xl pb-3xl">
         {/* Заголовок задачи */}
         <div className="flex flex-col gap-md border-b border-border pb-lg">
+          <p className="text-meta text-muted-foreground">
+            Задача проекта{" "}
+            <Link
+              to="/projects/$id"
+              params={{ id: "p-1" }}
+              className="font-medium text-foreground underline underline-offset-4 transition-fast hover:text-accent"
+            >
+              {t.project}
+            </Link>
+          </p>
           <h1 className="text-heading font-semibold text-foreground">{t.title}</h1>
           <div className="flex flex-wrap items-center gap-sm">
             <StatusChip tone={statusTone[t.status]}>{t.status}</StatusChip>
