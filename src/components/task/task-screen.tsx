@@ -297,7 +297,7 @@ export function TaskScreen() {
                   <li key={c.id} className="flex items-center justify-between gap-md py-sm">
                     <Checkbox
                       label={c.text}
-                      checked={checks[i]}
+                      checked={checks[i] ?? false}
                       disabled={!canEdit}
                       onChange={(v) =>
                         setChecks((prev) => prev.map((p, idx) => (idx === i ? v : p)))
