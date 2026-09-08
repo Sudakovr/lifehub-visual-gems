@@ -101,10 +101,10 @@ export function TaskRow({
         </span>
       </span>
 
-      <span className="w-36 shrink-0 whitespace-nowrap lg:text-right">
+      <span className="w-44 shrink-0 whitespace-nowrap lg:text-right">
         <span
           className={cn(
-            "num text-body",
+            "num text-meta",
             task.overdue ? "font-medium text-danger-foreground" : "text-foreground",
           )}
         >
