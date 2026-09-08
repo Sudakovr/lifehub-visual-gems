@@ -33,6 +33,16 @@ export function QuickAdd() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Открытие из шапки и командного меню
+  React.useEffect(() => {
+    function onOpen() {
+      reset();
+      setOpen(true);
+    }
+    window.addEventListener("lifehub:quick-add", onOpen);
+    return () => window.removeEventListener("lifehub:quick-add", onOpen);
+  }, []);
+
   React.useEffect(() => {
     if (open) inputRef.current?.focus();
   }, [open]);

@@ -10,9 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FilesRouteImport } from './routes/files'
 import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as MyRouteImport } from './routes/my'
+import { Route as NotesRouteImport } from './routes/notes'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as TimeRouteImport } from './routes/time'
 import { Route as TodayRouteImport } from './routes/today'
+import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as AuthInviteRouteImport } from './routes/auth/invite'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AuthRegisterRouteImport } from './routes/auth/register'
+import { Route as AuthResetRouteImport } from './routes/auth/reset'
 import { Route as KitIndexRouteImport } from './routes/kit/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsIdRouteRouteImport } from './routes/projects/$id/route'
@@ -30,6 +39,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FilesRoute = FilesRouteImport.update({
+  id: '/files',
+  path: '/files',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InboxRoute = InboxRouteImport.update({
   id: '/inbox',
   path: '/inbox',
@@ -40,9 +54,49 @@ const MyRoute = MyRouteImport.update({
   path: '/my',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesRoute = NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimeRoute = TimeRouteImport.update({
+  id: '/time',
+  path: '/time',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TodayRoute = TodayRouteImport.update({
   id: '/today',
   path: '/today',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WelcomeRoute = WelcomeRouteImport.update({
+  id: '/welcome',
+  path: '/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthInviteRoute = AuthInviteRouteImport.update({
+  id: '/auth/invite',
+  path: '/auth/invite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthResetRoute = AuthResetRouteImport.update({
+  id: '/auth/reset',
+  path: '/auth/reset',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KitIndexRoute = KitIndexRouteImport.update({
@@ -103,10 +157,19 @@ const TasksIdIndexRoute = TasksIdIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
+  '/notes': typeof NotesRoute
+  '/search': typeof SearchRoute
+  '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/welcome': typeof WelcomeRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
+  '/auth/invite': typeof AuthInviteRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/auth/reset': typeof AuthResetRoute
   '/kit/': typeof KitIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
@@ -120,9 +183,18 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
+  '/notes': typeof NotesRoute
+  '/search': typeof SearchRoute
+  '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/welcome': typeof WelcomeRoute
+  '/auth/invite': typeof AuthInviteRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/auth/reset': typeof AuthResetRoute
   '/kit': typeof KitIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
@@ -137,10 +209,19 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
+  '/notes': typeof NotesRoute
+  '/search': typeof SearchRoute
+  '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/welcome': typeof WelcomeRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
+  '/auth/invite': typeof AuthInviteRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/auth/reset': typeof AuthResetRoute
   '/kit/': typeof KitIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
@@ -156,10 +237,19 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/files'
     | '/inbox'
     | '/my'
+    | '/notes'
+    | '/search'
+    | '/time'
     | '/today'
+    | '/welcome'
     | '/projects/$id'
+    | '/auth/invite'
+    | '/auth/login'
+    | '/auth/register'
+    | '/auth/reset'
     | '/kit/'
     | '/projects/'
     | '/projects/$id/board'
@@ -173,9 +263,18 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/files'
     | '/inbox'
     | '/my'
+    | '/notes'
+    | '/search'
+    | '/time'
     | '/today'
+    | '/welcome'
+    | '/auth/invite'
+    | '/auth/login'
+    | '/auth/register'
+    | '/auth/reset'
     | '/kit'
     | '/projects'
     | '/projects/$id/board'
@@ -189,10 +288,19 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/files'
     | '/inbox'
     | '/my'
+    | '/notes'
+    | '/search'
+    | '/time'
     | '/today'
+    | '/welcome'
     | '/projects/$id'
+    | '/auth/invite'
+    | '/auth/login'
+    | '/auth/register'
+    | '/auth/reset'
     | '/kit/'
     | '/projects/'
     | '/projects/$id/board'
@@ -207,10 +315,19 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FilesRoute: typeof FilesRoute
   InboxRoute: typeof InboxRoute
   MyRoute: typeof MyRoute
+  NotesRoute: typeof NotesRoute
+  SearchRoute: typeof SearchRoute
+  TimeRoute: typeof TimeRoute
   TodayRoute: typeof TodayRoute
+  WelcomeRoute: typeof WelcomeRoute
   ProjectsIdRouteRoute: typeof ProjectsIdRouteRouteWithChildren
+  AuthInviteRoute: typeof AuthInviteRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
+  AuthResetRoute: typeof AuthResetRoute
   KitIndexRoute: typeof KitIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
   TasksIdIndexRoute: typeof TasksIdIndexRoute
@@ -223,6 +340,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/files': {
+      id: '/files'
+      path: '/files'
+      fullPath: '/files'
+      preLoaderRoute: typeof FilesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inbox': {
@@ -239,11 +363,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/time': {
+      id: '/time'
+      path: '/time'
+      fullPath: '/time'
+      preLoaderRoute: typeof TimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/today': {
       id: '/today'
       path: '/today'
       fullPath: '/today'
       preLoaderRoute: typeof TodayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/welcome': {
+      id: '/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof WelcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/invite': {
+      id: '/auth/invite'
+      path: '/auth/invite'
+      fullPath: '/auth/invite'
+      preLoaderRoute: typeof AuthInviteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/reset': {
+      id: '/auth/reset'
+      path: '/auth/reset'
+      fullPath: '/auth/reset'
+      preLoaderRoute: typeof AuthResetRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kit/': {
@@ -352,10 +532,19 @@ const ProjectsIdRouteRouteWithChildren = ProjectsIdRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FilesRoute: FilesRoute,
   InboxRoute: InboxRoute,
   MyRoute: MyRoute,
+  NotesRoute: NotesRoute,
+  SearchRoute: SearchRoute,
+  TimeRoute: TimeRoute,
   TodayRoute: TodayRoute,
+  WelcomeRoute: WelcomeRoute,
   ProjectsIdRouteRoute: ProjectsIdRouteRouteWithChildren,
+  AuthInviteRoute: AuthInviteRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
+  AuthResetRoute: AuthResetRoute,
   KitIndexRoute: KitIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
   TasksIdIndexRoute: TasksIdIndexRoute,
