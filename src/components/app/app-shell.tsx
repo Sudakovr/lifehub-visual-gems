@@ -184,7 +184,8 @@ function SidebarBody({ collapsed, onNavigate }: { collapsed: boolean; onNavigate
       </nav>
 
       <div className={cn("border-t border-border px-sm py-sm", collapsed && "px-xs")}>
-        <button
+        <Nav
+          to="/settings/profile"
           className={cn(
             "flex w-full items-center gap-sm rounded-md px-sm py-sm text-left transition-fast hover:bg-surface-pressed",
             collapsed && "justify-center px-0",
@@ -199,7 +200,7 @@ function SidebarBody({ collapsed, onNavigate }: { collapsed: boolean; onNavigate
               <span className="truncate text-caption text-muted-foreground">anna@lifehub.ru</span>
             </span>
           )}
-        </button>
+        </Nav>
       </div>
     </div>
   );
@@ -254,6 +255,13 @@ function Notifications() {
               </li>
             ))}
           </ul>
+          <Nav
+            to="/notifications"
+            onClick={() => setOpen(false)}
+            className="block border-t border-border px-md py-sm text-meta text-accent transition-fast hover:bg-surface-pressed"
+          >
+            Открыть центр уведомлений
+          </Nav>
         </div>
       ) : null}
     </div>
