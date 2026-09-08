@@ -9,7 +9,7 @@ import { aiAnswer } from "@/mock/content";
 
 const Nav = Link as unknown as React.FC<{
   to: string;
-  params?: Record<string, string>;
+  params?: Record<string, string> | undefined;
   className?: string;
   children?: React.ReactNode;
 }>;

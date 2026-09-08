@@ -136,7 +136,7 @@ export function TimeScreen() {
       <Modal
         open={edit !== null}
         title="Изменить запись времени"
-        description={edit ? `${edit.taskCode} · ${edit.task}` : undefined}
+        description={edit ? `${edit.taskCode} · ${edit.task}` : ""}
         onClose={() => setEdit(null)}
         footer={
           <>
@@ -180,6 +180,11 @@ export function TimeScreen() {
   );
 }
 
+function BillableCheckbox({ initial }: { initial: boolean }) {
+  const [on, setOn] = React.useState(initial);
+  return <Checkbox label="Оплачиваемое время" checked={on} onChange={setOn} />;
+}
+
 function EntryForm({ entry }: { entry?: DayEntry }) {
   return (
     <div className="flex flex-col gap-lg">
@@ -194,7 +199,7 @@ function EntryForm({ entry }: { entry?: DayEntry }) {
         <Input aria-label="Конец" defaultValue={entry?.end ?? "11:00"} />
       </div>
       <Input aria-label="Комментарий" defaultValue={entry?.comment ?? ""} placeholder="Что делали" />
-      <Checkbox label="Оплачиваемое время" defaultChecked={entry?.billable ?? true} />
+      <BillableCheckbox initial={entry?.billable ?? true} />
     </div>
   );
 }
