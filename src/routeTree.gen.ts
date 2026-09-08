@@ -23,6 +23,7 @@ import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
 import { Route as AuthResetRouteImport } from './routes/auth/reset'
 import { Route as KitIndexRouteImport } from './routes/kit/index'
+import { Route as NotesIndexRouteImport } from './routes/notes/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsIdRouteRouteImport } from './routes/projects/$id/route'
 import { Route as ProjectsIdIndexRouteImport } from './routes/projects/$id/index'
@@ -104,6 +105,11 @@ const KitIndexRoute = KitIndexRouteImport.update({
   path: '/kit/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesIndexRoute = NotesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => NotesRoute,
+} as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -160,7 +166,7 @@ export interface FileRoutesByFullPath {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
-  '/notes': typeof NotesRoute
+  '/notes': typeof NotesRouteWithChildren
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
   '/kit/': typeof KitIndexRoute
+  '/notes/': typeof NotesIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
@@ -186,7 +193,6 @@ export interface FileRoutesByTo {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
-  '/notes': typeof NotesRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -196,6 +202,7 @@ export interface FileRoutesByTo {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
   '/kit': typeof KitIndexRoute
+  '/notes': typeof NotesIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
@@ -212,7 +219,7 @@ export interface FileRoutesById {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
-  '/notes': typeof NotesRoute
+  '/notes': typeof NotesRouteWithChildren
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -223,6 +230,7 @@ export interface FileRoutesById {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
   '/kit/': typeof KitIndexRoute
+  '/notes/': typeof NotesIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
@@ -251,6 +259,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset'
     | '/kit/'
+    | '/notes/'
     | '/projects/'
     | '/projects/$id/board'
     | '/projects/$id/files'
@@ -266,7 +275,6 @@ export interface FileRouteTypes {
     | '/files'
     | '/inbox'
     | '/my'
-    | '/notes'
     | '/search'
     | '/time'
     | '/today'
@@ -276,6 +284,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset'
     | '/kit'
+    | '/notes'
     | '/projects'
     | '/projects/$id/board'
     | '/projects/$id/files'
@@ -302,6 +311,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset'
     | '/kit/'
+    | '/notes/'
     | '/projects/'
     | '/projects/$id/board'
     | '/projects/$id/files'
@@ -318,7 +328,7 @@ export interface RootRouteChildren {
   FilesRoute: typeof FilesRoute
   InboxRoute: typeof InboxRoute
   MyRoute: typeof MyRoute
-  NotesRoute: typeof NotesRoute
+  NotesRoute: typeof NotesRouteWithChildren
   SearchRoute: typeof SearchRoute
   TimeRoute: typeof TimeRoute
   TodayRoute: typeof TodayRoute
@@ -433,6 +443,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KitIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes/': {
+      id: '/notes/'
+      path: '/'
+      fullPath: '/notes/'
+      preLoaderRoute: typeof NotesIndexRouteImport
+      parentRoute: typeof NotesRoute
+    }
     '/projects/': {
       id: '/projects/'
       path: '/projects'
@@ -506,6 +523,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface NotesRouteChildren {
+  NotesIndexRoute: typeof NotesIndexRoute
+}
+
+const NotesRouteChildren: NotesRouteChildren = {
+  NotesIndexRoute: NotesIndexRoute,
+}
+
+const NotesRouteWithChildren = NotesRoute._addFileChildren(NotesRouteChildren)
+
 interface ProjectsIdRouteRouteChildren {
   ProjectsIdBoardRoute: typeof ProjectsIdBoardRoute
   ProjectsIdFilesRoute: typeof ProjectsIdFilesRoute
@@ -535,7 +562,7 @@ const rootRouteChildren: RootRouteChildren = {
   FilesRoute: FilesRoute,
   InboxRoute: InboxRoute,
   MyRoute: MyRoute,
-  NotesRoute: NotesRoute,
+  NotesRoute: NotesRouteWithChildren,
   SearchRoute: SearchRoute,
   TimeRoute: TimeRoute,
   TodayRoute: TodayRoute,
