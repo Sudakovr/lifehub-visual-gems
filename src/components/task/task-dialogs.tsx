@@ -60,7 +60,7 @@ function Dialog({
         aria-label={title}
         className={cn(
           "flex max-h-[85vh] w-full flex-col overflow-hidden rounded-lg border border-border bg-surface shadow-e3",
-          wide ? "max-w-2xl" : "max-w-lg",
+          wide ? "max-w-dialog-wide" : "max-w-dialog",
         )}
       >
         <div className="flex items-start gap-md border-b border-border px-xl py-lg">
