@@ -19,6 +19,7 @@ import { Route as TimeRouteImport } from './routes/time'
 import { Route as TodayRouteImport } from './routes/today'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
+import { Route as AuthResetRouteImport } from './routes/auth/reset'
 import { Route as KitIndexRouteImport } from './routes/kit/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsIdRouteRouteImport } from './routes/projects/$id/route'
@@ -79,6 +80,11 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
   id: '/auth/register',
   path: '/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthResetRoute = AuthResetRouteImport.update({
+  id: '/auth/reset',
+  path: '/auth/reset',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KitIndexRoute = KitIndexRouteImport.update({
@@ -149,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/auth/reset': typeof AuthResetRoute
   '/kit/': typeof KitIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
@@ -171,6 +178,7 @@ export interface FileRoutesByTo {
   '/today': typeof TodayRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/auth/reset': typeof AuthResetRoute
   '/kit': typeof KitIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
@@ -195,6 +203,7 @@ export interface FileRoutesById {
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/auth/reset': typeof AuthResetRoute
   '/kit/': typeof KitIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/projects/$id'
     | '/auth/login'
     | '/auth/register'
+    | '/auth/reset'
     | '/kit/'
     | '/projects/'
     | '/projects/$id/board'
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/today'
     | '/auth/login'
     | '/auth/register'
+    | '/auth/reset'
     | '/kit'
     | '/projects'
     | '/projects/$id/board'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/projects/$id'
     | '/auth/login'
     | '/auth/register'
+    | '/auth/reset'
     | '/kit/'
     | '/projects/'
     | '/projects/$id/board'
@@ -289,6 +301,7 @@ export interface RootRouteChildren {
   ProjectsIdRouteRoute: typeof ProjectsIdRouteRouteWithChildren
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
+  AuthResetRoute: typeof AuthResetRoute
   KitIndexRoute: typeof KitIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
   TasksIdIndexRoute: typeof TasksIdIndexRoute
@@ -364,6 +377,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/register'
       fullPath: '/auth/register'
       preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/reset': {
+      id: '/auth/reset'
+      path: '/auth/reset'
+      fullPath: '/auth/reset'
+      preLoaderRoute: typeof AuthResetRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kit/': {
@@ -482,6 +502,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsIdRouteRoute: ProjectsIdRouteRouteWithChildren,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
+  AuthResetRoute: AuthResetRoute,
   KitIndexRoute: KitIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
   TasksIdIndexRoute: TasksIdIndexRoute,
