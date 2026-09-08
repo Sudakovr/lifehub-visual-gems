@@ -9,8 +9,11 @@ export type ChecklistItem = {
   text: string;
   done: boolean;
   due?: string;
+  /** срок прошёл — дата показывается красной и подписью «просрочено» */
+  overdue?: boolean;
   position: number;
 };
+
 
 export type AcceptanceItem = { id: string; text: string; done: boolean; due?: string };
 
