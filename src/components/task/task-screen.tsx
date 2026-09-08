@@ -479,6 +479,9 @@ export function TaskScreen() {
           </aside>
         </div>
       </main>
+
+      {dialog ? <TaskDialog kind={dialog} onClose={() => setDialog(null)} /> : null}
     </div>
   );
 }
+
