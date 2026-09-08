@@ -10,6 +10,7 @@ import {
   Moon,
   Paperclip,
   Play,
+  Sparkles,
   Square,
   Sun,
 } from "lucide-react";
@@ -25,8 +26,10 @@ import {
   Textarea,
   type Tone,
 } from "@/components/kit/primitives";
+import { TaskDialog, type TaskDialogKind } from "@/components/task/task-dialogs";
 import { taskDetail, taskHints, type FeedItem } from "@/mock/task";
 import type { TaskStatus } from "@/mock/kit";
+
 
 const statusTone: Record<TaskStatus, Tone> = {
   Новая: "neutral",
