@@ -101,7 +101,7 @@ export function TaskRow({
         </span>
       </span>
 
-      <span className="w-40 shrink-0 lg:text-right">
+      <span className="w-48 shrink-0 whitespace-nowrap lg:text-right">
         <span
           className={cn(
             "num text-body",
