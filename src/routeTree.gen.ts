@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FilesRouteImport } from './routes/files'
 import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as MyRouteImport } from './routes/my'
 import { Route as NotesRouteImport } from './routes/notes'
@@ -29,6 +30,11 @@ import { Route as TasksIdIndexRouteImport } from './routes/tasks/$id/index'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FilesRoute = FilesRouteImport.update({
+  id: '/files',
+  path: '/files',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InboxRoute = InboxRouteImport.update({
@@ -109,6 +115,7 @@ const TasksIdIndexRoute = TasksIdIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
   '/notes': typeof NotesRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
   '/notes': typeof NotesRoute
@@ -145,6 +153,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
   '/notes': typeof NotesRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/files'
     | '/inbox'
     | '/my'
     | '/notes'
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/files'
     | '/inbox'
     | '/my'
     | '/notes'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/files'
     | '/inbox'
     | '/my'
     | '/notes'
@@ -219,6 +231,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FilesRoute: typeof FilesRoute
   InboxRoute: typeof InboxRoute
   MyRoute: typeof MyRoute
   NotesRoute: typeof NotesRoute
@@ -236,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/files': {
+      id: '/files'
+      path: '/files'
+      fullPath: '/files'
+      preLoaderRoute: typeof FilesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inbox': {
@@ -372,6 +392,7 @@ const ProjectsIdRouteRouteWithChildren = ProjectsIdRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FilesRoute: FilesRoute,
   InboxRoute: InboxRoute,
   MyRoute: MyRoute,
   NotesRoute: NotesRoute,
