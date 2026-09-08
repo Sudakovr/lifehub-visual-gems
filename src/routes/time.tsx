@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TimeScreen } from "@/components/app/space-screens";
+import { TimeScreen } from "@/components/content/time-screen";
 
 export const Route = createFileRoute("/time")({
   head: () => ({

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { NotesScreen } from "@/components/app/space-screens";
+import { NotesScreen } from "@/components/content/notes-screen";
 
-export const Route = createFileRoute("/notes")({
+export const Route = createFileRoute("/notes/")({
   head: () => ({
     meta: [
       { title: "Заметки пространства — LifeHub" },

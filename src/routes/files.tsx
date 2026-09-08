@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FilesScreen } from "@/components/app/space-screens";
+import { FilesScreen } from "@/components/content/files-screen";
 
 export const Route = createFileRoute("/files")({
   head: () => ({

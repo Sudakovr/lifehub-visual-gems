@@ -13,7 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as FilesRouteImport } from './routes/files'
 import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as MyRouteImport } from './routes/my'
-import { Route as NotesRouteImport } from './routes/notes'
+import { Route as ReviewRouteImport } from './routes/review'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TimeRouteImport } from './routes/time'
 import { Route as TodayRouteImport } from './routes/today'
@@ -23,8 +23,10 @@ import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
 import { Route as AuthResetRouteImport } from './routes/auth/reset'
 import { Route as KitIndexRouteImport } from './routes/kit/index'
+import { Route as NotesIndexRouteImport } from './routes/notes/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsIdRouteRouteImport } from './routes/projects/$id/route'
+import { Route as NotesIdIndexRouteImport } from './routes/notes/$id/index'
 import { Route as ProjectsIdIndexRouteImport } from './routes/projects/$id/index'
 import { Route as ProjectsIdBoardRouteImport } from './routes/projects/$id/board'
 import { Route as ProjectsIdFilesRouteImport } from './routes/projects/$id/files'
@@ -54,9 +56,9 @@ const MyRoute = MyRouteImport.update({
   path: '/my',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NotesRoute = NotesRouteImport.update({
-  id: '/notes',
-  path: '/notes',
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -104,6 +106,11 @@ const KitIndexRoute = KitIndexRouteImport.update({
   path: '/kit/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesIndexRoute = NotesIndexRouteImport.update({
+  id: '/notes/',
+  path: '/notes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -112,6 +119,11 @@ const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
 const ProjectsIdRouteRoute = ProjectsIdRouteRouteImport.update({
   id: '/projects/$id',
   path: '/projects/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesIdIndexRoute = NotesIdIndexRouteImport.update({
+  id: '/notes/$id/',
+  path: '/notes/$id/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsIdIndexRoute = ProjectsIdIndexRouteImport.update({
@@ -160,7 +172,7 @@ export interface FileRoutesByFullPath {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
-  '/notes': typeof NotesRoute
+  '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -171,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
   '/kit/': typeof KitIndexRoute
+  '/notes/': typeof NotesIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
@@ -178,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/projects/$id/settings': typeof ProjectsIdSettingsRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id/time': typeof ProjectsIdTimeRoute
+  '/notes/$id/': typeof NotesIdIndexRoute
   '/projects/$id/': typeof ProjectsIdIndexRoute
   '/tasks/$id/': typeof TasksIdIndexRoute
 }
@@ -186,7 +200,7 @@ export interface FileRoutesByTo {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
-  '/notes': typeof NotesRoute
+  '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -196,6 +210,7 @@ export interface FileRoutesByTo {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
   '/kit': typeof KitIndexRoute
+  '/notes': typeof NotesIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
@@ -203,6 +218,7 @@ export interface FileRoutesByTo {
   '/projects/$id/settings': typeof ProjectsIdSettingsRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id/time': typeof ProjectsIdTimeRoute
+  '/notes/$id': typeof NotesIdIndexRoute
   '/projects/$id': typeof ProjectsIdIndexRoute
   '/tasks/$id': typeof TasksIdIndexRoute
 }
@@ -212,7 +228,7 @@ export interface FileRoutesById {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
-  '/notes': typeof NotesRoute
+  '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -223,6 +239,7 @@ export interface FileRoutesById {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
   '/kit/': typeof KitIndexRoute
+  '/notes/': typeof NotesIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
@@ -230,6 +247,7 @@ export interface FileRoutesById {
   '/projects/$id/settings': typeof ProjectsIdSettingsRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id/time': typeof ProjectsIdTimeRoute
+  '/notes/$id/': typeof NotesIdIndexRoute
   '/projects/$id/': typeof ProjectsIdIndexRoute
   '/tasks/$id/': typeof TasksIdIndexRoute
 }
@@ -240,7 +258,7 @@ export interface FileRouteTypes {
     | '/files'
     | '/inbox'
     | '/my'
-    | '/notes'
+    | '/review'
     | '/search'
     | '/time'
     | '/today'
@@ -251,6 +269,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset'
     | '/kit/'
+    | '/notes/'
     | '/projects/'
     | '/projects/$id/board'
     | '/projects/$id/files'
@@ -258,6 +277,7 @@ export interface FileRouteTypes {
     | '/projects/$id/settings'
     | '/projects/$id/tasks'
     | '/projects/$id/time'
+    | '/notes/$id/'
     | '/projects/$id/'
     | '/tasks/$id/'
   fileRoutesByTo: FileRoutesByTo
@@ -266,7 +286,7 @@ export interface FileRouteTypes {
     | '/files'
     | '/inbox'
     | '/my'
-    | '/notes'
+    | '/review'
     | '/search'
     | '/time'
     | '/today'
@@ -276,6 +296,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset'
     | '/kit'
+    | '/notes'
     | '/projects'
     | '/projects/$id/board'
     | '/projects/$id/files'
@@ -283,6 +304,7 @@ export interface FileRouteTypes {
     | '/projects/$id/settings'
     | '/projects/$id/tasks'
     | '/projects/$id/time'
+    | '/notes/$id'
     | '/projects/$id'
     | '/tasks/$id'
   id:
@@ -291,7 +313,7 @@ export interface FileRouteTypes {
     | '/files'
     | '/inbox'
     | '/my'
-    | '/notes'
+    | '/review'
     | '/search'
     | '/time'
     | '/today'
@@ -302,6 +324,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset'
     | '/kit/'
+    | '/notes/'
     | '/projects/'
     | '/projects/$id/board'
     | '/projects/$id/files'
@@ -309,6 +332,7 @@ export interface FileRouteTypes {
     | '/projects/$id/settings'
     | '/projects/$id/tasks'
     | '/projects/$id/time'
+    | '/notes/$id/'
     | '/projects/$id/'
     | '/tasks/$id/'
   fileRoutesById: FileRoutesById
@@ -318,7 +342,7 @@ export interface RootRouteChildren {
   FilesRoute: typeof FilesRoute
   InboxRoute: typeof InboxRoute
   MyRoute: typeof MyRoute
-  NotesRoute: typeof NotesRoute
+  ReviewRoute: typeof ReviewRoute
   SearchRoute: typeof SearchRoute
   TimeRoute: typeof TimeRoute
   TodayRoute: typeof TodayRoute
@@ -329,7 +353,9 @@ export interface RootRouteChildren {
   AuthRegisterRoute: typeof AuthRegisterRoute
   AuthResetRoute: typeof AuthResetRoute
   KitIndexRoute: typeof KitIndexRoute
+  NotesIndexRoute: typeof NotesIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
+  NotesIdIndexRoute: typeof NotesIdIndexRoute
   TasksIdIndexRoute: typeof TasksIdIndexRoute
 }
 
@@ -363,11 +389,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/notes': {
-      id: '/notes'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof NotesRouteImport
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -433,6 +459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KitIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes/': {
+      id: '/notes/'
+      path: '/notes'
+      fullPath: '/notes/'
+      preLoaderRoute: typeof NotesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects/': {
       id: '/projects/'
       path: '/projects'
@@ -445,6 +478,13 @@ declare module '@tanstack/react-router' {
       path: '/projects/$id'
       fullPath: '/projects/$id'
       preLoaderRoute: typeof ProjectsIdRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes/$id/': {
+      id: '/notes/$id/'
+      path: '/notes/$id'
+      fullPath: '/notes/$id/'
+      preLoaderRoute: typeof NotesIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects/$id/': {
@@ -535,7 +575,7 @@ const rootRouteChildren: RootRouteChildren = {
   FilesRoute: FilesRoute,
   InboxRoute: InboxRoute,
   MyRoute: MyRoute,
-  NotesRoute: NotesRoute,
+  ReviewRoute: ReviewRoute,
   SearchRoute: SearchRoute,
   TimeRoute: TimeRoute,
   TodayRoute: TodayRoute,
@@ -546,7 +586,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRegisterRoute: AuthRegisterRoute,
   AuthResetRoute: AuthResetRoute,
   KitIndexRoute: KitIndexRoute,
+  NotesIndexRoute: NotesIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
+  NotesIdIndexRoute: NotesIdIndexRoute,
   TasksIdIndexRoute: TasksIdIndexRoute,
 }
 export const routeTree = rootRouteImport

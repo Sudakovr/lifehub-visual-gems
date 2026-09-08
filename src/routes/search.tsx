@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SearchScreen } from "@/components/app/space-screens";
+import { SearchScreen } from "@/components/content/search-screen";
 
 export const Route = createFileRoute("/search")({
   head: () => ({
