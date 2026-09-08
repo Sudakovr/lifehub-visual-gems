@@ -470,12 +470,16 @@ export function TaskScreen() {
               <div className="flex items-center justify-between gap-md">
                 <AvatarGroup names={t.watchers.map((w) => w.name)} max={4} />
                 {canEdit ? (
-                  <button className="text-meta text-accent transition-fast hover:text-accent-hover">
+                  <button
+                    className="text-meta text-accent transition-fast hover:text-accent-hover"
+                    onClick={() => setDialog("watchers")}
+                  >
                     Добавить
                   </button>
                 ) : null}
               </div>
             </div>
+
           </aside>
         </div>
       </main>
