@@ -59,7 +59,7 @@ export function ProjectChrome({ id, children }: { id: string; children: React.Re
           </div>
         </div>
 
-        <nav className="-mb-px flex gap-lg overflow-x-auto border-b border-border">
+        <nav className="-mb-px flex max-w-full gap-lg overflow-x-auto overscroll-x-contain border-b border-border">
           {tabs.map((t) => (
             <Link
               key={t.label}

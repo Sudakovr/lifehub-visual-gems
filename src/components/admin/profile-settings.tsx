@@ -26,7 +26,7 @@ export function ProfileSettings() {
       />
 
       <div className="mt-2xl grid gap-3xl lg:profile-grid">
-        <section className="flex flex-col gap-xl">
+        <section className="flex min-w-0 flex-col gap-xl">
           <div className="flex flex-col gap-lg">
             <SectionHead title="Профиль" />
             <div className="flex items-center gap-lg">
@@ -93,7 +93,7 @@ export function ProfileSettings() {
           </div>
         </section>
 
-        <section className="flex flex-col gap-lg">
+        <section className="flex min-w-0 flex-col gap-lg">
           <SectionHead title="Уведомления" note="письмо и push настраиваются отдельно" />
           <table className="w-full border-collapse text-body">
             <thead>

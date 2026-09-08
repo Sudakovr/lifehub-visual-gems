@@ -39,7 +39,7 @@ export function SystemModules() {
 
       <div className="mt-2xl flex flex-col gap-lg">
         <SectionHead title="Список модулей" note="изменение действует на все пространства" />
-        <div className="overflow-x-auto">
+        <div className="max-w-full overflow-x-auto overscroll-x-contain">
           <table className="w-full min-w-page border-collapse text-body">
             <thead>
               <tr className="border-b border-border text-left text-meta text-muted-foreground">
