@@ -112,7 +112,7 @@ export function TaskRow({
         </span>
       </span>
 
-      <span className="hidden w-32 shrink-0 lg:block xl:block">
+      <span className="hidden w-32 shrink-0 2xl:block">
         <PriorityChip level={task.priority} />
       </span>
 
@@ -121,7 +121,7 @@ export function TaskRow({
         <span className="truncate">{task.assignee}</span>
       </span>
 
-      <span className="num hidden w-16 shrink-0 text-meta text-muted-foreground lg:text-right xl:block">
+      <span className="num hidden w-16 shrink-0 text-right text-meta text-muted-foreground 2xl:block">
         {minutes(task.estimateMin)}
       </span>
 
