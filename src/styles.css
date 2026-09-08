@@ -48,6 +48,7 @@
   /* --- Статусы: заливка, подложка, текст на подложке ---------- */
   --color-ok: var(--ok); /* Готово, приёмка принята, таймер остановлен успешно */
   --color-ok-hover: var(--ok-hover); /* ховер зелёной кнопки */
+  --color-ok-contrast: var(--ok-contrast); /* текст на сплошной зелёной кнопке */
   --color-ok-soft: var(--ok-soft);
   --color-ok-foreground: var(--ok-foreground);
   --color-warn: var(--warn); /* На приёмке, дедлайн сегодня, файл в очереди */
@@ -146,6 +147,7 @@
 
   --ok: oklch(0.5 0.075 155);
   --ok-hover: oklch(0.43 0.07 155);
+  --ok-contrast: oklch(0.99 0.002 155);
   --ok-soft: oklch(0.955 0.024 155);
   --ok-foreground: oklch(0.38 0.065 155);
 
@@ -218,6 +220,7 @@
 
   --ok: oklch(0.72 0.12 155);
   --ok-hover: oklch(0.65 0.1 155);
+  --ok-contrast: oklch(0.18 0.025 155);
   --ok-soft: oklch(0.29 0.05 155);
   --ok-foreground: oklch(0.85 0.09 155);
 
@@ -277,4 +280,13 @@
 @utility transition-slow {
   transition-duration: var(--duration-slow);
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Не начинаются с text-: сборщик классов не путает цвет с размером text-body. */
+@utility action-label {
+  color: var(--color-action-foreground);
+}
+
+@utility ok-label {
+  color: var(--color-ok-contrast);
 }

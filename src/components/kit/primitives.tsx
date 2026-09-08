@@ -14,9 +14,9 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-action text-action-foreground shadow-e1 hover:bg-action-hover disabled:bg-surface-sunken disabled:shadow-none",
+          "action-label bg-action shadow-e1 hover:bg-action-hover disabled:bg-surface-sunken disabled:shadow-none",
         ok:
-          "bg-ok text-white hover:bg-ok-hover disabled:bg-surface-sunken",
+          "ok-label bg-ok hover:bg-ok-hover disabled:bg-surface-sunken",
         secondary:
           "bg-surface text-foreground border border-border hover:bg-surface-pressed disabled:bg-surface-sunken",
         ghost: "text-foreground hover:bg-surface-pressed",
