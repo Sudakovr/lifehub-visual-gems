@@ -240,15 +240,30 @@ export function TaskScreen() {
               <p className="max-w-prose text-body-lg text-foreground">{t.description}</p>
             </div>
 
-            <div className="flex flex-col gap-md">
-              <BlockTitle note="3 подсказки">Помощь ИИ</BlockTitle>
-              <ul className="flex flex-col divide-y divide-border">
+            <section
+              aria-label="Рекомендации ИИ"
+              className="flex flex-col gap-md rounded-lg border border-accent/25 bg-accent-soft px-lg py-lg"
+            >
+              <div className="flex flex-wrap items-center gap-sm">
+                <Sparkles className="size-4 text-accent" strokeWidth={1.75} />
+                <h2 className="text-body font-semibold text-foreground">Рекомендации ИИ</h2>
+                <span className="num text-meta text-muted-foreground">3 подсказки</span>
+                {canEdit ? (
+                  <button
+                    className="ml-auto text-meta text-accent transition-fast hover:text-accent-hover"
+                    onClick={() => setDialog("decompose")}
+                  >
+                    Разобрать на подзадачи
+                  </button>
+                ) : null}
+              </div>
+              <ul className="flex flex-col divide-y divide-accent/15">
                 {taskHints.map((h) => (
-                  <li key={h.id} className="flex gap-md py-md">
+                  <li key={h.id} className="flex gap-md py-sm first:pt-0 last:pb-0">
                     <span
                       className={cn(
                         "mt-1.5 size-1.5 shrink-0 rounded-full",
-                        h.important ? "bg-warn" : "bg-border-strong",
+                        h.important ? "bg-warn" : "bg-accent/50",
                       )}
                     />
                     <p className="text-body text-foreground">
@@ -260,7 +275,8 @@ export function TaskScreen() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
+
 
             {showAcceptance ? (
               <div className="flex flex-col gap-md">
