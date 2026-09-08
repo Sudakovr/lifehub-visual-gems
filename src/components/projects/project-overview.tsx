@@ -2,6 +2,7 @@ import * as React from "react";
 import { Sparkles } from "lucide-react";
 import { Avatar, Button } from "@/components/kit/primitives";
 import { Metric } from "@/components/app/app-shell";
+import { ProjectAiAnswer } from "@/components/projects/project-ai";
 import { TaskDialog } from "@/components/task/task-dialogs";
 import { DueText, ProgressBar, SectionHead, TaskLink, taskStatusTone } from "@/components/projects/shared";
 import {
@@ -181,6 +182,8 @@ export function ProjectOverview({ id }: { id: string }) {
           </ul>
         </div>
       </section>
+
+      <ProjectAiAnswer />
 
       {dialog ? <TaskDialog kind="decompose" onClose={() => setDialog(null)} /> : null}
     </div>
