@@ -40,6 +40,11 @@
   --color-accent-foreground: var(--accent-foreground); /* текст на акценте */
   --color-accent-soft: var(--accent-soft); /* подложка выделенной строки, чип «Мои» */
 
+  /* --- Главное действие --------------------------------------- */
+  --color-action: var(--action); /* регистрация, создание, сохранение */
+  --color-action-hover: var(--action-hover);
+  --color-action-foreground: var(--action-foreground);
+
   /* --- Статусы: заливка, подложка, текст на подложке ---------- */
   --color-ok: var(--ok); /* Готово, приёмка принята, таймер остановлен успешно */
   --color-ok-hover: var(--ok-hover); /* ховер зелёной кнопки */
@@ -77,6 +82,7 @@
   --container-page: 48rem; /* узкая страница-поток: онбординг, длинный текст */
   --container-phone: 24.375rem; /* рамка телефона — ровно 390 px */
   --container-phone-h: 50.75rem; /* высота рамки телефона — 812 px */
+  --container-table: 46rem; /* минимальная ширина эталонной таблицы */
 
 
 
@@ -129,6 +135,11 @@
   --accent-foreground: oklch(0.995 0 0);
   --accent-soft: oklch(0.955 0.021 258);
 
+  /* Графитово-синяя матовая клавиша: заметна без яркого синего пятна */
+  --action: oklch(0.34 0.035 255);
+  --action-hover: oklch(0.28 0.03 255);
+  --action-foreground: oklch(0.985 0.002 250);
+
   --ok: oklch(0.5 0.075 155);
   --ok-hover: oklch(0.43 0.07 155);
   --ok-soft: oklch(0.955 0.024 155);
@@ -159,8 +170,8 @@
   --card-foreground: var(--foreground);
   --popover: var(--surface);
   --popover-foreground: var(--foreground);
-  --primary: var(--accent);
-  --primary-foreground: var(--accent-foreground);
+  --primary: var(--action);
+  --primary-foreground: var(--action-foreground);
   --secondary: var(--surface-sunken);
   --secondary-foreground: var(--foreground);
   --muted: var(--surface-sunken);
@@ -196,6 +207,10 @@
   --accent-hover: oklch(0.74 0.13 258);
   --accent-foreground: oklch(0.16 0.02 258);
   --accent-soft: oklch(0.3 0.05 258);
+
+  --action: oklch(0.82 0.018 255);
+  --action-hover: oklch(0.88 0.014 255);
+  --action-foreground: oklch(0.2 0.012 260);
 
   --ok: oklch(0.72 0.12 155);
   --ok-hover: oklch(0.65 0.1 155);

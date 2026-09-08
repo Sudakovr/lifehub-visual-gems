@@ -36,7 +36,7 @@ export function NotesScreen() {
           <NoteLink
             to="/notes/$id"
             params={{ id: "n-1" }}
-            className="inline-flex h-9 items-center rounded-md bg-accent px-lg text-body font-medium text-accent-foreground transition-fast hover:bg-accent-hover"
+            className="inline-flex h-9 items-center rounded-md bg-action px-lg text-body font-medium text-action-foreground shadow-e1 transition-fast hover:bg-action-hover"
           >
             Новая заметка
           </NoteLink>

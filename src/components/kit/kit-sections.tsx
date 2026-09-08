@@ -85,7 +85,7 @@ export function KitSections() {
 
       {/* Кнопки */}
       <section className="flex flex-col gap-lg">
-        <SectionTitle note="Акцент — не чаще двух раз на экран">Кнопки</SectionTitle>
+        <SectionTitle note="Главное действие — графитовое; цветовой акцент остаётся для навигации и связей">Кнопки</SectionTitle>
         <Row>
           <Button>Создать задачу</Button>
           <Button variant="secondary">Отложить</Button>
@@ -101,6 +101,7 @@ export function KitSections() {
           </Button>
         </Row>
         <Row>
+          <Button variant="ok">Принять работу</Button>
           <Button loading>Сохраняем</Button>
           <Button disabled>Недоступно</Button>
           <Button variant="secondary" disabled>
@@ -293,7 +294,7 @@ export function KitSections() {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[46rem] border-collapse text-body">
+          <table className="w-full min-w-table border-collapse text-body">
             <thead>
               <tr className="border-b border-border-strong text-left text-meta text-muted-foreground">
                 <th className="py-sm pr-md font-medium">Задача</th>

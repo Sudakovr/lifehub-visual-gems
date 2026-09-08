@@ -26,9 +26,9 @@ function ThemePane({ theme, children }: { theme: "light" | "dark"; children: Rea
       <div className="bg-canvas text-foreground">
         <div className="mx-auto max-w-6xl px-lg py-2xl sm:px-2xl">
           <header className="mb-2xl flex flex-wrap items-baseline gap-md border-b border-border pb-lg">
-            <h1 className="text-heading font-semibold">
+            <h2 className="text-heading font-semibold">
               {theme === "light" ? "Светлая тема" : "Тёмная тема"}
-            </h1>
+            </h2>
             <p className="text-meta text-muted-foreground">
               Одни и те же токены, разные значения
             </p>
