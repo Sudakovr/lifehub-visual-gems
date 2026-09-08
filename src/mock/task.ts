@@ -217,3 +217,34 @@ export const taskHints: { id: string; text: string; important?: boolean }[] = [
   { id: "h-2", text: "Похожие задачи закрывались за 9 часов, здесь оценка 8 часов." },
   { id: "h-3", text: "Ирина уже согласовала лимиты — пункт «Согласовать лимиты» можно закрывать." },
 ];
+
+/* --- Данные диалогов задачи --------------------------------- */
+
+export const spaceProjects: { id: string; name: string; space: string }[] = [
+  { id: "p-1", name: "Запуск платёжного шлюза", space: "Работа" },
+  { id: "p-2", name: "Мобильный кабинет", space: "Работа" },
+  { id: "p-3", name: "Реестр контрагентов", space: "Работа" },
+  { id: "p-4", name: "Внутренние регламенты", space: "Работа" },
+];
+
+export const spaceMembers: Person[] = [
+  { id: "u-av", name: "Анна Верёвкина", role: "member" },
+  { id: "u-ds", name: "Дмитрий Соловьёв", role: "member" },
+  { id: "u-mp", name: "Марина Панова", role: "member" },
+  { id: "u-og", name: "Олег Гринь", role: "member" },
+  { id: "u-nk", name: "Нина Кац", role: "viewer" },
+  { id: "u-ss", name: "Сергей Штейн", role: "viewer" },
+  { id: "u-ik", name: "Ирина Ковалёва", role: "owner" },
+];
+
+export const aiSubtaskSuggestions: {
+  id: string;
+  title: string;
+  estimateMin: number;
+  reason: string;
+}[] = [
+  { id: "ai-1", title: "Повтор запроса при таймауте /reconcile", estimateMin: 120, reason: "В ленте зафиксирован 504 на батчах больше 500 записей" },
+  { id: "ai-2", title: "Нагрузочный прогон на 5 000 транзакций", estimateMin: 180, reason: "Блокирует приёмку, срок 12 июня" },
+  { id: "ai-3", title: "Сверка подписи вебхуков HMAC SHA-256", estimateMin: 90, reason: "Схема обновлена до payload v2" },
+  { id: "ai-4", title: "Инструкция по откату релиза", estimateMin: 60, reason: "Похожие задачи закрывались с этим пунктом" },
+];
