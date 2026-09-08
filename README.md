@@ -1,14 +1,19 @@
-# Welcome to your Lovable project
+# LifeHub Vision Board
+
+Ты собираешь визуальные эталоны продукта LifeHub
+Пока ничего не делай, это старт только
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://lifehub-visual-gems.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f34e7b6e-3bd2-4f99-b557-6e8ae5a4c5bc).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +25,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
