@@ -83,12 +83,12 @@ export function QuickAdd() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-overlay px-lg pt-4xl" role="presentation" onClick={() => setOpen(false)}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-foreground/30 px-lg pt-4xl" role="presentation" onClick={() => setOpen(false)}>
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Быстрый ввод задачи"
-        className="flex w-full max-w-dialog flex-col rounded-lg border border-border bg-surface"
+        className="flex w-full max-w-dialog flex-col rounded-lg border border-border bg-surface shadow-e3"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-md border-b border-border px-lg py-md">

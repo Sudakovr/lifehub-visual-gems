@@ -49,7 +49,7 @@ export function TodayScreen() {
 
         <section
           aria-label="План дня от ИИ"
-          className={cn("rounded-lg border border-accent/30 bg-accent-soft", planOpen ? "max-h-1/4-screen" : "")}
+          className="rounded-lg border border-accent/30 bg-accent-soft"
         >
           <div className="flex flex-wrap items-center gap-md px-lg py-md">
             <Sparkles className="size-4 text-accent" strokeWidth={1.75} />
