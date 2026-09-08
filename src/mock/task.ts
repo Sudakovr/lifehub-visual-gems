@@ -204,7 +204,7 @@ export const taskDetail: TaskDetail = {
       text: "Обновил схему вебхуков: подпись HMAC SHA-256, версия payload v2. Стенд перезапущен.",
     },
   ],
-  viewerRole: "member",
+  viewerRole: "owner",
   viewerId: "u-av",
 };
 
