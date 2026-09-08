@@ -14,6 +14,7 @@ import { Route as FilesRouteImport } from './routes/files'
 import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as MyRouteImport } from './routes/my'
 import { Route as NotesRouteImport } from './routes/notes'
+import { Route as ReviewRouteImport } from './routes/review'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TimeRouteImport } from './routes/time'
 import { Route as TodayRouteImport } from './routes/today'
@@ -59,6 +60,11 @@ const MyRoute = MyRouteImport.update({
 const NotesRoute = NotesRouteImport.update({
   id: '/notes',
   path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -173,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
   '/notes': typeof NotesRouteWithChildren
+  '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -200,6 +207,7 @@ export interface FileRoutesByTo {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
+  '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -228,6 +236,7 @@ export interface FileRoutesById {
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
   '/notes': typeof NotesRouteWithChildren
+  '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
@@ -258,6 +267,7 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/my'
     | '/notes'
+    | '/review'
     | '/search'
     | '/time'
     | '/today'
@@ -285,6 +295,7 @@ export interface FileRouteTypes {
     | '/files'
     | '/inbox'
     | '/my'
+    | '/review'
     | '/search'
     | '/time'
     | '/today'
@@ -312,6 +323,7 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/my'
     | '/notes'
+    | '/review'
     | '/search'
     | '/time'
     | '/today'
@@ -341,6 +353,7 @@ export interface RootRouteChildren {
   InboxRoute: typeof InboxRoute
   MyRoute: typeof MyRoute
   NotesRoute: typeof NotesRouteWithChildren
+  ReviewRoute: typeof ReviewRoute
   SearchRoute: typeof SearchRoute
   TimeRoute: typeof TimeRoute
   TodayRoute: typeof TodayRoute
@@ -390,6 +403,13 @@ declare module '@tanstack/react-router' {
       path: '/notes'
       fullPath: '/notes'
       preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -584,6 +604,7 @@ const rootRouteChildren: RootRouteChildren = {
   InboxRoute: InboxRoute,
   MyRoute: MyRoute,
   NotesRoute: NotesRouteWithChildren,
+  ReviewRoute: ReviewRoute,
   SearchRoute: SearchRoute,
   TimeRoute: TimeRoute,
   TodayRoute: TodayRoute,
