@@ -17,6 +17,7 @@ import { Route as NotesRouteImport } from './routes/notes'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TimeRouteImport } from './routes/time'
 import { Route as TodayRouteImport } from './routes/today'
+import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AuthInviteRouteImport } from './routes/auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
@@ -71,6 +72,11 @@ const TimeRoute = TimeRouteImport.update({
 const TodayRoute = TodayRouteImport.update({
   id: '/today',
   path: '/today',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WelcomeRoute = WelcomeRouteImport.update({
+  id: '/welcome',
+  path: '/welcome',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthInviteRoute = AuthInviteRouteImport.update({
@@ -158,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/welcome': typeof WelcomeRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/auth/invite': typeof AuthInviteRoute
   '/auth/login': typeof AuthLoginRoute
@@ -183,6 +190,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/welcome': typeof WelcomeRoute
   '/auth/invite': typeof AuthInviteRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
@@ -208,6 +216,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/welcome': typeof WelcomeRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/auth/invite': typeof AuthInviteRoute
   '/auth/login': typeof AuthLoginRoute
@@ -235,6 +244,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/time'
     | '/today'
+    | '/welcome'
     | '/projects/$id'
     | '/auth/invite'
     | '/auth/login'
@@ -260,6 +270,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/time'
     | '/today'
+    | '/welcome'
     | '/auth/invite'
     | '/auth/login'
     | '/auth/register'
@@ -284,6 +295,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/time'
     | '/today'
+    | '/welcome'
     | '/projects/$id'
     | '/auth/invite'
     | '/auth/login'
@@ -310,6 +322,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   TimeRoute: typeof TimeRoute
   TodayRoute: typeof TodayRoute
+  WelcomeRoute: typeof WelcomeRoute
   ProjectsIdRouteRoute: typeof ProjectsIdRouteRouteWithChildren
   AuthInviteRoute: typeof AuthInviteRoute
   AuthLoginRoute: typeof AuthLoginRoute
@@ -376,6 +389,13 @@ declare module '@tanstack/react-router' {
       path: '/today'
       fullPath: '/today'
       preLoaderRoute: typeof TodayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/welcome': {
+      id: '/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof WelcomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/invite': {
@@ -519,6 +539,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   TimeRoute: TimeRoute,
   TodayRoute: TodayRoute,
+  WelcomeRoute: WelcomeRoute,
   ProjectsIdRouteRoute: ProjectsIdRouteRouteWithChildren,
   AuthInviteRoute: AuthInviteRoute,
   AuthLoginRoute: AuthLoginRoute,
