@@ -23,7 +23,7 @@ function AuthFrame({
   return (
     <div className="min-h-screen bg-canvas text-foreground">
       <div className="mx-auto flex min-h-screen w-full max-w-app flex-col px-lg py-xl lg:flex-row lg:gap-4xl lg:py-3xl">
-        <div className="flex w-full shrink-0 flex-col lg:w-96">
+        <div className="flex w-full shrink-0 flex-col lg:w-form">
           <div className="flex items-center justify-between">
             <Nav to="/" className="text-body font-semibold text-foreground">
               LifeHub
@@ -43,8 +43,8 @@ function AuthFrame({
         </div>
 
         <div className="mt-2xl hidden min-w-0 flex-1 border-l border-border pl-4xl lg:mt-0 lg:flex lg:flex-col lg:justify-center">
-          <p className="max-w-md text-caption text-muted-foreground">Что внутри</p>
-          <ul className="mt-md flex max-w-md flex-col">
+          <p className="max-w-form text-caption text-muted-foreground">Что внутри</p>
+          <ul className="mt-md flex max-w-form flex-col">
             {[
               ["Проекты и задачи", "Статусы, приёмка работы, подзадачи любой глубины."],
               ["День под контролем", "План дня, просрочки и входящие в одном экране."],

@@ -94,7 +94,7 @@ export function WelcomeScreen() {
 
   return (
     <div className="min-h-screen bg-canvas text-foreground">
-      <div className="mx-auto w-full max-w-3xl px-lg py-xl">
+      <div className="mx-auto w-full max-w-page px-lg py-xl">
         <div className="flex items-center justify-between">
           <span className="text-body font-semibold text-foreground">LifeHub</span>
           <ThemeToggle />
