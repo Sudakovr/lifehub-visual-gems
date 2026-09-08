@@ -177,8 +177,8 @@ export function TimeScreen() {
           <h2 className="text-title font-semibold text-foreground">По людям</h2>
           <ul className="mt-sm border-t border-border">
             {timeByPerson.map((p) => (
-              <li key={p.name} className="flex items-baseline justify-between gap-md border-b border-border py-sm">
-                <span className="text-body text-foreground">{p.name}</span>
+              <li key={p.person} className="flex items-baseline justify-between gap-md border-b border-border py-sm">
+                <span className="text-body text-foreground">{p.person}</span>
                 <span className="num text-body text-foreground">{hoursMinutes(p.minutes)}</span>
               </li>
             ))}
