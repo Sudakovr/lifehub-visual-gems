@@ -87,7 +87,15 @@ export function ThemeToggle() {
 function locationTitle(pathname: string) {
   if (pathname.startsWith("/projects/")) return ["Проекты", "Переезд офиса"];
   if (pathname.startsWith("/tasks/")) return ["Переезд офиса", "LH-2481"];
+  if (pathname === "/settings/space") return ["Работа", "Настройки пространства"];
+  if (pathname === "/settings/profile") return ["Аккаунт", "Профиль и уведомления"];
+  if (pathname === "/admin/modules") return ["Администрирование", "Модули системы"];
+  if (pathname === "/notifications") return ["Работа", "Уведомления"];
+  if (pathname === "/states/empty") return ["Состояния", "Пустые экраны"];
+  if (pathname === "/states/errors") return ["Состояния", "Ошибки и сеть"];
+  if (pathname === "/states/mobile") return ["Состояния", "Мобильная сборка"];
   const found = sections.find((s) => pathname.startsWith(s.to));
+
   if (found) return ["Работа", found.label];
   return ["Работа", "Обзор"];
 }
