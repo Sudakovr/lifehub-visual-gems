@@ -297,7 +297,7 @@ function BigRows({ rows }: { rows: ProjectRow[] }) {
               ))}
             </div>
           </div>
-          <div className="flex shrink-0 flex-wrap items-center gap-x-xl gap-y-md lg:flex-nowrap lg:justify-end">
+          <div className="flex shrink-0 flex-wrap items-center gap-x-xl gap-y-md lg:w-rowmeta lg:flex-nowrap lg:justify-between">
             <div className="w-40 shrink-0">
               <div className="mb-xs flex items-baseline justify-between text-meta text-muted-foreground">
                 <span>Ход</span>
