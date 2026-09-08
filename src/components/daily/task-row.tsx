@@ -39,7 +39,7 @@ export function TaskRow({
   return (
     <li
       className={cn(
-        "group flex flex-col gap-sm transition-fast hover:bg-surface-pressed focus-within:bg-surface-pressed lg:flex-row lg:items-center lg:gap-lg",
+        "group flex flex-col gap-sm transition-fast hover:bg-surface-pressed focus-within:bg-surface-pressed lg:flex-row lg:items-center lg:gap-md",
         compact ? "py-sm" : "py-md",
       )}
     >
@@ -53,11 +53,11 @@ export function TaskRow({
         />
       ) : null}
 
-      <span className="w-28 shrink-0">
+      <span className="w-24 shrink-0">
         <StatusChip tone={taskStatusTone[task.status]}>{task.status}</StatusChip>
       </span>
 
-      <span className="flex min-w-0 flex-1 flex-col gap-2xs">
+      <span className="flex min-w-0 flex-1 basis-64 flex-col gap-2xs">
         <span className="flex flex-wrap items-baseline gap-sm">
           <span className="num text-meta text-muted-foreground">{task.code}</span>
           {onPeek ? (
@@ -101,7 +101,7 @@ export function TaskRow({
         </span>
       </span>
 
-      <span className="w-48 shrink-0 whitespace-nowrap lg:text-right">
+      <span className="w-40 shrink-0 whitespace-nowrap lg:text-right">
         <span
           className={cn(
             "num text-body",
@@ -112,16 +112,16 @@ export function TaskRow({
         </span>
       </span>
 
-      <span className="w-36 shrink-0">
+      <span className="w-32 shrink-0">
         <PriorityChip level={task.priority} />
       </span>
 
-      <span className="flex w-44 shrink-0 items-center gap-sm text-meta text-muted-foreground">
+      <span className="flex w-36 shrink-0 items-center gap-sm text-meta text-muted-foreground">
         <Avatar name={task.assignee} size="sm" />
         <span className="truncate">{task.assignee}</span>
       </span>
 
-      <span className="num w-20 shrink-0 text-meta text-muted-foreground lg:text-right">
+      <span className="num w-16 shrink-0 text-meta text-muted-foreground lg:text-right">
         {minutes(task.estimateMin)}
       </span>
 
