@@ -8,7 +8,8 @@ import { Check, ChevronDown, Loader2 } from "lucide-react";
 ------------------------------------------------------------------ */
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-sm rounded-sm font-medium transition-fast transition-colors disabled:pointer-events-none disabled:text-disabled-foreground select-none",
+  "inline-flex items-center justify-center gap-sm rounded-md font-medium transition-fast transition-colors disabled:pointer-events-none disabled:text-disabled-foreground select-none",
+
   {
     variants: {
       variant: {
