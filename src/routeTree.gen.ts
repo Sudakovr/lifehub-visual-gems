@@ -15,6 +15,7 @@ import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as MyRouteImport } from './routes/my'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as TimeRouteImport } from './routes/time'
 import { Route as TodayRouteImport } from './routes/today'
 import { Route as KitIndexRouteImport } from './routes/kit/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
@@ -56,6 +57,11 @@ const NotesRoute = NotesRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimeRoute = TimeRouteImport.update({
+  id: '/time',
+  path: '/time',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TodayRoute = TodayRouteImport.update({
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/my': typeof MyRoute
   '/notes': typeof NotesRoute
   '/search': typeof SearchRoute
+  '/time': typeof TimeRoute
   '/today': typeof TodayRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/kit/': typeof KitIndexRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/my': typeof MyRoute
   '/notes': typeof NotesRoute
   '/search': typeof SearchRoute
+  '/time': typeof TimeRoute
   '/today': typeof TodayRoute
   '/kit': typeof KitIndexRoute
   '/projects': typeof ProjectsIndexRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/my': typeof MyRoute
   '/notes': typeof NotesRoute
   '/search': typeof SearchRoute
+  '/time': typeof TimeRoute
   '/today': typeof TodayRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/kit/': typeof KitIndexRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/my'
     | '/notes'
     | '/search'
+    | '/time'
     | '/today'
     | '/projects/$id'
     | '/kit/'
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/my'
     | '/notes'
     | '/search'
+    | '/time'
     | '/today'
     | '/kit'
     | '/projects'
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/my'
     | '/notes'
     | '/search'
+    | '/time'
     | '/today'
     | '/projects/$id'
     | '/kit/'
@@ -248,6 +260,7 @@ export interface RootRouteChildren {
   MyRoute: typeof MyRoute
   NotesRoute: typeof NotesRoute
   SearchRoute: typeof SearchRoute
+  TimeRoute: typeof TimeRoute
   TodayRoute: typeof TodayRoute
   ProjectsIdRouteRoute: typeof ProjectsIdRouteRouteWithChildren
   KitIndexRoute: typeof KitIndexRoute
@@ -297,6 +310,13 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/time': {
+      id: '/time'
+      path: '/time'
+      fullPath: '/time'
+      preLoaderRoute: typeof TimeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/today': {
@@ -417,6 +437,7 @@ const rootRouteChildren: RootRouteChildren = {
   MyRoute: MyRoute,
   NotesRoute: NotesRoute,
   SearchRoute: SearchRoute,
+  TimeRoute: TimeRoute,
   TodayRoute: TodayRoute,
   ProjectsIdRouteRoute: ProjectsIdRouteRouteWithChildren,
   KitIndexRoute: KitIndexRoute,
