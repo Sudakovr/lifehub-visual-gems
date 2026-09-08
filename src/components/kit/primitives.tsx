@@ -234,15 +234,15 @@ export function StatusChip({ tone = "neutral", children }: { tone?: Tone; childr
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-xs rounded-xs border px-sm py-0.5 text-meta font-medium",
+        "inline-flex items-center rounded-full border px-md py-0.5 text-meta font-medium",
         toneClass[tone],
       )}
     >
-      <span className={cn("size-1.5 rounded-full", dotClass[tone])} />
       {children}
     </span>
   );
 }
+
 
 export function PriorityChip({ level }: { level: "Критический" | "Высокий" | "Обычный" | "Низкий" }) {
   const map = {
