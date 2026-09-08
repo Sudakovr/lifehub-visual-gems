@@ -297,7 +297,7 @@ function BigRows({ rows }: { rows: ProjectRow[] }) {
               ))}
             </div>
           </div>
-          <div className="grid shrink-0 grid-cols-2 items-start gap-lg sm:grid-cols-4 lg:grid-cols-[10rem_9rem_7rem_11rem]">
+          <div className="grid shrink-0 grid-cols-2 items-start gap-lg sm:grid-cols-4 lg:w-2xl">
             <div className="min-w-0">
               <div className="mb-xs flex items-baseline justify-between text-meta text-muted-foreground">
                 <span>Ход</span>
