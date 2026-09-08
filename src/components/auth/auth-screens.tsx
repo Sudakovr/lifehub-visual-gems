@@ -43,8 +43,8 @@ function AuthFrame({
         </div>
 
         <div className="mt-2xl hidden min-w-0 flex-1 border-l border-border pl-4xl lg:mt-0 lg:flex lg:flex-col lg:justify-center">
-          <p className="text-caption text-muted-foreground">Что внутри</p>
-          <ul className="mt-md flex flex-col">
+          <p className="max-w-md text-caption text-muted-foreground">Что внутри</p>
+          <ul className="mt-md flex max-w-md flex-col">
             {[
               ["Проекты и задачи", "Статусы, приёмка работы, подзадачи любой глубины."],
               ["День под контролем", "План дня, просрочки и входящие в одном экране."],
