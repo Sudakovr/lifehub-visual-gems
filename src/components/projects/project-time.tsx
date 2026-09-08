@@ -53,7 +53,7 @@ export function ProjectTime() {
           <ul className="divide-y divide-border">
             {timeByPerson.map((p) => (
               <li key={p.person} className="flex flex-col gap-xs py-sm">
-                <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-md">
+                <div className="timeline-row grid items-baseline gap-md">
                   <span className="text-body text-foreground">{p.person}</span>
                   <span className="num flex flex-col items-end text-body sm:block">
                     {hoursMinutes(p.minutes)}
@@ -73,7 +73,7 @@ export function ProjectTime() {
           <ul className="divide-y divide-border">
             {timeByTask.map((t) => (
               <li key={t.code} className="flex flex-col gap-xs py-sm">
-                <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-md">
+                <div className="timeline-row grid items-baseline gap-md">
                   <span className="min-w-0 text-body">
                     <TaskLink code={t.code} title={t.title} />
                   </span>
