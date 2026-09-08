@@ -169,15 +169,19 @@ export function TaskScreen() {
   const [timer, setTimer] = React.useState(false);
   const [checks, setChecks] = React.useState(() => t.checklist.map((c) => c.done));
   const [comment, setComment] = React.useState("");
+  const [dialog, setDialog] = React.useState<TaskDialogKind | null>(null);
+  /** эталон показывает обе роли приёмки: исполнитель и постановщик */
+  const [seat, setSeat] = React.useState<"assignee" | "author">("assignee");
 
   React.useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
   const canEdit = t.viewerRole !== "viewer";
-  const isAssignee = t.viewerId === t.assignee.id;
-  const isAuthor = t.viewerId === t.author.id;
+  const isAssignee = seat === "assignee";
+  const isAuthor = seat === "author";
   const showAcceptance = t.needsAcceptance && t.author.id !== t.assignee.id;
+
 
   const doneChecks = checks.filter(Boolean).length;
   const doneAcceptance = t.acceptance.filter((a) => a.done).length;
