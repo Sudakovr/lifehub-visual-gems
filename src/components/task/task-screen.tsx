@@ -524,7 +524,7 @@ export function TaskScreen() {
               </div>
               <Progress value={spentPct} label={`Из оценки ${hm(t.estimateMin)}`} />
               {canEdit ? (
-                <Button variant={timer ? "secondary" : "ok"} onClick={() => setTimer((v) => !v)}}>
+                <Button variant={timer ? "secondary" : "ok"} onClick={() => setTimer((v) => !v)}>
                   {timer ? (
                     <>
                       <Square className="size-4" strokeWidth={1.75} />
