@@ -296,21 +296,43 @@ export function TaskScreen() {
               <BlockTitle note={`${doneChecks} из ${t.checklist.length}`}>Чек-лист</BlockTitle>
               <Progress value={Math.round((doneChecks / t.checklist.length) * 100)} />
               <ul className="flex flex-col divide-y divide-border">
-                {t.checklist.map((c, i) => (
-                  <li key={c.id} className="flex items-center justify-between gap-md py-sm">
-                    <Checkbox
-                      label={c.text}
-                      checked={checks[i] ?? false}
-                      disabled={!canEdit}
-                      onChange={(v) =>
-                        setChecks((prev) => prev.map((p, idx) => (idx === i ? v : p)))
-                      }
-                    />
-                    <span className="num shrink-0 text-meta text-muted-foreground">{c.due}</span>
-                  </li>
-                ))}
+                {t.checklist.map((c, i) => {
+                  const done = checks[i] ?? false;
+                  const late = !done && c.overdue;
+                  return (
+                    <li key={c.id} className="flex items-center justify-between gap-md py-sm">
+                      <span className="flex min-w-0 items-center gap-sm">
+                        <Checkbox
+                          label=""
+                          checked={done}
+                          disabled={!canEdit}
+                          onChange={(v) =>
+                            setChecks((prev) => prev.map((p, idx) => (idx === i ? v : p)))
+                          }
+                        />
+                        <span
+                          className={cn(
+                            "min-w-0 text-body",
+                            done ? "text-muted-foreground line-through" : "text-foreground",
+                          )}
+                        >
+                          {c.text}
+                        </span>
+                      </span>
+                      <span
+                        className={cn(
+                          "num shrink-0 text-meta",
+                          late ? "font-medium text-danger-foreground" : "text-muted-foreground",
+                        )}
+                      >
+                        {late ? `Просрочено · ${c.due}` : c.due}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
+
 
             <div className="flex flex-col gap-md">
               <BlockTitle note={`${t.subtasks.length} шт.`}>Подзадачи</BlockTitle>
