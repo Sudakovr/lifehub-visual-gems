@@ -101,7 +101,7 @@ export function TaskRow({
         </span>
       </span>
 
-      <span className="w-40 shrink-0 whitespace-nowrap lg:text-right">
+      <span className="w-36 shrink-0 whitespace-nowrap lg:text-right">
         <span
           className={cn(
             "num text-body",
@@ -112,16 +112,16 @@ export function TaskRow({
         </span>
       </span>
 
-      <span className="w-32 shrink-0">
+      <span className="hidden w-32 shrink-0 lg:block xl:block">
         <PriorityChip level={task.priority} />
       </span>
 
-      <span className="flex w-36 shrink-0 items-center gap-sm text-meta text-muted-foreground">
+      <span className="flex w-32 shrink-0 items-center gap-sm text-meta text-muted-foreground">
         <Avatar name={task.assignee} size="sm" />
         <span className="truncate">{task.assignee}</span>
       </span>
 
-      <span className="num w-16 shrink-0 text-meta text-muted-foreground lg:text-right">
+      <span className="num hidden w-16 shrink-0 text-meta text-muted-foreground lg:text-right xl:block">
         {minutes(task.estimateMin)}
       </span>
 
