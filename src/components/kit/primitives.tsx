@@ -252,7 +252,7 @@ export function PriorityChip({ level }: { level: "Критический" | "В�
     Низкий: { tone: "neutral" as Tone, bars: 0 },
   }[level];
   return (
-    <span className={cn("inline-flex items-center gap-sm rounded-xs border px-sm py-0.5 text-meta font-medium", toneClass[map.tone])}>
+    <span className={cn("inline-flex items-center gap-sm rounded-full border px-md py-0.5 text-meta font-medium", toneClass[map.tone])}>
       <span className="flex items-end gap-0.5" aria-hidden>
         {[1, 2, 3].map((i) => (
           <span
