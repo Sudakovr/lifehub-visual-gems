@@ -42,6 +42,7 @@
 
   /* --- Статусы: заливка, подложка, текст на подложке ---------- */
   --color-ok: var(--ok); /* Готово, приёмка принята, таймер остановлен успешно */
+  --color-ok-hover: var(--ok-hover); /* ховер зелёной кнопки */
   --color-ok-soft: var(--ok-soft);
   --color-ok-foreground: var(--ok-foreground);
   --color-warn: var(--warn); /* На приёмке, дедлайн сегодня, файл в очереди */
@@ -120,6 +121,7 @@
   --accent-soft: oklch(0.955 0.021 258);
 
   --ok: oklch(0.5 0.075 155);
+  --ok-hover: oklch(0.43 0.07 155);
   --ok-soft: oklch(0.955 0.024 155);
   --ok-foreground: oklch(0.38 0.065 155);
 
@@ -187,6 +189,7 @@
   --accent-soft: oklch(0.3 0.05 258);
 
   --ok: oklch(0.72 0.12 155);
+  --ok-hover: oklch(0.65 0.1 155);
   --ok-soft: oklch(0.29 0.05 155);
   --ok-foreground: oklch(0.85 0.09 155);
 
