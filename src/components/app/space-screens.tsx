@@ -61,7 +61,7 @@ export function FilesScreen() {
         actions={<Button variant="secondary">Загрузить файл</Button>}
       />
       <div className="mt-xl overflow-x-auto">
-        <table className="w-full min-w-3xl border-collapse text-body">
+        <table className="w-full min-w-page border-collapse text-body">
           <thead>
             <tr className="border-y border-border text-left text-meta text-muted-foreground">
               <th className="py-sm pr-md font-medium">Имя</th>
