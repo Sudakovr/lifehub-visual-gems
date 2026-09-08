@@ -16,6 +16,7 @@ import { Route as ProjectsIdRouteRouteImport } from './routes/projects/$id/route
 import { Route as ProjectsIdIndexRouteImport } from './routes/projects/$id/index'
 import { Route as ProjectsIdBoardRouteImport } from './routes/projects/$id/board'
 import { Route as ProjectsIdFilesRouteImport } from './routes/projects/$id/files'
+import { Route as ProjectsIdNotesRouteImport } from './routes/projects/$id/notes'
 import { Route as ProjectsIdTasksRouteImport } from './routes/projects/$id/tasks'
 import { Route as TasksIdIndexRouteImport } from './routes/tasks/$id/index'
 
@@ -54,6 +55,11 @@ const ProjectsIdFilesRoute = ProjectsIdFilesRouteImport.update({
   path: '/files',
   getParentRoute: () => ProjectsIdRouteRoute,
 } as any)
+const ProjectsIdNotesRoute = ProjectsIdNotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => ProjectsIdRouteRoute,
+} as any)
 const ProjectsIdTasksRoute = ProjectsIdTasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
+  '/projects/$id/notes': typeof ProjectsIdNotesRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id/': typeof ProjectsIdIndexRoute
   '/tasks/$id/': typeof TasksIdIndexRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
+  '/projects/$id/notes': typeof ProjectsIdNotesRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id': typeof ProjectsIdIndexRoute
   '/tasks/$id': typeof TasksIdIndexRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/projects/': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
   '/projects/$id/files': typeof ProjectsIdFilesRoute
+  '/projects/$id/notes': typeof ProjectsIdNotesRoute
   '/projects/$id/tasks': typeof ProjectsIdTasksRoute
   '/projects/$id/': typeof ProjectsIdIndexRoute
   '/tasks/$id/': typeof TasksIdIndexRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/projects/'
     | '/projects/$id/board'
     | '/projects/$id/files'
+    | '/projects/$id/notes'
     | '/projects/$id/tasks'
     | '/projects/$id/'
     | '/tasks/$id/'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/projects/$id/board'
     | '/projects/$id/files'
+    | '/projects/$id/notes'
     | '/projects/$id/tasks'
     | '/projects/$id'
     | '/tasks/$id'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/projects/'
     | '/projects/$id/board'
     | '/projects/$id/files'
+    | '/projects/$id/notes'
     | '/projects/$id/tasks'
     | '/projects/$id/'
     | '/tasks/$id/'
@@ -192,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsIdFilesRouteImport
       parentRoute: typeof ProjectsIdRouteRoute
     }
+    '/projects/$id/notes': {
+      id: '/projects/$id/notes'
+      path: '/notes'
+      fullPath: '/projects/$id/notes'
+      preLoaderRoute: typeof ProjectsIdNotesRouteImport
+      parentRoute: typeof ProjectsIdRouteRoute
+    }
     '/projects/$id/tasks': {
       id: '/projects/$id/tasks'
       path: '/tasks'
@@ -212,6 +231,7 @@ declare module '@tanstack/react-router' {
 interface ProjectsIdRouteRouteChildren {
   ProjectsIdBoardRoute: typeof ProjectsIdBoardRoute
   ProjectsIdFilesRoute: typeof ProjectsIdFilesRoute
+  ProjectsIdNotesRoute: typeof ProjectsIdNotesRoute
   ProjectsIdTasksRoute: typeof ProjectsIdTasksRoute
   ProjectsIdIndexRoute: typeof ProjectsIdIndexRoute
 }
@@ -219,6 +239,7 @@ interface ProjectsIdRouteRouteChildren {
 const ProjectsIdRouteRouteChildren: ProjectsIdRouteRouteChildren = {
   ProjectsIdBoardRoute: ProjectsIdBoardRoute,
   ProjectsIdFilesRoute: ProjectsIdFilesRoute,
+  ProjectsIdNotesRoute: ProjectsIdNotesRoute,
   ProjectsIdTasksRoute: ProjectsIdTasksRoute,
   ProjectsIdIndexRoute: ProjectsIdIndexRoute,
 }
