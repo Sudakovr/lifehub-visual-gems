@@ -29,7 +29,7 @@ export function ProjectBoard() {
     e.preventDefault();
     const el = document.elementFromPoint(e.clientX, e.clientY);
     const col = el?.closest<HTMLElement>("[data-column]");
-    setTarget((col?.dataset.column as TaskStatus) ?? null);
+    setTarget((col?.dataset["column"] as TaskStatus) ?? null);
   }
 
   function onPointerUp() {

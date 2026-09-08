@@ -253,7 +253,7 @@ export const projects: ProjectRow[] = [
 ];
 
 export function getProject(id: string): ProjectRow {
-  return projects.find((p) => p.id === id) ?? projects[0];
+  return projects.find((p) => p.id === id) ?? (projects[0] as ProjectRow);
 }
 
 /* --- Обзор проекта --------------------------------------------- */

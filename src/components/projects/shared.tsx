@@ -67,7 +67,15 @@ export function ProgressBar({ value, className }: { value: number; className?: s
   );
 }
 
-export function DueText({ due, overdue, note }: { due: string; overdue?: boolean; note?: string }) {
+export function DueText({
+  due,
+  overdue,
+  note,
+}: {
+  due: string;
+  overdue?: boolean | undefined;
+  note?: string | undefined;
+}) {
   return (
     <span className="flex flex-col">
       <span className={cn("num text-body", overdue ? "font-medium text-danger-foreground" : "text-foreground")}>

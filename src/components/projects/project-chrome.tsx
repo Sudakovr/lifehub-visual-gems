@@ -7,7 +7,7 @@ import { AvatarGroup } from "@/components/kit/primitives";
 import { ProjectStatusChip, RiskChip, TagDot } from "@/components/projects/shared";
 import { getProject } from "@/mock/projects";
 
-const tabs = [
+const tabs: { to: "/projects/$id" | "/projects/$id/tasks" | "/projects/$id/board" | "/projects/$id/files" | "/projects/$id/notes" | "/projects/$id/time" | "/projects/$id/settings"; label: string; exact?: boolean }[] = [
   { to: "/projects/$id", label: "Обзор", exact: true },
   { to: "/projects/$id/tasks", label: "Задачи" },
   { to: "/projects/$id/board", label: "Канбан" },
@@ -15,7 +15,7 @@ const tabs = [
   { to: "/projects/$id/notes", label: "Заметки" },
   { to: "/projects/$id/time", label: "Время" },
   { to: "/projects/$id/settings", label: "Настройки" },
-] as const;
+];
 
 export function ProjectChrome({ id, children }: { id: string; children: React.ReactNode }) {
   const project = getProject(id);
@@ -65,7 +65,7 @@ export function ProjectChrome({ id, children }: { id: string; children: React.Re
               key={t.label}
               to={t.to}
               params={{ id }}
-              activeOptions={t.exact ? { exact: true } : undefined}
+              activeOptions={{ exact: Boolean(t.exact) }}
               className="border-b-2 border-transparent pb-sm text-body whitespace-nowrap text-muted-foreground transition-fast hover:text-foreground"
               activeProps={{ className: "border-accent text-foreground font-medium" }}
             >
