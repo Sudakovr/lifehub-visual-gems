@@ -113,10 +113,11 @@ export const taskDetail: TaskDetail = {
   checklist: [
     { id: "c-1", text: "Подключить тестовый стенд", done: true, due: "04 июн", position: 1 },
     { id: "c-2", text: "Настроить шифрование ключей", done: true, due: "06 июн", position: 2 },
-    { id: "c-3", text: "Проверить обработку вебхуков", done: false, due: "10 июн", position: 3 },
-    { id: "c-4", text: "Согласовать лимиты с платёжной группой", done: false, due: "11 июн", position: 4 },
+    { id: "c-3", text: "Проверить обработку вебхуков", done: false, due: "10 июн", overdue: true, position: 3 },
+    { id: "c-4", text: "Согласовать лимиты с платёжной группой", done: false, due: "11 июн", overdue: true, position: 4 },
     { id: "c-5", text: "Провести нагрузочное тестирование", done: false, due: "13 июн", position: 5 },
   ],
+
   subtasks: [
     { id: "s-1", code: "LH-2483", title: "API сверки остатков", status: "Готово", assignee: "Дмитрий Соловьёв", estimateMin: 240, spentMin: 120 },
     { id: "s-2", code: "LH-2484", title: "Модуль возврата средств", status: "В работе", assignee: "Анна Верёвкина", estimateMin: 300, spentMin: 180 },
