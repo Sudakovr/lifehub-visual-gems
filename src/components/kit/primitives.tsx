@@ -272,7 +272,7 @@ export function PriorityChip({ level }: { level: "Критический" | "В�
 
 export function Tag({ color, children }: { color: string; children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-xs rounded-xs border border-border bg-surface px-sm py-0.5 text-meta text-foreground">
+    <span className="inline-flex items-center gap-xs rounded-full border border-border bg-surface px-md py-0.5 text-meta text-foreground">
       <span className="size-2 rounded-xs" style={{ backgroundColor: color }} aria-hidden />
       {children}
     </span>
