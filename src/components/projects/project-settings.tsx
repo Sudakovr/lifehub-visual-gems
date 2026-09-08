@@ -20,7 +20,7 @@ export function ProjectSettings({ id }: { id: string }) {
             <Button variant="secondary" size="sm" onClick={() => setArchiveOpen(true)}>
               В архив
             </Button>
-            <Button size="sm">Сохранить изменения</Button>
+            <Button size="sm">Сохранить</Button>
             <KebabMenu
               items={[{ label: "Дублировать проект" }, { label: "Скопировать ссылку" }]}
               destructive={{ label: "Удалить проект", onSelect: () => setDeleteOpen(true) }}
@@ -117,7 +117,7 @@ export function ProjectSettings({ id }: { id: string }) {
       <Modal
         open={deleteOpen}
         title="Удалить проект"
-        description={`Удаление уберёт проект «${project.name}», ${project.tasksTotal} задач, файлы, заметки и записи времени. Восстановить их будет нельзя.`}
+        description={`Удалим проект «${project.name}», ${project.tasksTotal} задач, файлы, заметки и записи времени. Восстановить их будет нельзя.`}
         onClose={() => {
           setDeleteOpen(false);
           setConfirmName("");

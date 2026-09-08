@@ -53,7 +53,7 @@ export type ModuleItem = {
 
 export const spaceModules: ModuleItem[] = [
   { id: "tasks", name: "Задачи", note: "Списки, канбан, подзадачи и приёмка работы.", enabled: true, locked: true },
-  { id: "files", name: "Файлы", note: "Загрузка файлов к проектам и задачам, извлечение текста.", enabled: true },
+  { id: "files", name: "Файлы", note: "Загружайте файлы к проектам и задачам, извлекайте текст.", enabled: true },
   { id: "notes", name: "Заметки", note: "Решения и договорённости со связями и вложениями.", enabled: true },
   { id: "time", name: "Учёт времени", note: "Таймер и ручные записи, отчёты по задачам и людям.", enabled: true },
   { id: "search", name: "Поиск по содержимому", note: "Поиск внутри задач, заметок и текста файлов.", enabled: true },

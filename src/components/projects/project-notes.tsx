@@ -126,7 +126,7 @@ export function ProjectNotes() {
                   <span className="num">{n.date}</span>
                 </span>
                 <Button variant="secondary" size="sm" onClick={() => setEditing(n)}>
-                  Редактировать
+                  Изменить
                 </Button>
                 <KebabMenu
                   items={[{ label: "Открыть заметку" }, { label: "Связать с задачей" }, { label: "Скопировать ссылку" }]}

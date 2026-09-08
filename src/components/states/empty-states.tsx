@@ -1,5 +1,5 @@
 import { AppShell, PageHeading } from "@/components/app/app-shell";
-import { Button } from "@/components/kit/primitives";
+import { Button, EmptyState } from "@/components/kit/primitives";
 import { emptyStates } from "@/mock/admin";
 
 /* Набор пустых состояний: заголовок, одно предложение, одно действие. */
@@ -16,13 +16,12 @@ export function EmptyStates() {
         {emptyStates.map((s) => (
           <section key={s.id} className="flex min-h-56 flex-col bg-surface p-xl">
             <p className="text-meta text-muted-foreground">{s.where}</p>
-            <div className="mt-auto flex flex-col items-start gap-sm pt-xl">
-              <h2 className="text-title font-semibold text-foreground">{s.title}</h2>
-              <p className="max-w-prose text-body text-muted-foreground">{s.text}</p>
-              <Button variant="secondary" size="sm">
-                {s.action}
-              </Button>
-            </div>
+            <EmptyState
+              className="mt-auto pt-xl pb-0"
+              title={s.title}
+              description={s.text}
+              action={<Button variant="secondary" size="sm">{s.action}</Button>}
+            />
           </section>
         ))}
       </div>

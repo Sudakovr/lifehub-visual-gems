@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { Check, ChevronDown, Loader2 } from "lucide-react";
+import { Check, ChevronDown, Loader2, type LucideIcon } from "lucide-react";
 
 /* ------------------------------------------------------------------
    Базовые примитивы LifeHub. Только семантические токены.
@@ -21,6 +21,8 @@ export const buttonVariants = cva(
           "bg-surface text-foreground border border-border hover:bg-surface-pressed disabled:bg-surface-sunken",
         ghost: "text-foreground hover:bg-surface-pressed",
         link: "text-accent underline underline-offset-4 hover:text-accent-hover px-0",
+        destructive:
+          "bg-danger text-accent-foreground hover:bg-danger-foreground disabled:bg-surface-sunken disabled:text-disabled-foreground",
       },
       size: {
         sm: "h-8 px-md text-meta",
@@ -373,4 +375,29 @@ export function SectionTitle({ children, note }: { children: React.ReactNode; no
 
 export function Row({ children }: { children: React.ReactNode }) {
   return <div className="flex flex-wrap items-center gap-md">{children}</div>;
+}
+
+export function EmptyState({
+  title,
+  description,
+  action,
+  icon: Icon,
+  className,
+}: {
+  title: string;
+  description: string;
+  action: React.ReactNode;
+  icon?: LucideIcon;
+  className?: string;
+}) {
+  return (
+    <div className={cn("flex flex-col items-start gap-md py-4xl", className)}>
+      {Icon ? <Icon className="size-5 text-muted-foreground" strokeWidth={1.75} aria-hidden /> : null}
+      <div className="flex min-w-0 flex-col gap-2xs">
+        <h3 className="text-title font-semibold text-foreground">{title}</h3>
+        <p className="max-w-prose text-body text-muted-foreground">{description}</p>
+      </div>
+      {action}
+    </div>
+  );
 }

@@ -53,13 +53,13 @@ function Dialog({
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/25 p-lg backdrop-blur-[2px] sm:items-center">
+    <div className="overlay-blur fixed inset-0 z-50 flex items-end justify-center bg-foreground/25 p-lg sm:items-center">
       <div
         role="dialog"
         aria-modal="true"
         aria-label={title}
         className={cn(
-          "flex max-h-[85vh] w-full flex-col overflow-hidden rounded-lg border border-border bg-surface shadow-e3",
+          "dialog-height flex w-full flex-col overflow-hidden rounded-lg border border-border bg-surface shadow-e3",
           wide ? "max-w-dialog-wide" : "max-w-dialog",
         )}
       >
@@ -173,8 +173,7 @@ function DeleteDialog({ onClose }: { onClose: () => void }) {
             Отменить
           </Button>
           <Button
-            variant="primary"
-            className="bg-danger text-accent-foreground hover:bg-danger-foreground"
+            variant="destructive"
             disabled={!ready}
             onClick={onClose}
           >
