@@ -13,11 +13,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as FilesRouteImport } from './routes/files'
 import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as MyRouteImport } from './routes/my'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ReviewRouteImport } from './routes/review'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TimeRouteImport } from './routes/time'
 import { Route as TodayRouteImport } from './routes/today'
 import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as AdminModulesRouteImport } from './routes/admin/modules'
 import { Route as AuthInviteRouteImport } from './routes/auth/invite'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
@@ -26,6 +28,11 @@ import { Route as KitIndexRouteImport } from './routes/kit/index'
 import { Route as NotesIndexRouteImport } from './routes/notes/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsIdRouteRouteImport } from './routes/projects/$id/route'
+import { Route as SettingsProfileRouteImport } from './routes/settings/profile'
+import { Route as SettingsSpaceRouteImport } from './routes/settings/space'
+import { Route as StatesEmptyRouteImport } from './routes/states/empty'
+import { Route as StatesErrorsRouteImport } from './routes/states/errors'
+import { Route as StatesMobileRouteImport } from './routes/states/mobile'
 import { Route as NotesIdIndexRouteImport } from './routes/notes/$id/index'
 import { Route as ProjectsIdIndexRouteImport } from './routes/projects/$id/index'
 import { Route as ProjectsIdBoardRouteImport } from './routes/projects/$id/board'
@@ -56,6 +63,11 @@ const MyRoute = MyRouteImport.update({
   path: '/my',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReviewRoute = ReviewRouteImport.update({
   id: '/review',
   path: '/review',
@@ -79,6 +91,11 @@ const TodayRoute = TodayRouteImport.update({
 const WelcomeRoute = WelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminModulesRoute = AdminModulesRouteImport.update({
+  id: '/admin/modules',
+  path: '/admin/modules',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthInviteRoute = AuthInviteRouteImport.update({
@@ -119,6 +136,31 @@ const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
 const ProjectsIdRouteRoute = ProjectsIdRouteRouteImport.update({
   id: '/projects/$id',
   path: '/projects/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsProfileRoute = SettingsProfileRouteImport.update({
+  id: '/settings/profile',
+  path: '/settings/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsSpaceRoute = SettingsSpaceRouteImport.update({
+  id: '/settings/space',
+  path: '/settings/space',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatesEmptyRoute = StatesEmptyRouteImport.update({
+  id: '/states/empty',
+  path: '/states/empty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatesErrorsRoute = StatesErrorsRouteImport.update({
+  id: '/states/errors',
+  path: '/states/errors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatesMobileRoute = StatesMobileRouteImport.update({
+  id: '/states/mobile',
+  path: '/states/mobile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotesIdIndexRoute = NotesIdIndexRouteImport.update({
@@ -172,16 +214,23 @@ export interface FileRoutesByFullPath {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
+  '/notifications': typeof NotificationsRoute
   '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
   '/welcome': typeof WelcomeRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
+  '/admin/modules': typeof AdminModulesRoute
   '/auth/invite': typeof AuthInviteRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
+  '/settings/profile': typeof SettingsProfileRoute
+  '/settings/space': typeof SettingsSpaceRoute
+  '/states/empty': typeof StatesEmptyRoute
+  '/states/errors': typeof StatesErrorsRoute
+  '/states/mobile': typeof StatesMobileRoute
   '/kit/': typeof KitIndexRoute
   '/notes/': typeof NotesIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -200,15 +249,22 @@ export interface FileRoutesByTo {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
+  '/notifications': typeof NotificationsRoute
   '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
   '/welcome': typeof WelcomeRoute
+  '/admin/modules': typeof AdminModulesRoute
   '/auth/invite': typeof AuthInviteRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
+  '/settings/profile': typeof SettingsProfileRoute
+  '/settings/space': typeof SettingsSpaceRoute
+  '/states/empty': typeof StatesEmptyRoute
+  '/states/errors': typeof StatesErrorsRoute
+  '/states/mobile': typeof StatesMobileRoute
   '/kit': typeof KitIndexRoute
   '/notes': typeof NotesIndexRoute
   '/projects': typeof ProjectsIndexRoute
@@ -228,16 +284,23 @@ export interface FileRoutesById {
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
   '/my': typeof MyRoute
+  '/notifications': typeof NotificationsRoute
   '/review': typeof ReviewRoute
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
   '/welcome': typeof WelcomeRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
+  '/admin/modules': typeof AdminModulesRoute
   '/auth/invite': typeof AuthInviteRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset': typeof AuthResetRoute
+  '/settings/profile': typeof SettingsProfileRoute
+  '/settings/space': typeof SettingsSpaceRoute
+  '/states/empty': typeof StatesEmptyRoute
+  '/states/errors': typeof StatesErrorsRoute
+  '/states/mobile': typeof StatesMobileRoute
   '/kit/': typeof KitIndexRoute
   '/notes/': typeof NotesIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -258,16 +321,23 @@ export interface FileRouteTypes {
     | '/files'
     | '/inbox'
     | '/my'
+    | '/notifications'
     | '/review'
     | '/search'
     | '/time'
     | '/today'
     | '/welcome'
     | '/projects/$id'
+    | '/admin/modules'
     | '/auth/invite'
     | '/auth/login'
     | '/auth/register'
     | '/auth/reset'
+    | '/settings/profile'
+    | '/settings/space'
+    | '/states/empty'
+    | '/states/errors'
+    | '/states/mobile'
     | '/kit/'
     | '/notes/'
     | '/projects/'
@@ -286,15 +356,22 @@ export interface FileRouteTypes {
     | '/files'
     | '/inbox'
     | '/my'
+    | '/notifications'
     | '/review'
     | '/search'
     | '/time'
     | '/today'
     | '/welcome'
+    | '/admin/modules'
     | '/auth/invite'
     | '/auth/login'
     | '/auth/register'
     | '/auth/reset'
+    | '/settings/profile'
+    | '/settings/space'
+    | '/states/empty'
+    | '/states/errors'
+    | '/states/mobile'
     | '/kit'
     | '/notes'
     | '/projects'
@@ -313,16 +390,23 @@ export interface FileRouteTypes {
     | '/files'
     | '/inbox'
     | '/my'
+    | '/notifications'
     | '/review'
     | '/search'
     | '/time'
     | '/today'
     | '/welcome'
     | '/projects/$id'
+    | '/admin/modules'
     | '/auth/invite'
     | '/auth/login'
     | '/auth/register'
     | '/auth/reset'
+    | '/settings/profile'
+    | '/settings/space'
+    | '/states/empty'
+    | '/states/errors'
+    | '/states/mobile'
     | '/kit/'
     | '/notes/'
     | '/projects/'
@@ -342,16 +426,23 @@ export interface RootRouteChildren {
   FilesRoute: typeof FilesRoute
   InboxRoute: typeof InboxRoute
   MyRoute: typeof MyRoute
+  NotificationsRoute: typeof NotificationsRoute
   ReviewRoute: typeof ReviewRoute
   SearchRoute: typeof SearchRoute
   TimeRoute: typeof TimeRoute
   TodayRoute: typeof TodayRoute
   WelcomeRoute: typeof WelcomeRoute
   ProjectsIdRouteRoute: typeof ProjectsIdRouteRouteWithChildren
+  AdminModulesRoute: typeof AdminModulesRoute
   AuthInviteRoute: typeof AuthInviteRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
   AuthResetRoute: typeof AuthResetRoute
+  SettingsProfileRoute: typeof SettingsProfileRoute
+  SettingsSpaceRoute: typeof SettingsSpaceRoute
+  StatesEmptyRoute: typeof StatesEmptyRoute
+  StatesErrorsRoute: typeof StatesErrorsRoute
+  StatesMobileRoute: typeof StatesMobileRoute
   KitIndexRoute: typeof KitIndexRoute
   NotesIndexRoute: typeof NotesIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -389,6 +480,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/review': {
       id: '/review'
       path: '/review'
@@ -422,6 +520,13 @@ declare module '@tanstack/react-router' {
       path: '/welcome'
       fullPath: '/welcome'
       preLoaderRoute: typeof WelcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/modules': {
+      id: '/admin/modules'
+      path: '/admin/modules'
+      fullPath: '/admin/modules'
+      preLoaderRoute: typeof AdminModulesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/invite': {
@@ -478,6 +583,41 @@ declare module '@tanstack/react-router' {
       path: '/projects/$id'
       fullPath: '/projects/$id'
       preLoaderRoute: typeof ProjectsIdRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/profile': {
+      id: '/settings/profile'
+      path: '/settings/profile'
+      fullPath: '/settings/profile'
+      preLoaderRoute: typeof SettingsProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/space': {
+      id: '/settings/space'
+      path: '/settings/space'
+      fullPath: '/settings/space'
+      preLoaderRoute: typeof SettingsSpaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/states/empty': {
+      id: '/states/empty'
+      path: '/states/empty'
+      fullPath: '/states/empty'
+      preLoaderRoute: typeof StatesEmptyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/states/errors': {
+      id: '/states/errors'
+      path: '/states/errors'
+      fullPath: '/states/errors'
+      preLoaderRoute: typeof StatesErrorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/states/mobile': {
+      id: '/states/mobile'
+      path: '/states/mobile'
+      fullPath: '/states/mobile'
+      preLoaderRoute: typeof StatesMobileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/notes/$id/': {
@@ -575,16 +715,23 @@ const rootRouteChildren: RootRouteChildren = {
   FilesRoute: FilesRoute,
   InboxRoute: InboxRoute,
   MyRoute: MyRoute,
+  NotificationsRoute: NotificationsRoute,
   ReviewRoute: ReviewRoute,
   SearchRoute: SearchRoute,
   TimeRoute: TimeRoute,
   TodayRoute: TodayRoute,
   WelcomeRoute: WelcomeRoute,
   ProjectsIdRouteRoute: ProjectsIdRouteRouteWithChildren,
+  AdminModulesRoute: AdminModulesRoute,
   AuthInviteRoute: AuthInviteRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
   AuthResetRoute: AuthResetRoute,
+  SettingsProfileRoute: SettingsProfileRoute,
+  SettingsSpaceRoute: SettingsSpaceRoute,
+  StatesEmptyRoute: StatesEmptyRoute,
+  StatesErrorsRoute: StatesErrorsRoute,
+  StatesMobileRoute: StatesMobileRoute,
   KitIndexRoute: KitIndexRoute,
   NotesIndexRoute: NotesIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,

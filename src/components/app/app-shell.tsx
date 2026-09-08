@@ -87,7 +87,15 @@ export function ThemeToggle() {
 function locationTitle(pathname: string) {
   if (pathname.startsWith("/projects/")) return ["Проекты", "Переезд офиса"];
   if (pathname.startsWith("/tasks/")) return ["Переезд офиса", "LH-2481"];
+  if (pathname === "/settings/space") return ["Работа", "Настройки пространства"];
+  if (pathname === "/settings/profile") return ["Аккаунт", "Профиль и уведомления"];
+  if (pathname === "/admin/modules") return ["Администрирование", "Модули системы"];
+  if (pathname === "/notifications") return ["Работа", "Уведомления"];
+  if (pathname === "/states/empty") return ["Состояния", "Пустые экраны"];
+  if (pathname === "/states/errors") return ["Состояния", "Ошибки и сеть"];
+  if (pathname === "/states/mobile") return ["Состояния", "Мобильная сборка"];
   const found = sections.find((s) => pathname.startsWith(s.to));
+
   if (found) return ["Работа", found.label];
   return ["Работа", "Обзор"];
 }
@@ -184,7 +192,8 @@ function SidebarBody({ collapsed, onNavigate }: { collapsed: boolean; onNavigate
       </nav>
 
       <div className={cn("border-t border-border px-sm py-sm", collapsed && "px-xs")}>
-        <button
+        <Nav
+          to="/settings/profile"
           className={cn(
             "flex w-full items-center gap-sm rounded-md px-sm py-sm text-left transition-fast hover:bg-surface-pressed",
             collapsed && "justify-center px-0",
@@ -199,7 +208,7 @@ function SidebarBody({ collapsed, onNavigate }: { collapsed: boolean; onNavigate
               <span className="truncate text-caption text-muted-foreground">anna@lifehub.ru</span>
             </span>
           )}
-        </button>
+        </Nav>
       </div>
     </div>
   );
@@ -254,6 +263,13 @@ function Notifications() {
               </li>
             ))}
           </ul>
+          <Nav
+            to="/notifications"
+            onClick={() => setOpen(false)}
+            className="block border-t border-border px-md py-sm text-meta text-accent transition-fast hover:bg-surface-pressed"
+          >
+            Открыть центр уведомлений
+          </Nav>
         </div>
       ) : null}
     </div>
