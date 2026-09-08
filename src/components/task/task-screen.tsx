@@ -76,7 +76,13 @@ function BlockTitle({
 
 /* ---------- Меню «…»: «Удалить» последним пунктом за разделителем ---------- */
 
-function ActionsMenu({ canDelete }: { canDelete: boolean }) {
+function ActionsMenu({
+  canDelete,
+  onSelect,
+}: {
+  canDelete: boolean;
+  onSelect: (kind: TaskDialogKind) => void;
+}) {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -88,7 +94,14 @@ function ActionsMenu({ canDelete }: { canDelete: boolean }) {
     return () => document.removeEventListener("mousedown", onDoc);
   }, []);
 
-  const items = ["Скопировать ссылку", "Дублировать задачу", "Перенести в проект", "Отписаться от задачи"];
+  const items: { label: string; kind?: TaskDialogKind }[] = [
+    { label: "Сменить исполнителя", kind: "assignee" },
+    { label: "Добавить наблюдателей", kind: "watchers" },
+    { label: "Разобрать на подзадачи через ИИ", kind: "decompose" },
+    { label: "Перенести в другой проект", kind: "move" },
+    { label: "Скопировать ссылку" },
+    { label: "Отписаться от задачи" },
+  ];
 
   return (
     <div className="relative" ref={ref}>
@@ -102,14 +115,17 @@ function ActionsMenu({ canDelete }: { canDelete: boolean }) {
         <MoreHorizontal className="size-4" strokeWidth={1.75} />
       </Button>
       {open ? (
-        <div className="absolute right-0 z-20 mt-xs w-56 rounded-md border border-border bg-surface py-xs shadow-e2">
+        <div className="absolute right-0 z-20 mt-xs w-64 rounded-md border border-border bg-surface py-xs shadow-e2">
           {items.map((i) => (
             <button
-              key={i}
+              key={i.label}
               className="block w-full px-md py-sm text-left text-body text-foreground transition-fast hover:bg-surface-pressed"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+                if (i.kind) onSelect(i.kind);
+              }}
             >
-              {i}
+              {i.label}
             </button>
           ))}
           {canDelete ? (
@@ -117,7 +133,10 @@ function ActionsMenu({ canDelete }: { canDelete: boolean }) {
               <div className="my-xs h-px bg-border" />
               <button
                 className="block w-full px-md py-sm text-left text-body text-danger-foreground transition-fast hover:bg-danger-soft"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  onSelect("delete");
+                }}
               >
                 Удалить
               </button>
@@ -128,6 +147,7 @@ function ActionsMenu({ canDelete }: { canDelete: boolean }) {
     </div>
   );
 }
+
 
 /* ---------- Лента: комментарии и события одним потоком ---------- */
 
