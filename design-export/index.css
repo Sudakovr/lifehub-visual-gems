@@ -1,0 +1,337 @@
+/* ============================================================
+   LifeHub — единственный источник значений дизайна.
+   Перенос в другой проект: скопировать этот файл целиком и
+   импортировать его вместо своего index.css.
+   Стек: Tailwind v4 (CSS-first), без tailwind.config.js.
+
+   Правила:
+   - в компонентах не должно быть значений вида text-[15px] или
+     bg-[#2557E8]; не хватает значения — заводится токен здесь;
+   - имена по роли, а не по цвету: surface, border, accent, ok…;
+   - тёмная тема переопределяет те же имена, а не заводит классы;
+   - цвет в oklch: предсказуемая светлота в обеих темах.
+   ============================================================ */
+
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* --- Гарнитуры ---------------------------------------------
+     Golos Text — интерфейсный гротеск с полной кириллицей:
+     узкие овалы, спокойные знаки, держит плотную таблицу.
+     JetBrains Mono — только цифры, коды задач, длительности:
+     одинаковая ширина знака выравнивает колонки сумм.
+     Подключаются <link>-ом в шапке документа, не @import-ом. */
+  --font-sans: "Golos Text", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* --- Поверхности: четыре уровня, больше не нужно ------------ */
+  --color-canvas: var(--canvas);                   /* фон приложения */
+  --color-surface: var(--surface);                 /* панель, строка списка, поповер */
+  --color-surface-sunken: var(--surface-sunken);   /* колонка канбана, поле ввода, код */
+  --color-surface-pressed: var(--surface-pressed); /* ховер и нажатие строки */
+
+  /* --- Текст --------------------------------------------------- */
+  --color-foreground: var(--foreground);                   /* основной текст и заголовки */
+  --color-muted-foreground: var(--muted-foreground);       /* подписи, метаданные, плейсхолдер */
+  --color-disabled-foreground: var(--disabled-foreground); /* недоступный контрол */
+
+  /* --- Границы ------------------------------------------------- */
+  --color-border: var(--border);               /* волосяные разделители, рамка поля */
+  --color-border-strong: var(--border-strong); /* активная рамка, шапка таблицы */
+
+  /* --- Акцент: не чаще двух раз на экран ----------------------- */
+  --color-accent: var(--accent);                       /* активная вкладка, ссылка, фокус */
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground); /* текст на акценте */
+  --color-accent-soft: var(--accent-soft);             /* подложка выделенной строки */
+
+  /* --- Главное действие: регистрация, создание, сохранение ----- */
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
+  --color-action-foreground: var(--action-foreground);
+
+  /* --- Статусы: заливка, мягкая подложка, текст на подложке ---- */
+  --color-ok: var(--ok);                       /* Готово, приёмка принята */
+  --color-ok-hover: var(--ok-hover);
+  --color-ok-contrast: var(--ok-contrast);     /* текст на сплошной зелёной кнопке */
+  --color-ok-soft: var(--ok-soft);
+  --color-ok-foreground: var(--ok-foreground);
+  --color-warn: var(--warn);                   /* На приёмке, дедлайн сегодня, файл в очереди */
+  --color-warn-soft: var(--warn-soft);
+  --color-warn-foreground: var(--warn-foreground);
+  --color-danger: var(--danger);               /* просрочено, критический приоритет, удаление */
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-info: var(--info);                   /* В работе, системные события ленты */
+  --color-info-soft: var(--info-soft);
+  --color-info-foreground: var(--info-foreground);
+
+  /* --- Шкала отступов: шаг ×1.5, без промежуточных значений ---- */
+  --spacing-2xs: 0.125rem; /* иконка ↔ текст внутри чипа */
+  --spacing-xs: 0.25rem;   /* внутри плотного контрола */
+  --spacing-sm: 0.5rem;    /* поля кнопки, зазор в строке */
+  --spacing-md: 0.75rem;   /* поля поля ввода, ячейка таблицы */
+  --spacing-lg: 1rem;      /* поля панели, шаг между полями формы */
+  --spacing-xl: 1.5rem;    /* между блоками внутри секции */
+  --spacing-2xl: 2rem;     /* между секциями экрана */
+  --spacing-3xl: 3rem;     /* верх и низ страницы */
+  --spacing-4xl: 4rem;     /* пустое состояние во всю высоту */
+  --spacing-editor: 28rem; /* рабочая высота текста заметки */
+
+  /* --- Ширины и высоты контейнеров ----------------------------- */
+  --container-app: 100rem;           /* предельная ширина рабочей области */
+  --container-dialog: 34rem;         /* обычный диалог */
+  --container-dialog-wide: 44rem;    /* диалог со списком (декомпозиция) */
+  --container-rowmeta: 42rem;        /* правый блок крупной строки проекта */
+  --container-peek: 26.25rem;        /* панель «взглянуть» — ровно 420 px */
+  --container-list: 78.75rem;        /* список рядом с панелью — 1260 px */
+  --container-form: 24rem;           /* колонка формы входа */
+  --container-page: 48rem;           /* узкая страница-поток: онбординг, текст */
+  --container-phone: 24.375rem;      /* рамка телефона — 390 px */
+  --container-phone-h: 50.75rem;     /* высота рамки телефона — 812 px */
+  --container-table: 46rem;          /* минимум эталонной таблицы */
+  --container-table-wide: 56rem;     /* таблица проекта */
+  --container-table-dense: 64rem;    /* плотная таблица задач с деревом */
+  --container-kit: 72rem;            /* полотно страницы дизайн-системы */
+  --container-copy: 42rem;           /* читаемая строка вводного текста */
+  --container-properties: 18rem;     /* колонка свойств задачи */
+  --container-command: 18.75rem;     /* список команд и результатов */
+  --container-drawer-handle: 6.25rem;/* ручка мобильной шторки */
+  --container-dialog-height: 85vh;   /* диалог на небольшом экране */
+
+  /* --- Радиусы: мягкие, но без «таблеток» на панелях ----------- */
+  --radius-xs: 0.375rem;  /* чекбокс, тег, чип */
+  --radius-sm: 0.625rem;  /* поле ввода */
+  --radius-md: 0.875rem;  /* кнопка, панель, меню, поповер */
+  --radius-lg: 1.125rem;  /* диалог, крупная карточка */
+  --radius-full: 9999px;  /* аватар, переключатель, прогресс */
+
+  /* --- Эффекты -------------------------------------------------- */
+  --blur-overlay: 0.125rem; /* отделяет диалог от рабочего экрана */
+
+  /* --- Тени: ровно три уровня, ниже — только линии -------------- */
+  --shadow-e1: 0 1px 2px oklch(0 0 0 / 0.06);   /* поднятая строка, кнопка */
+  --shadow-e2: 0 4px 12px oklch(0 0 0 / 0.1);   /* меню, поповер, тост */
+  --shadow-e3: 0 16px 40px oklch(0 0 0 / 0.18); /* диалог, шторка, панель «взглянуть» */
+
+  /* --- Типографика: размер и межстрочный ----------------------- */
+  --text-caption: 0.6875rem;              /* метка над значением, счётчики */
+  --text-caption--line-height: 1rem;
+  --text-meta: 0.75rem;                   /* метаданные, подписи полей, лента */
+  --text-meta--line-height: 1.125rem;
+  --text-body: 0.875rem;                  /* базовый текст интерфейса и таблиц */
+  --text-body--line-height: 1.375rem;
+  --text-body-lg: 1rem;                   /* описание, комментарии */
+  --text-body-lg--line-height: 1.5rem;
+  --text-title: 1.125rem;                 /* заголовок панели, название задачи */
+  --text-title--line-height: 1.625rem;
+  --text-heading: 1.5rem;                 /* заголовок экрана */
+  --text-heading--line-height: 2rem;
+  --text-display: 2rem;                   /* число-показатель, титул пустого экрана */
+  --text-display--line-height: 2.375rem;
+}
+
+:root {
+  /* Светлая тема — мягкие, слегка холодные поверхности */
+  --canvas: oklch(0.982 0.004 250);
+  --surface: oklch(0.998 0.002 250);
+  --surface-sunken: oklch(0.966 0.005 250);
+  --surface-pressed: oklch(0.945 0.006 250);
+
+  --foreground: oklch(0.27 0.012 260);
+  --muted-foreground: oklch(0.55 0.01 260);
+  --disabled-foreground: oklch(0.71 0.006 260);
+
+  --border: oklch(0.918 0.005 260);
+  --border-strong: oklch(0.83 0.007 260);
+
+  --accent: oklch(0.47 0.093 258); /* с белым текстом контраст > 7:1 */
+  --accent-hover: oklch(0.41 0.093 258);
+  --accent-foreground: oklch(0.995 0 0);
+  --accent-soft: oklch(0.955 0.021 258);
+
+  /* Графитово-синяя матовая клавиша вместо яркого синего пятна */
+  --action: oklch(0.34 0.035 255);
+  --action-hover: oklch(0.28 0.03 255);
+  --action-foreground: oklch(0.985 0.002 250);
+
+  --ok: oklch(0.5 0.075 155);
+  --ok-hover: oklch(0.43 0.07 155);
+  --ok-contrast: oklch(0.99 0.002 155);
+  --ok-soft: oklch(0.955 0.024 155);
+  --ok-foreground: oklch(0.38 0.065 155);
+
+  --warn: oklch(0.65 0.09 70);
+  --warn-soft: oklch(0.963 0.028 80);
+  --warn-foreground: oklch(0.46 0.075 65);
+
+  --danger: oklch(0.53 0.13 25);
+  --danger-soft: oklch(0.958 0.022 25);
+  --danger-foreground: oklch(0.46 0.12 25);
+
+  --info: oklch(0.53 0.075 245);
+  --info-soft: oklch(0.958 0.022 245);
+  --info-foreground: oklch(0.44 0.07 245);
+
+  /* Длительности переходов */
+  --duration-fast: 100ms; /* ховер, фокус, чекбокс */
+  --duration-base: 160ms; /* меню, вкладки, смена темы */
+  --duration-slow: 240ms; /* диалог, шторка, сворачивание ленты */
+
+  /* Совместимость с shadcn: те же роли под привычными именами */
+  --radius: 0.5rem;
+  --background: var(--canvas);
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --primary: var(--action);
+  --primary-foreground: var(--action-foreground);
+  --secondary: var(--surface-sunken);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--surface-sunken);
+  --destructive: var(--danger);
+  --destructive-foreground: oklch(0.99 0 0);
+  --input: var(--border);
+  --ring: var(--accent);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--accent);
+  --sidebar-primary-foreground: var(--accent-foreground);
+  --sidebar-accent: var(--surface-pressed);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--accent);
+}
+
+.dark {
+  /* Тёмная тема — те же роли, другие значения.
+     Поверхности не чернее 0.17: чёрный фон даёт ореол вокруг текста. */
+  --canvas: oklch(0.17 0.008 260);
+  --surface: oklch(0.215 0.009 260);
+  --surface-sunken: oklch(0.19 0.008 260);
+  --surface-pressed: oklch(0.265 0.011 260);
+
+  --foreground: oklch(0.95 0.004 260);
+  --muted-foreground: oklch(0.71 0.008 260);
+  --disabled-foreground: oklch(0.5 0.008 260);
+
+  --border: oklch(0.3 0.01 260);
+  --border-strong: oklch(0.42 0.012 260);
+
+  --accent: oklch(0.68 0.13 258);
+  --accent-hover: oklch(0.74 0.13 258);
+  --accent-foreground: oklch(0.16 0.02 258);
+  --accent-soft: oklch(0.3 0.05 258);
+
+  /* В темноте главная клавиша светлая с тёмным текстом */
+  --action: oklch(0.82 0.018 255);
+  --action-hover: oklch(0.88 0.014 255);
+  --action-foreground: oklch(0.2 0.012 260);
+
+  --ok: oklch(0.72 0.12 155);
+  --ok-hover: oklch(0.65 0.1 155);
+  --ok-contrast: oklch(0.18 0.025 155);
+  --ok-soft: oklch(0.29 0.05 155);
+  --ok-foreground: oklch(0.85 0.09 155);
+
+  --warn: oklch(0.79 0.12 78);
+  --warn-soft: oklch(0.31 0.05 70);
+  --warn-foreground: oklch(0.88 0.09 80);
+
+  --danger: oklch(0.68 0.16 25);
+  --danger-soft: oklch(0.31 0.06 25);
+  --danger-foreground: oklch(0.85 0.11 25);
+
+  --info: oklch(0.72 0.1 245);
+  --info-soft: oklch(0.29 0.05 245);
+  --info-foreground: oklch(0.86 0.07 245);
+
+  --destructive: var(--danger);
+  --destructive-foreground: oklch(0.16 0.02 25);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Видимый фокус с клавиатуры на всём без исключения */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Табличные цифры: суммы, длительности, коды задач */
+@utility num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+@utility transition-fast {
+  transition-duration: var(--duration-fast);
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@utility transition-base {
+  transition-duration: var(--duration-base);
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@utility transition-slow {
+  transition-duration: var(--duration-slow);
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Имена не начинаются с text-: иначе сборщик путает цвет с размером. */
+@utility action-label {
+  color: var(--color-action-foreground);
+}
+
+@utility ok-label {
+  color: var(--color-ok-contrast);
+}
+
+/* Рабочее место задачи: лента развёрнута и свёрнута в полосу */
+@utility task-workspace-open {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) var(--container-properties);
+}
+
+@utility task-workspace-closed {
+  grid-template-columns: minmax(0, 1fr) var(--spacing-3xl) var(--container-properties);
+}
+
+/* Подпись свёрнутой ленты и свёрнутой колонки канбана */
+@utility vertical-label {
+  writing-mode: vertical-rl;
+}
+
+@utility dialog-height {
+  max-height: var(--container-dialog-height);
+}
+
+@utility overlay-blur {
+  backdrop-filter: blur(var(--blur-overlay));
+}
+
+@utility profile-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+}
+
+@utility timeline-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}

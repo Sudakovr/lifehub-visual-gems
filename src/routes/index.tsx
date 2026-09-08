@@ -113,6 +113,67 @@ const groups: { title: string; note: string; items: Item[] }[] = [
 ];
 
 
+const built: { title: string; text: string }[] = [
+  {
+    title: "Основа значений",
+    text: "Цвета, отступы, радиусы, тени, типографика и длительности заданы токенами в src/styles.css. В разметке нет ни одного произвольного значения: не хватает — заводится токен. Тёмная тема переопределяет те же имена.",
+  },
+  {
+    title: "Примитивы",
+    text: "Кнопки, поля, чипы статуса и приоритета, теги, аватары, прогресс, пустое состояние и скелет живут в одном файле примитивов и используются всеми экранами. Страница «Набор примитивов» показывает их разом.",
+  },
+  {
+    title: "Каркас",
+    text: "Общая оболочка даёт боковую навигацию с переключателем пространств, верхнюю строку с поиском, быстрым вводом, активным таймером и уведомлениями, а на телефоне — шторку и нижние вкладки.",
+  },
+  {
+    title: "Экраны продукта",
+    text: "День, входящие, мои задачи, проекты со всеми вкладками, рабочее место задачи, заметки, файлы, время, поиск, обзор недели, администрирование и системные состояния — 32 маршрута.",
+  },
+  {
+    title: "Повторяющиеся места",
+    text: "Строка задачи, чип статуса, аватар, меню «…», пустое состояние и главная кнопка выглядят одинаково везде. Удаление — только последним пунктом меню «…».",
+  },
+  {
+    title: "Проверка",
+    text: "Каждый маршрут открыт в светлой и тёмной темах и на ширине 360 px: горизонтальной прокрутки, обрезанного текста и ошибок нет.",
+  },
+];
+
+const scheme = `Вход ─ Регистрация ─ Восстановление ─ Приглашение
+   │
+   └─ Онбординг (три шага, можно пропустить)
+         │
+         ▼
+   ┌─────────────────────── Оболочка ───────────────────────┐
+   │ пространство · поиск · быстрый ввод (N) · таймер · 🔔  │
+   ├─────────────┬──────────────────────────────────────────┤
+   │ Сегодня     │  план дня от ИИ → задача                 │
+   │ Входящие    │  «Перенести в проект» → проект           │
+   │ Мои задачи  │  группировки и сохранённые фильтры       │
+   │ Проекты     │  список → проект                         │
+   │             │     ├─ обзор   (сводка ИИ → источники)   │
+   │             │     ├─ задачи  → «взглянуть» 420 px      │
+   │             │     ├─ канбан  → «взглянуть» 420 px      │
+   │             │     ├─ файлы · заметки · время           │
+   │             │     └─ настройки → «…» → Удалить         │
+   │ Заметки     │  список → редактор (автосохранение)      │
+   │ Файлы       │  привязка к задаче, извлечение текста    │
+   │ Поиск       │  задачи · проекты · заметки · файлы      │
+   │ Время       │  записи → суммы по дням и людям          │
+   └─────────────┴──────────────────────────────────────────┘
+                        │
+                        ▼
+              Задача /tasks/[id]
+   ┌────────────┬───────────────┬─────────────┐
+   │ содержание │ единая лента  │ свойства    │
+   │ чек-лист   │ комментарии + │ статус, срок│
+   │ подзадачи  │ события вместе│ исполнитель │
+   └────────────┴───────────────┴─────────────┘
+        В работе → На приёмке (исполнитель)
+        На приёмке → Готово (постановщик)
+        На приёмке → В работе (постановщик, с комментарием)`;
+
 function Home() {
   return (
     <main className="min-h-screen bg-canvas">
@@ -123,6 +184,53 @@ function Home() {
           Собрана основа дизайн-системы и эталонные экраны продукта. Открывайте любой раздел —
           каждый экран работает в светлой и тёмной темах и от 360 px.
         </p>
+
+        <section className="mt-3xl flex flex-col gap-md">
+          <div className="border-b border-border pb-sm">
+            <h2 className="text-title font-semibold text-foreground">Что и как сделано</h2>
+            <p className="text-meta text-muted-foreground">Шесть слоёв работы — от значений до проверки.</p>
+          </div>
+          <ul className="grid gap-x-xl gap-y-0 sm:grid-cols-2 xl:grid-cols-3">
+            {built.map((b) => (
+              <li key={b.title} className="flex flex-col gap-2xs border-b border-border py-md">
+                <span className="text-body font-medium text-foreground">{b.title}</span>
+                <span className="text-meta text-muted-foreground">{b.text}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-2xl flex flex-col gap-md">
+          <div className="border-b border-border pb-sm">
+            <h2 className="text-title font-semibold text-foreground">Схема взаимодействий</h2>
+            <p className="text-meta text-muted-foreground">
+              Как экраны связаны между собой и где начинается работа с задачей.
+            </p>
+          </div>
+          <div className="overflow-x-auto rounded-md border border-border bg-surface p-lg">
+            <pre className="w-max font-mono text-meta whitespace-pre text-foreground">{scheme}</pre>
+          </div>
+        </section>
+
+        <section className="mt-2xl flex flex-col gap-md">
+          <div className="border-b border-border pb-sm">
+            <h2 className="text-title font-semibold text-foreground">Для переноса в другой проект</h2>
+            <p className="text-meta text-muted-foreground">Три файла в папке design-export рядом с кодом.</p>
+          </div>
+          <ul className="grid gap-x-xl gap-y-0 sm:grid-cols-3">
+            {[
+              { title: "index.css", note: "Все токены обеих тем с комментариями — единственный источник значений." },
+              { title: "DESIGN.md", note: "Гарнитуры, шкалы, поверхности, плотность, брейкпоинты, инвентарь блоков." },
+              { title: "ROUTES.md", note: "Все маршруты и по одной строке назначения каждого." },
+            ].map((d) => (
+              <li key={d.title} className="flex flex-col gap-2xs border-b border-border py-md">
+                <span className="font-mono text-body font-medium text-foreground">{d.title}</span>
+                <span className="text-meta text-muted-foreground">{d.note}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
 
         <div className="mt-3xl flex flex-col gap-2xl">
           {groups.map((g) => (
