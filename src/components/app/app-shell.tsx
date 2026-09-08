@@ -2,6 +2,7 @@ import * as React from "react";
 import { Link } from "@tanstack/react-router";
 import { Moon, Sun } from "lucide-react";
 import { Avatar, Button } from "@/components/kit/primitives";
+import { QuickAdd } from "@/components/daily/quick-add";
 import { cn } from "@/lib/utils";
 
 /* Общая рамка экранов: верхняя строка пространства и содержимое. */
@@ -38,7 +39,29 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             LifeHub
           </Link>
           <span className="hidden text-meta text-muted-foreground sm:inline">Пространство «Работа»</span>
-          <nav className="ml-auto flex items-center gap-xs">
+          <nav className="ml-auto flex min-w-0 items-center gap-xs">
+            <div className="flex min-w-0 items-center gap-xs overflow-x-auto whitespace-nowrap">
+            <Link
+              to="/today"
+              className="rounded-md px-md py-xs text-body text-muted-foreground transition-fast hover:bg-surface-pressed hover:text-foreground"
+              activeProps={{ className: "bg-surface-pressed text-foreground" }}
+            >
+              Сегодня
+            </Link>
+            <Link
+              to="/inbox"
+              className="rounded-md px-md py-xs text-body text-muted-foreground transition-fast hover:bg-surface-pressed hover:text-foreground"
+              activeProps={{ className: "bg-surface-pressed text-foreground" }}
+            >
+              Входящие
+            </Link>
+            <Link
+              to="/my"
+              className="rounded-md px-md py-xs text-body text-muted-foreground transition-fast hover:bg-surface-pressed hover:text-foreground"
+              activeProps={{ className: "bg-surface-pressed text-foreground" }}
+            >
+              Мои задачи
+            </Link>
             <Link
               to="/projects"
               className="rounded-md px-md py-xs text-body text-muted-foreground transition-fast hover:bg-surface-pressed hover:text-foreground"
@@ -53,12 +76,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             >
               Библиотека
             </Link>
+            </div>
             <ThemeToggle />
             <Avatar name="Анна Верёвкина" size="sm" />
           </nav>
         </div>
       </header>
       <main className="mx-auto w-full max-w-app px-lg pt-xl pb-3xl">{children}</main>
+      <QuickAdd />
     </div>
   );
 }

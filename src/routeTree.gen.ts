@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InboxRouteImport } from './routes/inbox'
+import { Route as MyRouteImport } from './routes/my'
+import { Route as TodayRouteImport } from './routes/today'
 import { Route as KitIndexRouteImport } from './routes/kit/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsIdRouteRouteImport } from './routes/projects/$id/route'
@@ -25,6 +28,21 @@ import { Route as TasksIdIndexRouteImport } from './routes/tasks/$id/index'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InboxRoute = InboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyRoute = MyRouteImport.update({
+  id: '/my',
+  path: '/my',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TodayRoute = TodayRouteImport.update({
+  id: '/today',
+  path: '/today',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KitIndexRoute = KitIndexRouteImport.update({
@@ -85,6 +103,9 @@ const TasksIdIndexRoute = TasksIdIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/inbox': typeof InboxRoute
+  '/my': typeof MyRoute
+  '/today': typeof TodayRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/kit/': typeof KitIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -99,6 +120,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/inbox': typeof InboxRoute
+  '/my': typeof MyRoute
+  '/today': typeof TodayRoute
   '/kit': typeof KitIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/projects/$id/board': typeof ProjectsIdBoardRoute
@@ -113,6 +137,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/inbox': typeof InboxRoute
+  '/my': typeof MyRoute
+  '/today': typeof TodayRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/kit/': typeof KitIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -129,6 +156,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/inbox'
+    | '/my'
+    | '/today'
     | '/projects/$id'
     | '/kit/'
     | '/projects/'
@@ -143,6 +173,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/inbox'
+    | '/my'
+    | '/today'
     | '/kit'
     | '/projects'
     | '/projects/$id/board'
@@ -156,6 +189,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/inbox'
+    | '/my'
+    | '/today'
     | '/projects/$id'
     | '/kit/'
     | '/projects/'
@@ -171,6 +207,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InboxRoute: typeof InboxRoute
+  MyRoute: typeof MyRoute
+  TodayRoute: typeof TodayRoute
   ProjectsIdRouteRoute: typeof ProjectsIdRouteRouteWithChildren
   KitIndexRoute: typeof KitIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -184,6 +223,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inbox': {
+      id: '/inbox'
+      path: '/inbox'
+      fullPath: '/inbox'
+      preLoaderRoute: typeof InboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my': {
+      id: '/my'
+      path: '/my'
+      fullPath: '/my'
+      preLoaderRoute: typeof MyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/today': {
+      id: '/today'
+      path: '/today'
+      fullPath: '/today'
+      preLoaderRoute: typeof TodayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kit/': {
@@ -292,6 +352,9 @@ const ProjectsIdRouteRouteWithChildren = ProjectsIdRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InboxRoute: InboxRoute,
+  MyRoute: MyRoute,
+  TodayRoute: TodayRoute,
   ProjectsIdRouteRoute: ProjectsIdRouteRouteWithChildren,
   KitIndexRoute: KitIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
