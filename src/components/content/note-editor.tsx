@@ -146,7 +146,7 @@ export function NoteEditor({ id }: { id: string }) {
               onBlur={() => window.setTimeout(() => setSelection(null), 150)}
               aria-label="Текст заметки"
               className={cn(
-                "min-h-[28rem] w-full resize-none border-0 bg-transparent text-body-lg text-foreground outline-none",
+                "min-h-editor w-full resize-none border-0 bg-transparent text-body-lg text-foreground outline-none",
                 "placeholder:text-disabled-foreground",
               )}
               placeholder="Пишите как есть. Выделите текст — появится форматирование."
