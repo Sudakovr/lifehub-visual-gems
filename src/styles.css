@@ -83,6 +83,10 @@
   --container-phone: 24.375rem; /* рамка телефона — ровно 390 px */
   --container-phone-h: 50.75rem; /* высота рамки телефона — 812 px */
   --container-table: 46rem; /* минимальная ширина эталонной таблицы */
+  --container-table-wide: 56rem; /* таблица проекта с основными свойствами */
+  --container-table-dense: 64rem; /* плотная таблица задач с деревом */
+  --container-kit: 72rem; /* полотно страницы дизайн-системы */
+  --container-copy: 42rem; /* читаемая строка вводного текста */
 
 
 

@@ -24,7 +24,7 @@ function ThemePane({ theme, children }: { theme: "light" | "dark"; children: Rea
   return (
     <section className={theme === "dark" ? "dark" : undefined}>
       <div className="bg-canvas text-foreground">
-        <div className="mx-auto max-w-6xl px-lg py-2xl sm:px-2xl">
+        <div className="mx-auto max-w-kit px-lg py-2xl sm:px-2xl">
           <header className="mb-2xl flex flex-wrap items-baseline gap-md border-b border-border pb-lg">
             <h2 className="text-heading font-semibold">
               {theme === "light" ? "Светлая тема" : "Тёмная тема"}
@@ -43,10 +43,10 @@ function ThemePane({ theme, children }: { theme: "light" | "dark"; children: Rea
 function KitPage() {
   return (
     <main className="min-h-screen bg-canvas">
-      <div className="mx-auto max-w-6xl px-lg pt-3xl sm:px-2xl">
+      <div className="mx-auto max-w-kit px-lg pt-3xl sm:px-2xl">
         <p className="text-meta text-muted-foreground">LifeHub · дизайн-система</p>
         <h1 className="mt-xs text-display font-semibold">Примитивы интерфейса</h1>
-        <p className="mt-sm max-w-2xl text-body-lg text-muted-foreground">
+        <p className="mt-sm max-w-copy text-body-lg text-muted-foreground">
           Все элементы собраны из семантических токенов: поверхности, текст, границы, акцент,
           статусы, отступы, радиусы, тени, типографика и длительности. Ниже один и тот же набор в
           обеих темах.
