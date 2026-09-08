@@ -197,7 +197,23 @@ export function TaskScreen() {
             <ChevronRight className="size-3.5 shrink-0" strokeWidth={1.75} />
             <span className="num text-foreground">{t.code}</span>
           </nav>
-          <div className="ml-auto flex items-center gap-sm">
+          <div className="ml-auto flex flex-wrap items-center gap-sm">
+            <div className="flex items-center gap-xs rounded-md border border-border p-0.5">
+              {(["assignee", "author"] as const).map((r) => (
+                <button
+                  key={r}
+                  onClick={() => setSeat(r)}
+                  className={cn(
+                    "rounded-sm px-md py-xs text-meta transition-fast",
+                    seat === r
+                      ? "bg-surface-pressed font-medium text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  {r === "assignee" ? "Я исполнитель" : "Я постановщик"}
+                </button>
+              ))}
+            </div>
             <Button
               variant="ghost"
               size="icon"
@@ -207,9 +223,17 @@ export function TaskScreen() {
               {dark ? <Sun className="size-4" strokeWidth={1.75} /> : <Moon className="size-4" strokeWidth={1.75} />}
             </Button>
             {canEdit && isAssignee ? <Button variant="primary">Отправить на приёмку</Button> : null}
-            {canEdit && isAuthor ? <Button variant="primary">Принять работу</Button> : null}
-            <ActionsMenu canDelete={t.viewerRole === "owner"} />
+            {canEdit && isAuthor ? (
+              <>
+                <Button variant="secondary" onClick={() => setDialog("return")}>
+                  Вернуть в работу
+                </Button>
+                <Button variant="primary">Принять работу</Button>
+              </>
+            ) : null}
+            <ActionsMenu canDelete={t.viewerRole === "owner"} onSelect={setDialog} />
           </div>
+
         </div>
       </header>
 
