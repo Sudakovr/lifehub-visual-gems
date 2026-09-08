@@ -28,7 +28,7 @@ export function TaskRow({
   task: DailyTask;
   /** Действия строки: появляются при наведении и при фокусе с клавиатуры. */
   actions?: React.ReactNode;
-  menu?: string[];
+  menu?: string[] | undefined;
   selectable?: boolean;
   selected?: boolean;
   onSelect?: (v: boolean) => void;
