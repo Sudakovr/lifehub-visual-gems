@@ -362,7 +362,7 @@ export function TaskScreen() {
                 Только обсуждение
               </label>
 
-              <ul className="flex flex-col divide-y divide-border border-l border-border">
+              <ul className="flex flex-col divide-y divide-border">
                 {feed.map((item) => (
                   <FeedRow key={item.id} item={item} />
                 ))}
