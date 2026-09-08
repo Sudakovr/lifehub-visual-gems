@@ -96,39 +96,40 @@
 }
 
 :root {
-  /* Светлая тема */
-  --canvas: oklch(0.985 0.002 250);
-  --surface: oklch(1 0 0);
-  --surface-sunken: oklch(0.965 0.003 250);
-  --surface-pressed: oklch(0.938 0.004 250);
+  /* Светлая тема — мягкие, слегка тёплые поверхности */
+  --canvas: oklch(0.982 0.004 250);
+  --surface: oklch(0.998 0.002 250);
+  --surface-sunken: oklch(0.966 0.005 250);
+  --surface-pressed: oklch(0.945 0.006 250);
 
-  --foreground: oklch(0.23 0.015 260);
-  --muted-foreground: oklch(0.52 0.012 260);
-  --disabled-foreground: oklch(0.68 0.008 260);
+  --foreground: oklch(0.27 0.012 260);
+  --muted-foreground: oklch(0.55 0.01 260);
+  --disabled-foreground: oklch(0.71 0.006 260);
 
-  --border: oklch(0.905 0.005 260);
-  --border-strong: oklch(0.79 0.008 260);
+  --border: oklch(0.918 0.005 260);
+  --border-strong: oklch(0.83 0.007 260);
 
-  --accent: oklch(0.5 0.115 258);
-  --accent-hover: oklch(0.44 0.115 258);
-  --accent-foreground: oklch(0.99 0 0);
-  --accent-soft: oklch(0.945 0.03 258);
+  --accent: oklch(0.47 0.093 258); /* контраст с белым текстом > 7:1 */
+  --accent-hover: oklch(0.41 0.093 258);
+  --accent-foreground: oklch(0.995 0 0);
+  --accent-soft: oklch(0.955 0.021 258);
 
-  --ok: oklch(0.52 0.1 155);
-  --ok-soft: oklch(0.945 0.035 155);
-  --ok-foreground: oklch(0.36 0.09 155);
+  --ok: oklch(0.5 0.075 155);
+  --ok-soft: oklch(0.955 0.024 155);
+  --ok-foreground: oklch(0.38 0.065 155);
 
-  --warn: oklch(0.63 0.12 70);
-  --warn-soft: oklch(0.955 0.04 80);
-  --warn-foreground: oklch(0.44 0.1 65);
+  --warn: oklch(0.65 0.09 70);
+  --warn-soft: oklch(0.963 0.028 80);
+  --warn-foreground: oklch(0.46 0.075 65);
 
-  --danger: oklch(0.53 0.17 25);
-  --danger-soft: oklch(0.95 0.03 25);
-  --danger-foreground: oklch(0.44 0.16 25);
+  --danger: oklch(0.53 0.13 25);
+  --danger-soft: oklch(0.958 0.022 25);
+  --danger-foreground: oklch(0.46 0.12 25);
 
-  --info: oklch(0.53 0.1 245);
-  --info-soft: oklch(0.95 0.03 245);
-  --info-foreground: oklch(0.42 0.09 245);
+  --info: oklch(0.53 0.075 245);
+  --info-soft: oklch(0.958 0.022 245);
+  --info-foreground: oklch(0.44 0.07 245);
+
 
   /* Длительности переходов */
   --duration-fast: 100ms; /* ховер, фокус, чекбокс */
