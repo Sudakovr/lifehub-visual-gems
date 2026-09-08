@@ -159,7 +159,7 @@ export function WelcomeScreen() {
         <div className="mt-2xl flex flex-wrap items-center gap-md">
           <Nav
             to="/today"
-            className="inline-flex h-9 items-center rounded-md bg-action px-lg text-body font-medium text-action-foreground shadow-e1 transition-fast hover:bg-action-hover"
+            className="action-label inline-flex h-9 items-center rounded-md bg-action px-lg text-body font-medium shadow-e1 transition-fast hover:bg-action-hover"
           >
             {done ? "Открыть «Сегодня»" : "Перейти к «Сегодня»"}
           </Nav>
