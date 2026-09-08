@@ -305,17 +305,17 @@ function BigRows({ rows }: { rows: ProjectRow[] }) {
               </div>
               <ProgressBar value={p.progress} />
             </div>
-            <div className="flex min-w-0 flex-col gap-2xs">
+            <div className="flex w-40 shrink-0 flex-col gap-2xs">
               <span className="text-meta text-muted-foreground">Ближайший срок</span>
               <DueText due={p.nextDue} overdue={p.overdue} note={p.nextDueNote} />
             </div>
-            <div className="flex min-w-0 flex-col gap-2xs">
+            <div className="flex w-32 shrink-0 flex-col gap-2xs">
               <span className="text-meta text-muted-foreground">Задач открыто / всего</span>
               <span className="num text-body">
                 {p.tasksOpen} / {p.tasksTotal}
               </span>
             </div>
-            <div className="flex items-center justify-end gap-md">
+            <div className="flex w-40 shrink-0 items-center justify-end gap-md">
             <AvatarGroup names={p.members} max={4} />
             <KebabMenu
               items={[
