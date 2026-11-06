@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FilesRouteImport } from './routes/files'
 import { Route as InboxRouteImport } from './routes/inbox'
+import { Route as LogoRouteImport } from './routes/logo'
 import { Route as MyRouteImport } from './routes/my'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ReviewRouteImport } from './routes/review'
@@ -56,6 +57,11 @@ const FilesRoute = FilesRouteImport.update({
 const InboxRoute = InboxRouteImport.update({
   id: '/inbox',
   path: '/inbox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogoRoute = LogoRouteImport.update({
+  id: '/logo',
+  path: '/logo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MyRoute = MyRouteImport.update({
@@ -213,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
+  '/logo': typeof LogoRoute
   '/my': typeof MyRoute
   '/notifications': typeof NotificationsRoute
   '/review': typeof ReviewRoute
@@ -248,6 +255,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
+  '/logo': typeof LogoRoute
   '/my': typeof MyRoute
   '/notifications': typeof NotificationsRoute
   '/review': typeof ReviewRoute
@@ -283,6 +291,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/files': typeof FilesRoute
   '/inbox': typeof InboxRoute
+  '/logo': typeof LogoRoute
   '/my': typeof MyRoute
   '/notifications': typeof NotificationsRoute
   '/review': typeof ReviewRoute
@@ -320,6 +329,7 @@ export interface FileRouteTypes {
     | '/'
     | '/files'
     | '/inbox'
+    | '/logo'
     | '/my'
     | '/notifications'
     | '/review'
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/'
     | '/files'
     | '/inbox'
+    | '/logo'
     | '/my'
     | '/notifications'
     | '/review'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/'
     | '/files'
     | '/inbox'
+    | '/logo'
     | '/my'
     | '/notifications'
     | '/review'
@@ -425,6 +437,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FilesRoute: typeof FilesRoute
   InboxRoute: typeof InboxRoute
+  LogoRoute: typeof LogoRoute
   MyRoute: typeof MyRoute
   NotificationsRoute: typeof NotificationsRoute
   ReviewRoute: typeof ReviewRoute
@@ -471,6 +484,13 @@ declare module '@tanstack/react-router' {
       path: '/inbox'
       fullPath: '/inbox'
       preLoaderRoute: typeof InboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logo': {
+      id: '/logo'
+      path: '/logo'
+      fullPath: '/logo'
+      preLoaderRoute: typeof LogoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/my': {
@@ -714,6 +734,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FilesRoute: FilesRoute,
   InboxRoute: InboxRoute,
+  LogoRoute: LogoRoute,
   MyRoute: MyRoute,
   NotificationsRoute: NotificationsRoute,
   ReviewRoute: ReviewRoute,
