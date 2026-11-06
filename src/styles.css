@@ -45,6 +45,19 @@
   --color-action-hover: var(--action-hover);
   --color-action-foreground: var(--action-foreground);
 
+  /* Лист сравнения логотипов: цвета эскизов, не палитра приложения.
+     Фиксированные поверхности сохраняют одинаковые условия в обеих темах. */
+  --color-logo-study: #6753D5;
+  --color-logo-sheet: #ffffff;
+  --color-logo-ink: #242735;
+  --color-logo-sheet-inverse: #242735;
+  --color-logo-ink-inverse: #ffffff;
+  --spacing-logo-symbol: 3rem;
+  --spacing-logo-symbol-small: 1.5rem; /* реальный знак 24 px */
+  --spacing-logo-word: 2rem;
+  --container-logo-word: 13.5rem;
+  --container-logo-sample: 8rem;
+
   /* --- Статусы: заливка, подложка, текст на подложке ---------- */
   --color-ok: var(--ok); /* Готово, приёмка принята, таймер остановлен успешно */
   --color-ok-hover: var(--ok-hover); /* ховер зелёной кнопки */
@@ -327,4 +340,26 @@
 
 @utility timeline-row {
   grid-template-columns: minmax(0, 1fr) auto;
+}
+
+/* Геометрия из исходных PNG; маска убирает оттенки и держит плоский цвет. */
+@utility logo-artwork {
+  display: block;
+  flex-shrink: 0;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+@utility logo-lockup {
+  display: grid;
+  grid-template-columns: var(--spacing-logo-symbol) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: calc(var(--spacing-logo-symbol) + var(--spacing-md) + var(--container-logo-word));
+}
+
+@utility logo-comparison-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) var(--container-logo-sample);
 }
