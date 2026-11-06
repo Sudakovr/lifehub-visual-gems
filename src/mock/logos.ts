@@ -2,6 +2,8 @@ import logoLinks from "@/assets/logo-myzveno-links.png";
 import logoKnot from "@/assets/logo-myzveno-knot.png";
 import logoLettering from "@/assets/logo-myzveno-lettering.png";
 import logoNodes from "@/assets/logo-myzveno-nodes.png";
+import twoLinksMaster from "@/assets/logo-two-links-master.png";
+import twoLinksSymbol from "@/assets/logo-two-links-symbol.png";
 import couplingJoined from "@/assets/logo-coupling-refined-joined.png";
 import couplingSeparated from "@/assets/logo-coupling-refined-separated.png";
 import couplingSymbol from "@/assets/logo-coupling-refined-symbol.png";
@@ -34,6 +36,14 @@ export const originalConcepts: Concept[] = [
   { name: "Леттеринг", idea: "Только название: буква «З» нарисована открытым звеном внутри слова. Без отдельного знака.", where: "Горизонтальные места, где знак уже не нужен: футер, документы.", src: logoLettering, width: 993, height: 235, wide: true },
   { name: "Цепочка узлов", idea: "Три узла на одной линии — цепочка связанных задач. Средний узел выделен спокойным синим.", where: "Шапка сайта, экран входа, презентации.", src: logoNodes, width: 1029, height: 239, wide: true },
 ];
+
+export const referenceLogo = {
+  name: "Два звена",
+  wordmark: "МоёЗвено",
+  description: "Сцепленные звенья одной линией: задачи и проекты связаны в одну цепь. Горизонтальная композиция.",
+  lockup: { src: twoLinksMaster, width: 1792, height: 326 },
+  symbol: { src: twoLinksSymbol, width: 573, height: 326 },
+};
 
 export type LogoStudy = {
   id: string;

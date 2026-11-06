@@ -1,17 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ThemeToggle } from "@/components/app/app-shell";
-import { originalConcepts, logoStudies, type Concept, type LogoStudy } from "@/mock/logos";
+import { originalConcepts, logoStudies, referenceLogo, type Concept, type LogoStudy } from "@/mock/logos";
 
 export const Route = createFileRoute("/logo")({
   head: () => ({
     meta: [
-      { title: "Моё звено — сравнение логотипов | myzveno.ru" },
+      { title: "МоёЗвено — эталон «Два звена» и варианты | myzveno.ru" },
       {
         name: "description",
-        content: "Девять направлений логотипа myzveno.ru: пять новых со слитным и раздельным русским написанием, знаками в 24 px и монохромом, и четыре прежних варианта.",
+        content: "Эталон «Два звена» для myzveno.ru в высоком разрешении: логотип с названием «МоёЗвено» и отдельный знак на светлом и тёмном фоне. Девять прежних направлений сохранены для сравнения.",
       },
-      { property: "og:title", content: "Моё звено — девять направлений логотипа" },
-      { property: "og:description", content: "Сравнение «моёзвено» и «Моё звено»: сцепление, монограммы, общее ядро и переплетение. Прежние варианты сохранены." },
+      { property: "og:title", content: "МоёЗвено — эталонный логотип «Два звена»" },
+      { property: "og:description", content: "Крупный логотип с названием и отдельная иконка. Светлая и одноцветная тёмная версии; остальные варианты сохранены." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -21,6 +21,44 @@ export const Route = createFileRoute("/logo")({
 
 function LogoArtwork({ src, className }: { src: string; className: string }) {
   return <span aria-hidden="true" className={`logo-artwork ${className}`} style={{ maskImage: `url("${src}")` }} />;
+}
+
+function ReferenceLogo() {
+  return (
+    <section className="flex min-w-0 flex-col gap-xl" aria-labelledby="reference-logo">
+      <div className="flex flex-col gap-sm">
+        <p className="text-meta font-medium text-muted-foreground">Эталон</p>
+        <h2 id="reference-logo" className="text-heading font-semibold">{referenceLogo.name}</h2>
+        <p className="max-w-copy text-body text-muted-foreground">{referenceLogo.description}</p>
+      </div>
+      <div className="flex min-w-0 flex-col gap-sm">
+        <h3 className="text-body font-medium">Знак с названием</h3>
+        <div className="flex min-w-0 items-center justify-center bg-logo-sheet px-xl py-3xl md:min-h-logo-master md:px-3xl" role="img" aria-label={`Эталон «${referenceLogo.name}»: знак с названием «${referenceLogo.wordmark}»`}>
+          <LogoArtwork src={referenceLogo.lockup.src} className="logo-master-artwork bg-logo-ink" />
+        </div>
+      </div>
+      <div className="grid min-w-0 gap-lg md:grid-cols-2">
+        <div className="flex min-w-0 flex-col gap-sm">
+          <h3 className="text-body font-medium">Отдельный знак</h3>
+          <div className="flex min-h-logo-master items-center justify-center bg-logo-sheet px-2xl py-2xl" role="img" aria-label={`Эталон «${referenceLogo.name}»: отдельный знак`}>
+            <LogoArtwork src={referenceLogo.symbol.src} className="logo-master-symbol bg-logo-ink" />
+          </div>
+        </div>
+        <div className="flex min-w-0 flex-col gap-sm">
+          <h3 className="text-body font-medium">Отдельный знак на тёмном фоне</h3>
+          <div className="flex min-h-logo-master items-center justify-center bg-logo-sheet-inverse px-2xl py-2xl" role="img" aria-label={`Эталон «${referenceLogo.name}»: отдельный белый знак на тёмном фоне`}>
+            <LogoArtwork src={referenceLogo.symbol.src} className="logo-master-symbol bg-logo-ink-inverse" />
+          </div>
+        </div>
+      </div>
+      <div className="flex min-w-0 flex-col gap-sm">
+        <h3 className="text-body font-medium">Знак с названием на тёмном фоне</h3>
+        <div className="flex min-w-0 items-center justify-center bg-logo-sheet-inverse px-xl py-3xl md:min-h-logo-master md:px-3xl" role="img" aria-label={`Эталон «${referenceLogo.name}»: белый знак с названием «${referenceLogo.wordmark}» на тёмном фоне`}>
+          <LogoArtwork src={referenceLogo.lockup.src} className="logo-master-artwork bg-logo-ink-inverse" />
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function LogoLockup({ study, separated = false, monochrome = false }: { study: LogoStudy; separated?: boolean; monochrome?: boolean }) {
@@ -118,6 +156,7 @@ function LogoPage() {
           </div>
           <ThemeToggle />
         </header>
+        <ReferenceLogo />
         <section className="flex min-w-0 flex-col gap-lg" aria-labelledby="new-logos">
           <div className="flex flex-col gap-sm">
             <h2 id="new-logos" className="text-heading font-semibold">Новые варианты</h2>

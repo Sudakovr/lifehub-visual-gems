@@ -57,6 +57,10 @@
   --spacing-logo-word: 2rem;
   --container-logo-word: 13.5rem;
   --container-logo-sample: 8rem;
+  --spacing-logo-master: 16rem; /* крупный эталон с названием */
+  --spacing-logo-master-symbol: 10rem; /* отдельный знак без растяжения */
+  --aspect-logo-master: 1792 / 326;
+  --aspect-logo-master-symbol: 573 / 326;
 
   /* --- Статусы: заливка, подложка, текст на подложке ---------- */
   --color-ok: var(--ok); /* Готово, приёмка принята, таймер остановлен успешно */
@@ -362,4 +366,15 @@
 
 @utility logo-comparison-grid {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) var(--container-logo-sample);
+}
+
+@utility logo-master-artwork {
+  width: 100%;
+  aspect-ratio: var(--aspect-logo-master);
+}
+
+@utility logo-master-symbol {
+  width: 100%;
+  max-height: var(--spacing-logo-master-symbol);
+  aspect-ratio: var(--aspect-logo-master-symbol);
 }
