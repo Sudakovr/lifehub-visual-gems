@@ -45,9 +45,9 @@
   --color-action-hover: var(--action-hover);
   --color-action-foreground: var(--action-foreground);
 
-  /* Лист сравнения логотипов: цвета эскизов, не палитра приложения.
+  /* Лист сравнения логотипов: нейтральные эскизы, не палитра приложения.
      Фиксированные поверхности сохраняют одинаковые условия в обеих темах. */
-  --color-logo-study: #6753D5;
+  --color-logo-study: var(--color-logo-ink);
   --color-logo-sheet: #ffffff;
   --color-logo-ink: #242735;
   --color-logo-sheet-inverse: #242735;
