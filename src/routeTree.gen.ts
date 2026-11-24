@@ -19,6 +19,7 @@ import { Route as ReviewRouteImport } from './routes/review'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TimeRouteImport } from './routes/time'
 import { Route as TodayRouteImport } from './routes/today'
+import { Route as TodayAiRouteImport } from './routes/today-ai'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AdminModulesRouteImport } from './routes/admin/modules'
 import { Route as AuthInviteRouteImport } from './routes/auth/invite'
@@ -92,6 +93,11 @@ const TimeRoute = TimeRouteImport.update({
 const TodayRoute = TodayRouteImport.update({
   id: '/today',
   path: '/today',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TodayAiRoute = TodayAiRouteImport.update({
+  id: '/today-ai',
+  path: '/today-ai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WelcomeRoute = WelcomeRouteImport.update({
@@ -226,6 +232,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/today-ai': typeof TodayAiRoute
   '/welcome': typeof WelcomeRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/admin/modules': typeof AdminModulesRoute
@@ -262,6 +269,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/today-ai': typeof TodayAiRoute
   '/welcome': typeof WelcomeRoute
   '/admin/modules': typeof AdminModulesRoute
   '/auth/invite': typeof AuthInviteRoute
@@ -298,6 +306,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/time': typeof TimeRoute
   '/today': typeof TodayRoute
+  '/today-ai': typeof TodayAiRoute
   '/welcome': typeof WelcomeRoute
   '/projects/$id': typeof ProjectsIdRouteRouteWithChildren
   '/admin/modules': typeof AdminModulesRoute
@@ -336,6 +345,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/time'
     | '/today'
+    | '/today-ai'
     | '/welcome'
     | '/projects/$id'
     | '/admin/modules'
@@ -372,6 +382,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/time'
     | '/today'
+    | '/today-ai'
     | '/welcome'
     | '/admin/modules'
     | '/auth/invite'
@@ -407,6 +418,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/time'
     | '/today'
+    | '/today-ai'
     | '/welcome'
     | '/projects/$id'
     | '/admin/modules'
@@ -444,6 +456,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   TimeRoute: typeof TimeRoute
   TodayRoute: typeof TodayRoute
+  TodayAiRoute: typeof TodayAiRoute
   WelcomeRoute: typeof WelcomeRoute
   ProjectsIdRouteRoute: typeof ProjectsIdRouteRouteWithChildren
   AdminModulesRoute: typeof AdminModulesRoute
@@ -533,6 +546,13 @@ declare module '@tanstack/react-router' {
       path: '/today'
       fullPath: '/today'
       preLoaderRoute: typeof TodayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/today-ai': {
+      id: '/today-ai'
+      path: '/today-ai'
+      fullPath: '/today-ai'
+      preLoaderRoute: typeof TodayAiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/welcome': {
@@ -741,6 +761,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   TimeRoute: TimeRoute,
   TodayRoute: TodayRoute,
+  TodayAiRoute: TodayAiRoute,
   WelcomeRoute: WelcomeRoute,
   ProjectsIdRouteRoute: ProjectsIdRouteRouteWithChildren,
   AdminModulesRoute: AdminModulesRoute,
